@@ -92,12 +92,12 @@ Version|Date|Author|Comment
 0.2    |21.09.09|Stephan Rudlof|new: [/numlab/interrupts](/interrupts)<<BR>renaming: postTimeClient, resultPostTimeClient -> postTime; solutionGetTimeClient -> solutionGetTime 
 0.1    |08.09.09|Stephan Rudlof|initial version||
 
-{{{#!wiki important
-This history is just for changes in syntax and/or semantics of ViPLab related JSON messages:
+!!! note
 
- * It must ''not'' be updated for mere improvements of the documentation.
- * Fixes in JSON examples are ''not'' reflected here: Exercise|Solution|Result|Interrupt JSON Format sections (the tables) count.
-}}}
+    This history is just for changes in syntax and/or semantics of ViPLab related JSON messages:
+
+     * It must ''not'' be updated for mere improvements of the documentation.
+     * Fixes in JSON examples are ''not'' reflected here: Exercise|Solution|Result|Interrupt JSON Format sections (the tables) count.
 
 ViPLab JSON Message Formats are found in:
 
