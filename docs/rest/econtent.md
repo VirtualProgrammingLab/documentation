@@ -1,13 +1,7 @@
-##master-page:HomepagePrivatePageTemplate
-##master-date:Unknown-Date
-#acl Project/AdminGroup:admin,read,write,delete,revert EcsGroup:read,write,delete All:read
-#format wiki
-#language de
+### econtents 
+`GET, econtents:` Listet alle verfügbaren eContent-Angebote des anfragenden Participanten auf, sofern er mit einer seiner MembershipIDs (`mid`) in `eligibleMembers` eines `econtents` vorkommt. Das Attribut `eligibleMembers` listet dabei alle MembershipIDs (`mid`) auf, die den Econtent verlinken bzw. referenzieren dürfen. Die dem Attribut `owner` zugeordnete `mid` repräsentiert die Heimatplattform bzw. den eigentlichen Anbieter des Econtent.
 
-<<Anchor(econtents)>>
-=== econtents ===
-'''GET, econtents:''' Listet alle verfügbaren eContent-Angebote des anfragenden Participanten auf, sofern er mit einer seiner MembershipIDs ({{{mid}}}) in {{{eligibleMembers}}} eines {{{econtents}}} vorkommt. Das Attribut {{{eligibleMembers}}} listet dabei alle MembershipIDs ({{{mid}}}) auf, die den Econtent verlinken bzw. referenzieren dürfen. Die dem Attribut {{{owner}}} zugeordnete {{{mid}}} repräsentiert die Heimatplattform bzw. den eigentlichen Anbieter des Econtent.
-{{{
+```
 https://infolms.rus.uni-stuttgart.de:7923/econtents
 [
 {
@@ -27,10 +21,11 @@ https://infolms.rus.uni-stuttgart.de:7923/econtents
 ...
 }
 ]
-}}}
+```
 
-'''GET, econtents/<eid>:''' Gibt eContent mit der eContentID= <eid> zurück. Dies funktioniert auch, wenn der aufrufende Participant nicht in {{{eligibleMembers}}} des {{{econtents}}} gelistet ist, sondern dort als {{{owner}}} eingetragen ist:
-{{{
+`GET, econtents/<eid>:` Gibt eContent mit der eContentID= <eid> zurück. Dies funktioniert auch, wenn der aufrufende Participant nicht in `eligibleMembers` des `econtents` gelistet ist, sondern dort als `owner` eingetragen ist:
+
+```
 https://infolms.rus.uni-stuttgart.de:7923/econtent/125
 [
 {
@@ -40,19 +35,20 @@ https://infolms.rus.uni-stuttgart.de:7923/econtent/125
 ...
 }
 ]
-}}}
-'''POST, econtents:''' Generiert neuen eContent. Nachfolgend sind alle möglichen Attribute für den Course-Econtent aufgeführt. Es müssen mindestens "url", "title", "eligibleMembers", "etype", "status","lang" und "owner" angegeben werden. Wertebereiche bzw. Infos für einzelne Attribute:
+```
+
+`POST, econtents:` Generiert neuen eContent. Nachfolgend sind alle möglichen Attribute für den Course-Econtent aufgeführt. Es müssen mindestens "url", "title", "eligibleMembers", "etype", "status","lang" und "owner" angegeben werden. Wertebereiche bzw. Infos für einzelne Attribute:
 
  * "status" : "online" | "offline"
  * "etype" : "application/ecs-course"
- * "eligibleMembers" : gültige MembershipIDs ({{{mid}}}). Für gewöhnlich gewonnen aus Abfrage der {{{memberships}}} Resource welche dem Dozenten zur Auswahl über Formular                  dargestellt werden.
+ * "eligibleMembers" : gültige MembershipIDs (`mid`). Für gewöhnlich gewonnen aus Abfrage der `memberships` Resource welche dem Dozenten zur Auswahl über Formular                  dargestellt werden.
  * "lang" : "de_DE"
- * "owner": gültige MembershipIDs ({{{mid}}}), d.h. der Participant muss dieser {{{mid}}} zugeordnet sein.
+ * "owner": gültige MembershipIDs (`mid`), d.h. der Participant muss dieser `mid` zugeordnet sein.
 
-{{{
+```
 https://infolms.rus.uni-stuttgart.de:7923/econtents
 
-[{
+{
   "timePlace": {
     "room": "Raum M 2.11",
     "cycle": "wöch.",
@@ -80,13 +76,16 @@ https://infolms.rus.uni-stuttgart.de:7923/econtents
   "status": "online",
   "credits": "10",
   "term": "WS 06/07"
-}]
-}}}
-{{{eligibleMembers}}} sind [[../memberships#mid|MembershipIDs]]. 
+}
+```
 
-'''PUT, econtents/<eid>:''' Updated eContent mit der eContentID=<eid> :
-{{{
+`eligibleMembers` sind [MembershipIDs](../memberships#mid). 
+
+`PUT, econtents/<eid>:` Updated eContent mit der eContentID=\<eid\>:
+
+```
 https://infolms.rus.uni-stuttgart.de:7923/econtents/125
+
 {
 "lecturer"  : [
   "Prof. Uli Ganzgenau",
@@ -95,11 +94,9 @@ https://infolms.rus.uni-stuttgart.de:7923/econtents/125
 ],
 "credits": 23
 }
+```
 
-}}}
-'''DELETE, econtents/<eid>''' Löscht eContent mit der eContentID=<eid> :
-{{{
+`DELETE, econtents/<eid>` Löscht eContent mit der eContentID=<eid> :
+```
 https://infolms.rus.uni-stuttgart.de:7923/econtents/125
-}}}
-<<Anchor(memberships)>>
-<<Anchor(mid)>>
+```

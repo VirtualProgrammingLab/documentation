@@ -1,5 +1,5 @@
 # memberships
-:%s/^M//g:%s/^M//gMemberships stellen eine eindeutige Beziehung zwischen einem Participanten
+Memberships stellen eine eindeutige Beziehung zwischen einem Participanten
 (E-Learningplattform) und einer Community her und werden vom ECS Administrator
 auf Anfrage/Antrag vergeben/eingetragen. Sollte ein Participant erstmalig in
 einer Community des ECS in Erscheinung treten, wird ihm vom ECS Admin ein
