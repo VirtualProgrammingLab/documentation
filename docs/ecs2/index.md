@@ -1,33 +1,28 @@
-#format wiki #language en
-#pragma section-numbers 2
-<<TableOfContents(4)>>
-<<Anchor(core_ecs)>>
-= Core ECS =
-<<Anchor(http_header)>>
-== HTTP Header ==
-=== Application specific headers ===
- X-EcsAuthId:: Has to be a valid participant id. In a standard ECS
+# Core ECS
+## HTTP Header
+### Application specific headers
+* X-EcsAuthId:: Has to be a valid participant id. In a standard ECS
  configuration this HTTP header will be attached by the authentication process
  running on the proxy server.
 
- X-EcsReceiverCommunities:: Has to be a valid community id/ids or community name/names.
+* X-EcsReceiverCommunities:: Has to be a valid community id/ids or community name/names.
  Adresses all participants joined the comimunity/communities. You are able to note
  multiple communities, either by name or by id, spaced by comma. Only allowed by `POST`.  
  
- X-EcsReceiverMemberships:: Has to be a valid membership id/ids. Adresses all
+* X-EcsReceiverMemberships:: Has to be a valid membership id/ids. Adresses all
  listed memberships. You are able to note multiple membersips spaced by comma.
  Only allowed by `POST`.
 
- X-EcsSender:: Beschreibt bei einem `GET` auf eine Message/Queue Ressource
+* X-EcsSender:: Beschreibt bei einem `GET` auf eine Message/Queue Ressource
  den Absender der Nachricht in Form seiner Membership-ID. Wird ausschließlich
  vom ECS gesetzt/beschrieben. Gleichzeitig setzt der ECS
- `X-EcsReceiverCommunities` auf die entsprechende Community des Senders.
+* `X-EcsReceiverCommunities` auf die entsprechende Community des Senders.
  Falls der Absender Teinehmer mehrerer Communities ist, bezeichnet X-!EcsSender
  eine Liste von Membership-IDs, entsprechend enthält auch
- `X-EcsReceiverCommunities` eine korrespondierende Liste an Communities.
+* `X-EcsReceiverCommunities` eine korrespondierende Liste an Communities.
 
  X-EcsQueryStrings:: Used to provide [[#querystrings|querystrings]]. 
-=== HTTP standard header ===
+## HTTP standard header
  Accept:: Content-Types that are acceptable.
  Content-Type:: The mime type of the body of the request (used with POST and PUT requests).
  If-None-Match:: Allows a 304 Not Modified to be returned if content is unchanged.
@@ -37,7 +32,7 @@
  Location:: Used in redirection, or when a new resource has been created.
  Set-Cookie:: An HTTP cookie.
 
-== Addressing ==
+## Addressing ==
 In order to communicate to each other you have to provide a unique address.
 These addresses can either be a so called membership id or a community id or
 community name.
@@ -55,7 +50,7 @@ participant can inquire his membership ids by calling the
 [[#memberships|memberships]]
 ressource.
 
-=== Community names and ids ===
+## Community names and ids ===
 A community can be referenced by his community id (cid) or his community name.
 If you address a community you implicit address all members of the community.
 This applies also to the sender joining the receiver community if the sender
@@ -65,7 +60,7 @@ can inquire his communities memberships by calling the
 [[#memberships|memberships]]
 ressource. 
 
-=== Create a ressource ===
+## Create a ressource ===
 If you want to `POST` to a ressource you have to provide either a
 `X-EcsReceiverMemberships` or `X-EcsReceiverCommunities` header or both
 together. 
