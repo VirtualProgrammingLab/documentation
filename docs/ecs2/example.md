@@ -1,14 +1,12 @@
-<<TableOfContents(3)>>
-
-= Beispiele =
+# Beispiele
 Als Client wird [[http://de.wikipedia.org/wiki/CURL|curl]] verwendet.
 
-== Persistente Message erzeugen (X.509 zertifizierter Client) ==
+## Persistente Message erzeugen (X.509 zertifizierter Client)
 Unter der Ressource {{{https://ecs.uni-stuttgart.de/numlab/exercises}}} neue
 persistente Message erzeugen (POST auf
-{{{https://ecs.uni-stuttgart.de/numlab/exercises}}}). Message wird an 
-participant mit membership id {{{8}}} adressiert:
-{{{
+`https://ecs.uni-stuttgart.de/numlab/exercises`). Message wird an 
+participant mit membership id `8` adressiert:
+```
 curl -i -X POST 
 --cacert freeit-root-ca.cert.pem  --cert client.cert.pem --key client.key.pem --pass "ganzgeheim" \
 -H "Content-Type: application/json" \
@@ -22,24 +20,24 @@ curl -i -X POST
 }
 ' \
 https://ecs.uni-stuttgart.de/numlab/exercises
-}}}
+```
 Mögliche Antwort:
-{{{
+```
 HTTP/1.1 201 Created
 Location: https://ecs.uni-stuttgart.de/numlab/exercises/274
 Content-Type: application/json; charset=utf-8
 
 <leerer http-body>
-}}}
+```
 
-== Eintrag in Message-Queue erzeugen (anonymer Client) ==
+## Eintrag in Message-Queue erzeugen (anonymer Client)
 Unter der Ressource {{{https://ecs.uni-stuttgart.de/numlab/solutions}}} neue
 Message in Message-Queue erzeugen (POST auf
 {{{https://ecs.uni-stuttgart.de/numlab/solutions}}}). Message wird an
 participant mit membership id {{{8}}} adressiert. Der Client besitzt zum
 Zeitpunkt der Anfrage noch kein gültiges Cookie (anonym). Ihm wird dieses durch
 den Respond-Header (Rückantwort vom ECS) mitgeteilt (siehe auch Core ECS):
-{{{
+```
 curl -i -X POST 
 -H "Content-Type: application/json" \
 -H "X-EcsReceiverMemberships: 8" \
@@ -59,34 +57,34 @@ curl -i -X POST
 }
 ' \
 http://ecs.uni-stuttgart.de/numlab/solutions
-}}}
+```
 
 Mögliche Antwort:
-{{{
+```
 HTTP/1.1 201 Created
 Location: http://ecs.uni-stuttgart.de/numlab/solutions/89
 Set-Cookie: ecs_anonymous=59c3aaeead64514b83abcea9f81cece9; path=/
 
 <leerer http-body>
-}}}
+```
 
-== Abfragen einer Message Queue durch authentisierten Participanten ==
+## Abfragen einer Message Queue durch authentisierten Participanten
 Die Queue Ressource {{{https://ecs.uni-stuttgart.de/numlab/solutions}}} soll
 von einem authentisierten Participanten (z.B. Computation client) abgefragt
 werden. Keine clientseitige zertifikatsbasierte Authentisierung (kein
 Clientzertifikat und kein Clientpasswort), sondern nur eine serverseitige
 Authentifikation (mit dem freeit-root-ca.cert.pem Rootzertifikat Prüfung des ECS
 Serverzertifikats):
-{{{
+```
 curl -i \
 --cacert freeit-root-ca.cert.pem \
 -H "X-EcsAuthId: tunichtgut" \
 -H "Accept: application/json" \
 -X POST https://ecs.uni-stuttgart.de/numlab/solutions/fifo
-}}}
+```
 
 Mögliche Antwort:
-{{{
+```
 HTTP/1.1 200 OK
 Connection: close
 Date: Thu, 03 Dec 2009 15:08:33 GMT
@@ -98,24 +96,24 @@ Content-Length: 310
 Cache-Control: private, max-age=5
 
 <BODY>
-}}}
+```
 
-== Abfragen einer Message Queue durch anonymen Participanten ==
-Die Queue Ressource {{{https://ecs.uni-stuttgart.de/numlab/results}}} soll
+## Abfragen einer Message Queue durch anonymen Participanten
+Die Queue Ressource `https://ecs.uni-stuttgart.de/numlab/results` soll
 von einem durch Cookie identifizierten (Cookie:
 ecs_anonymous=92cee57f228a999bbf3c0bbf162d9cf20210a9cb), anonymen Participanten
 (z.B. Presentation client) abgefragt werden (serverseitige Authentifikation mit
 dem freeit-root-ca.cert.pem Rootzertifikat):
-{{{
+```
 curl -i \
 --cacert freeit-root-ca.cert.pem \
 -H "Cookie: ecs_anonymous=59c3aaeead64514b83abcea9f81cece9" \
 -H "Accept: application/json" \
 -X POST https://ecs.uni-stuttgart.de/numlab/solutions/fifo
-}}}
+```
 
 Mögliche Antwort:
-{{{
+```
 HTTP/1.1 200 OK
 Server: nginx/0.7.65
 Date: Mon, 29 Mar 2010 23:31:53 GMT
@@ -131,17 +129,16 @@ Set-Cookie: ecs_anonymous=92cee57f228a999bbf3c0bbf162d9cf20210a9cb; path=/; expi
 Cache-Control: private, max-age=5
 
 <BODY>
-}}}
+```
 
 
-<<Anchor(exercises_show_filter)>>
-== Exercises Filter-Plugin ==
-'''Filterung einer Exercises Message-Ressource nach dem {{{name}}} Property:'''
-{{{
+##Exercises Filter-Plugin
+**Filterung einer Exercises Message-Ressource nach dem {{{name}}} Property:***
+```
 curl -i -X GET http://ecs.uni-stuttgart.de/numlab/exercises/27?properties=name
-}}}
+```
 Mögliche Antwort:
-{{{
+```
 HTTP/1.1 200 OK
 Connection: close
 Date: Thu, 03 Dec 2009 15:08:33 GMT
@@ -157,14 +154,14 @@ Cache-Control: private, max-age=5
   "name" : "Aufgabe 1: C-Funktion zur Integralberechnung"
   }
 } 
-}}}
+```
 
-'''Filterung einer Exercises Message-Ressource nach dem {{{name}}} und {{{description}}} Property:'''
-{{{
+**Filterung einer Exercises Message-Ressource nach dem {{{name}}} und {{{description}}} Property:**
+```
 curl -i -X GET http://ecs.uni-stuttgart.de/numlab/exercises/27?properties=name,description
-}}}
+```
 Mögliche Antwort:
-{{{
+```
 HTTP/1.1 200 OK
 Connection: close
 Date: Thu, 03 Dec 2009 15:08:33 GMT
@@ -181,11 +178,4 @@ Cache-Control: private, max-age=5
   "description" : "Schreiben Sie eine C-Funktion trapez(a,b,n,f) zur numerischen Berechnung des Integrals einer Funktion f im Intervall [a,b] mit Hilfe der aufsummierten Sehnentrapezregel mit n äquidistanten Stützstellen."
   }
 } 
-}}}
-
-
-{{{{#!wiki comment/dotted
-
-== Liste aller Messages ==
-Unter der Ressource {{{http://ecs.uni-stuttgart.de/numlab/exercises}}} alle Messages als Liste anfordern (GET auf {{{http://ecs.uni-stuttgart.de/numlab/exercises}}}):
-}}}}
+```
