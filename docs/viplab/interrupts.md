@@ -11,13 +11,13 @@ Broadcast message queue.
 
 ## Interface
 
-POST, GET (see [[../../core#message-queues|''English section name unknown so far.'']])
+POST, GET (see [''English section name unknown so far.''](/ecs2#queue-resource))
 
 ### Generic
 
-  POST resourceURL (push):: creates Interrupt.
-  POST resourceURL/fifo (pull):: gets first Interrupt and removes it from the queue.
-  GET resourceURL/fifo (look):: gets first Interrupt (fifo) without removing it from the queue.
+* **POST resourceURL (push)**: creates Interrupt.
+* **POST resourceURL/fifo (pull)**: gets first Interrupt and removes it from the queue.
+* **GET resourceURL/fifo (look)**: gets first Interrupt (fifo) without removing it from the queue.
 
 ### VipLab Specific
 
@@ -25,11 +25,9 @@ POST resourceURL (push) will be used by SCs, POST resourceURL/fifo (pull) by CCs
 
 Student clients (SCs) push Interrupts into this queue; computation clients (CCs) pulls them from there (each CC gets all Interrupts (broadcast)). For getting next Interrupt the former one has to be removed (by POST resourceURL/fifo (pull)).
 
-### VipLab Specific
-
-  POST resourceURL (push):: SC creates Interrupt for interrupting a computation of a formerly posted Solution.
-  POST resourceURL/fifo (pull):: each CC pulls next available Interrupt. If this Interrupt matches a currently computed Solution (affects only ''one'' CC), its computation will be finished, otherwise (all other CCs) it will be ignored.
-  GET resourceURL/fifo (look):: for debugging purposes only.
+* **POST resourceURL (push)**: SC creates Interrupt for interrupting a computation of a formerly posted Solution.
+* **POST resourceURL/fifo (pull)**: each CC pulls next available Interrupt. If this Interrupt matches a currently computed Solution (affects only ''one'' CC), its computation will be finished, otherwise (all other CCs) it will be ignored.
+* **GET resourceURL/fifo (look)**: for debugging purposes only.
 
 Notes:
 

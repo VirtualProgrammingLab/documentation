@@ -209,8 +209,8 @@ Für alle weiteren Betrachtungen soll folgendes gelten:
 
 <<Anchor(persistent-messages)>>
 <<Anchor(message-ressource)>>
-=== Message Ressource ===
-In einer Message Ressource können Nachrichten für einen bestimmten Empfänger
+=== Message Resource ===
+In einer Message Resource können Nachrichten für einen bestimmten Empfänger
 abgelegt werden. Der Empfänger kann diese Nachrichten ebenfalls über diese
 Ressource abholen. Eine Message Ressource kann so konfiguriert werden, dass die
 in ihr abgelegten Nachrichten "persistent" gehalten werden, um so
@@ -393,8 +393,8 @@ Of course you can also specify the querystring by appending it to the end of the
 
 <<Anchor(message-queues)>>
 <<Anchor(queue-ressource)>>
-=== Queue Ressource ===
-Die Queue Ressource ist als Subressource einer Listen Ressource realisiert und kann entweder im ''lifo'' oder ''fifo'' Mode angesprochen werden:
+=== Queue Resource ===
+Die Queue Resource ist als Subressource einer Listen Ressource realisiert und kann entweder im ''lifo'' oder ''fifo'' Mode angesprochen werden:
 
 ''GET'': Liefert erste (fifo) oder letzte (lifo) Message-Ressource zurück. Gibt "200" Status Code zurück auch wenn keine Nachricht in Queue (leerer HTTP-Body, "Content-Length: 0"). <<BR>>
 ''DELETE'': unzulaessig ("405" Method Not Allowed Statuscode). <<BR>>

@@ -4,19 +4,19 @@ Message queue.
 
 Solutions (made by students) to (referenced) Exercises.
 
-[Solutions Json format](#solution-json-format) uses [Excercise JSON Format](./excercises/#exercise-json-format).
+[Solutions Json format](#solution-json-format) uses [Excercise JSON Format](/viplab/exercises/#exercise-json-format).
 
-##Interface
+## Interface
 
-POST, GET (see [[../../core#message-queues|''English section name unknown so far.'']])
+POST, GET (see [''English section name unknown so far.''](/ecs2#queue-resource))
 
-###Generic
+### Generic
 
 * __POST resourceURL (push)__ creates Solution.
 * __POST resourceURL/fifo (pull)__ gets first Solution and removes it from the queue.
 * __GET resourceURL/fifo (look)__ gets first Solution (fifo) without removing it from the queue.
 
-###VipLab Specific
+### VipLab Specific
 
 POST resourceURL (push) will be used by SCs, POST resourceURL/fifo (pull) by CCs.
 
@@ -24,13 +24,13 @@ Student clients (SCs) push Solutions into this queue; computation clients (CCs) 
 
 GET
 
-* will '''not''' be used by CC: using POST resourceURL/fifo (pull) assures that each Solution will be computed by ''one'' CC (transaction semantics; if GET would be used, same Solution could be taken from multiple ones);
+* will **not** be used by CC: using POST resourceURL/fifo (pull) assures that each Solution will be computed by *one* CC (transaction semantics; if GET would be used, same Solution could be taken from multiple ones);
 * may be used for debugging purposes.
 
 Notes:
 
-* Solution comes from SC and serves as input for CC: it is '''not''' the result from the following computation.
-* POST resourceURL/fifo (pull) returns a ''single'' solution (not e.g. a list of multiple URLs).
+* Solution comes from SC and serves as input for CC: it is **not** the result from the following computation.
+* POST resourceURL/fifo (pull) returns a *single* solution (not e.g. a list of multiple URLs).
 
 ## Message
 ###Solution JSON Definition by Example (informal)
@@ -47,8 +47,10 @@ Notes:
   "exerciseModifications" : // contains modified parts of referenced exercise
   { "elements" :
     [
-      { "identifier": "codeFromStudent", // must: identifier of (text) element, has to be the ''same'' as in original from Exercise
-        "value"     : "void bar() { printf(\"bar!\\n\");\n}\n" // changed source from student ('\\n' quoting gives '\n' after decoding)
+      { "identifier": "codeFromStudent", // must: identifier of (text) element, 
+                                         // has to be the *same* as in original from Exercise
+        "value"     : "void bar() { printf(\"bar!\\n\");\n}\n" // changed source from student 
+                                                               // ('\\n' quoting gives '\n' after decoding)
         // Other fields defining this (text) element must *not* be repeated here.
       }
       // unchanged elements needn't be repeated here
@@ -61,12 +63,12 @@ Notes:
 ### Solution JSON Format
 wrapper "Solution" around the following:
 
-|Key [--Subkey] |Type |Opt / Must |Description |Comment |
-|------|-----|-----|-----|----|
-|postTime             |string UTC |must             |timestamp | Timestamp from SC: in addition a CC side timestamp should be made (for security reasons). |
+|Key [--Subkey] |Type |Opt / Must |Description |Comment | AS |
+|------|-----|-----|-----|----|----|
+|postTime             |string UTC |must             |timestamp | Timestamp from SC: in addition a CC side timestamp should be made (for security reasons). | Needed? What is the security reason? |
 |ID                   |string     |must             | unique Solution ID created by SC (automatically)| Needed for associating computed Results to Solution (think of long computations, where one overruns another). |
 |evaluationService    |struct     |opt              | __jobID:__ evaluation job identification (string)<BR>__jobSender:__ membership id of evaluation job sender (string) | Only relevant for evaluation service. Computation backend must not change these values. Needed for associating results to evaluation jobs (VIP 2.1).|
-|comment              |string     |opt              | comment from student | |
-|exercise             |string URL |must             | existing exercise at ECS server| |
+|comment              |string     |opt              | comment from student | | implemented in frontend?
+|exercise             |string URL |must             | existing exercise at ECS server| | insert complete computation-template here? |
 |exerciseModifications|struct     |opt              | modifications of Exercise having same structure as Exercise: <BR>- "exerciseModifications" corresponds to "Exercise" as root;<BR>- leaves of this structure are only "identifier":value and "value":value pairs (no others allowed)|It contains student's work defining this solution for - URL referenced - Exercise. If omitted, an unchanged Exercise is given as solution: this may make sense, if an unchanged Exercise is computable.<BR>To be a modifiable object taken from Excercise: <BR>- it has to have members "identifier", "modifiable", "value"; and<BR>- its member "modifiable" has to be true.|
-|exerciseModifications --elements[]|[ {...}, {...}, ... ] |must |array containing 'modified'  [JSON objects in Exercise--elements\[\]](./excercises/#JSON_objects_in_Exercise--elements.5B.5D): there has to be at least one element |Semantics for CC: <BR>- modified version ''here'' will be recognized by having the same "identifier" as the original one;<BR>- modified version wins;<BR>- objects just existing in original version will be taken as they are (merge effect).|
+|exerciseModifications --elements[]|[ {...}, {...}, ... ] |must |array containing *modified*  [JSON objects in Exercise--elements\[\]](/viplab/exercises/#json-objects-in-exercise-elements): there has to be at least one element |Semantics for CC: <BR>- modified version *here* will be recognized by having the same "identifier" as the original one;<BR>- modified version wins;<BR>- objects just existing in original version will be taken as they are (merge effect).|
