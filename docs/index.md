@@ -6,6 +6,7 @@ The documentation contains three main parts:
 - The [old ECS](/rest/index.md) documenation
 - The [ECS2](/ecs2/index.md) documenation
 - The [ViPLab](/viplab/index.md) documenation
+- The [ViPLab 3.0](/viplab3.0/index.md) documenation
 
 ## mkdoc command
 
