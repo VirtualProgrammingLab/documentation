@@ -3,7 +3,7 @@
 A *computation template*  can be 
 
  * the definition of an *Exercise* in the context of a learning environment, or
- * a pre-configured execution of a research software (stored in a docker image), used to show reproducabiltiy of a research work or to reduce complex software environments to specific functionality
+ * a pre-configured research software (stored in a docker image), used to show reproducability of a research work or to reduce complex software environments to specific functionality
 
 
 ## Example (informal)
@@ -14,81 +14,76 @@ Note: `//` with text following until EOL is a comment,
  * but nevertheless it would help, if JSON parsers could just ignore them.
 
 ```
-{ "Exercise" :
-{ "postTime"    : "1985-04-12T23:20:50.52Z", // must, given by TC
-  "TTL"         : 360000, // opt, given by TC (here 10*10*3600s = 100h)
-  "identifier"  : "Numerik II, SS10, Aufgabe 1, v1.0", // name of exercise for teachers
-  "department"  : "RUS", // opt, for filtering exercises
-  "comment"     : "Um die Studenten mal richtig zu fordern.", // optional
-  "name"        : "Aufgabe 1",                       // name of exercise to be shown in SCs
-  "description" : "Schreiben Sie eine C-Funktion...",// optional: short description (could be used as 
-                                                     // subtitle, longer descriptions in "elements").
-  "elements" : // must: at least one array element
+{ "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
+  "metadata": // information for frontend
+    { "display_name" : "Aufgabe 1",  // name of computation template shown in frontend
+      "description" : "Schreiben Sie eine C-Funktion...", // short description (could be used  
+                                                     // as subtitle, further descriptions in "parts").
+    },
+  "environment" : "C", // important for interpreting configuration 
+  "files" : // must: at least one array element
   [
-    { "identifier": "preamble",                       // for referencing
-      "visible"   : true,                             // if it has to be shown in SC
-      "modifiable": false,                            // optional
-      "name"      : "Info: source before your code.", // name of element for student
-      "MIMEtype"  : "text/plain",                     // optional (default: "text/plain")
-      "syntaxHighlighting": "C",                      // optional (default: "none")
-      "emphasis"  : "low",                            // optional (for rendering)
-      "value"     : "#include <stdio.h>\n"            // source (newline should be in effect after decoding)
-    },
-    { "identifier": "codeFromStudent",
-      "visible"   : true,
-      "modifiable": true,                             // bool; has to be true here to make it editable in SC
-      "name"      : "Fill in your code!",
-      "MIMEtype"  : "text/plain",                     // optional (default: "text/plain")
-      "syntaxHighlighting": "C",                      // optional (default: "none")
-      "emphasis"  : "medium",
-      "value"     : "void bar() { /* Schreiben Sie hier Code, der \"bar\" ausgibt. */\n\n}\n" 
-                                                      // source (template) from teacher
-    },
-    { "identifier": "postscript",
-      "visible"   : true,
-      "modifiable": false,
-      "name"      : "Info: source after your code calling bar() in it.",
-      "MIMEtype"  : "text/plain",                     // optional (default: "text/plain")
-      "syntaxHighlighting": "C",                      // optional (default: "none")
-      "emphasis"  : "low",
-      "value"     : "int main() { bar(); return 0; }" // source
+    { "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3e", // uuid, for referencing
+      "path"      : "code.c"                                // should it be file://code.c ?? 
+      "metadata"  : // information for frontend
+        {  "MIMEtype": "text/plain",                     // optional (default: "text/plain")
+           "syntaxHighlighting": "C",                    // optional (default: "none")
+        },
+      "parts" : // must: at least one array element
+      [ 
+        { "identifier": "preamble",
+          "access"    : "visible",   // it is rendered, but can not be changed
+          "metadata"  : // what has to be moved to files ?
+          { "name"    : "Info: source before your code.", // name of element in frontend
+            "emphasis"  : "low"                           // optional (for rendering)          
+          },
+          "content"   : "I2luY2x1ZGUgPHN0ZGlvLmg-Cg"      // source (base64url encoded) 
+                                                          // decoded: #include <stdio.h>\n
+        },
+        { "identifier": "codeFromStudent",
+          "access"    : "modifiable",             // it can be edited in the frontend
+          "metadata"  :
+          { "name"    : "Fill in your code!",
+            "emphasis"  : "medium"
+          },
+          "content" : "dm9pZCBiYXIoKSB7IC8qIFNjaHJlaWJlbiBTaWUgaGllciBDb2RlLCBkZXIgImJhciIgYXVzZ2lidC4gKi8KCn0K"
+            // source (template)
+            // decoded: void bar() { /* Schreiben Sie hier Code, der "bar" ausgibt. */\n\n}\n 
+        },
+        { "identifier": "postscript",
+          "access"    : "visible",
+          "metadata"  :
+          { "name"      : "Info: source after your code calling bar() in it.",
+            "emphasis"  : "low",
+          },
+          "content" : "aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ" // source
+                                                // decoded: int main() { bar(); return 0; }
+        }
+      ] // parts[]
     }
-  ], // elements[]
-
-  "environment" : "anIdentifier", // optional
-
-  "config" :
-  { "C" : // C language specific stuff
-    {
-      // phases
-      "merging"  : // optional / must (for compiling)
-      {
-        "sources" : ["preamble", "codeFromStudent", "postscript"] // identifiers of to be merged sources
-                                                                  // (elements with text content) from above
-      },
-      "compiling" : // optional / must (for checking/linking)
-      {
-        "compiler" : "gcc",      // string
-        "flags"    : "-O2 -Wall" // string
-      },
-      "checking" : // optional
-      {
-        "sources": ["codeFromStudent"],   // sources to be checked
-        "forbiddenCalls": "system execve" // forbidden call names separated by WS
-      },
-      "linking" : // optional / must (for running)
-      {
-        "flags" : "-lm" // string
-      },
-      "running" : // optional
-      {
-        "commandLineArguments" : "--stepwidth 0.001" // string
-      },
-      "stopAfterPhase" : "running" // optional: "running" here is the same as omitting "stopAfterPhase"
-    } // "C"
-  } // "config"
-} // "Exercise"
-} // "Exercise" wrapper
+  ], // files[]
+  "parameters" : // parameters can be used to supply values at runtime to the configuration
+  { "__STEPWIDTH__" :
+    { "gui_type" : "input_field",
+      "name"     : "stepwidth"
+      "type"     : "number",
+      "value"    : 0.001 //default
+      "min"      : 0
+      "max"      : 1
+      "step"     : 0.001
+      "validation" : "range" // one of [range, pattern (regex), anyof/oneof]
+    }
+  },
+  "configuration" :
+  { "compiling.compiler" : "gcc",                  // string
+    "compiling.flags"    : "-O2 -Wall"             // string
+    "checking.sources"   : ["codeFromStudent"],    // identifier to parts
+    "checking.forbiddenCalls": "system execve"     // forbidden call names separated by WS
+    "linking.flags"      : "-lm"                   // string
+    "running.commandLineArguments" : "--stepwidth {{ __STEPWIDTH__ }}"
+                                               // mustache template if parameters are used
+  }
+}
 ```
 
 ### Exercise JSON Format
