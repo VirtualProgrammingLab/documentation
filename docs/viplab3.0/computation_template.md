@@ -15,8 +15,9 @@ Note: `//` with text following until EOL is a comment,
 
 ```
 { "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
+  "version" : "3.0.0" // version of this JSON-spec definition
   "metadata": // information for frontend
-    { "display_name" : "Aufgabe 1",  // name of computation template shown in frontend
+    { "displayName" : "Aufgabe 1",  // name of computation template shown in frontend
       "description" : "Schreiben Sie eine C-Funktion...", // short description (could be used  
                                                      // as subtitle, further descriptions in "parts").
     },
@@ -24,10 +25,9 @@ Note: `//` with text following until EOL is a comment,
   "files" : // must: at least one array element
   [
     { "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3e", // uuid, for referencing
-      "path"      : "code.c"                                // should it be file://code.c ?? 
+      "path"      : "code.c"                                // filename on backend 
       "metadata"  : // information for frontend
-        {  "MIMEtype": "text/plain",                     // optional (default: "text/plain")
-           "syntaxHighlighting": "C",                    // optional (default: "none")
+        {  "syntaxHighlighting": "C",                    // optional (default: "none")
         },
       "parts" : // must: at least one array element
       [ 
@@ -64,13 +64,13 @@ Note: `//` with text following until EOL is a comment,
   ], // files[]
   "parameters" : // parameters can be used to supply values at runtime to the configuration
   { "__STEPWIDTH__" :
-    { "gui_type" : "input_field",
-      "name"     : "stepwidth"
+    { "guiType" : "input_field",
+      "name"     : "stepwidth",
       "type"     : "number",
-      "value"    : 0.001 //default
-      "min"      : 0
-      "max"      : 1
-      "step"     : 0.001
+      "value"    : 0.001, //default
+      "min"      : 0,
+      "max"      : 1,
+      "step"     : 0.001,
       "validation" : "range" // one of [range, pattern (regex), anyof/oneof]
     }
   },
@@ -78,79 +78,194 @@ Note: `//` with text following until EOL is a comment,
   { "compiling.compiler" : "gcc",                  // string
     "compiling.flags"    : "-O2 -Wall"             // string
     "checking.sources"   : ["codeFromStudent"],    // identifier to parts
-    "checking.forbiddenCalls": "system execve"     // forbidden call names separated by WS
-    "linking.flags"      : "-lm"                   // string
+    "checking.forbiddenCalls": "system execve",    // forbidden call names separated by WS
+    "linking.flags"      : "-lm",                  // string
     "running.commandLineArguments" : "--stepwidth {{ __STEPWIDTH__ }}"
                                                // mustache template if parameters are used
   }
 }
 ```
 
-### Exercise JSON Format
+## Explaining the JSON Format
 
-Note: wrapper "Exercise" omitted.
-
-_wrapper "Exercise" around the following_
+*version 3.0.0*
 
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
 |---------------|----------------------------------------|-----------|------------|--------|----|
-|postTime |string UTC |must |timestamp from TC|Timestamp from TC: in addition a CC side timestamp could be made. A change of an exercise should be performed by a POST of the changed one, combined with DELETEs of older versions (PUT has problems, see [NumLab](/viplab)). | Still needed? Couldn't the websocket API or anybody else generate this? |
-|TTL |uint seconds |optional |time to live from teacher|Limits validity of Exercise. If (currentTime > postTime + TTL) Exercise can be deleted automatically. In all other cases (includes no TTL) it **must not** be deleted automatically (it can always be deleted manually, of course). For extending the lifetime of an exercise it has to be rePOSTed (leading to a new one with updated postTime).| Is this actually done? Ensured by the backend? Could also be parameter under config/resources? |
-|identifier |string |must       |name for teachers |Technically there is no need for uniqueness of the identifier at this protocol level: e.g. if modifying an exercise, there may be different versions with the same ID. | If there is no technically need, why do we have it? |
-|department |string |opt        |institution shortcut| For filtering exercises at frontend (e.g. for showing only a subset).| Frontend feature |
-|comment             |string     |opt               | comment from teacher |Generic element: same as comment from others: wrapper (here teacher) says who is originator.| |
-|name |string |opt |name of exercise to be shown in SCs. | If it is missing, "identifier" could be used.| Frontend feature |
-|description |string (plain text) |opt |short description |Mostly a few lines. A longer description in different formats can be put in "elements" (see below). | |
-|elements             |[ {...}, {...}, ... ] |must |array containing [JSON objects](#json-objects-in-exercise-elements): there has to be at least one element | | |
-|environment |string |opt |identifier for referring to static environment meta data |Static environment meta data stores complex exercise configurations containing data, which is changing very slowly: e.g. which external post processing tools will be called how for a set of exercises. Optional arguments here may also be placed into the static environment: e.g. linking--flags. | Do we need this? Didn't find it in tests. What can it be? |
-|routing      |struct |opt | | | Needed without ECS? |
-|routing --solutionQueue |string |must |Queue to be used for posting Solutions.|If there is *no* "routing" struct at all, implicit default value for "solutionQueue" is 'solutions', otherwise this key has to be set.|
-|elementMap |{ SOURCE_ID: URI, ... } |opt |mapping of sources to URIs, SOURCE_ID has to be an identifier (string) of an existing element (ELEMENT_ID), or an identifier of a yet to be generated element (MERGE_ID, availability depends on chain) |Currently only file:// protocol mapping to local file without directory path supported (Note: this is 'file:///filename.txt' for 'filename.txt'). If and how mapped elements will be used, depends on semantics of computation chain defined by "config".<BR> **C/C++/Java**: created files with suffix '.c' resp. '.cpp' resp. '.java' can (explicitly) or will (implicitly) be taken as a source for compilation (see config --C/C++/Java --compiling --sources); all others will just be created (they may be used as input for compilation (e.g. '.h', '.hpp') or executable).| Move to "config--merging"? |
-|elementProperties |{ SOURCE_ID: { string: VALUE, string: VALUE, ... } |opt |mapping of sources to {} containing properties ('string: VALUE' pairs); SOURCE_ID as defined for elementMap; unique property names, VALUE types and their allowed values have to be defined. |What kind of properties are allowed and their semantics may depend on chain (config --).| From test examples it seems to be that SOURCE_ID can also be the "group" name of an element. Unclear if still needed... |
-|elementProperties --MERGE_ID --tabType | one of {"source", "header", "data"} |opt | [C/C++][frontend] kind of merged sources | Ignored by backend.| |
-|config      |struct |opt | configuration | | make "merging" equal for all languages? |
-|config --Octave |struct |opt | configuration for Octave programming|Same as 'config --Matlab', just replace "Matlab" by "Octave" (all sub attributes are the same).| |
-|config --Matlab |struct |opt | configuration for Matlab programming|Chain: merging -> checking -> interpreting. Merging may be a trivial merge consisting of just one element. Checking needs a positive list of callable functions.| |
-|config --Matlab --merging |struct |must (may be trivial merge) | | See [Notes to merging](#notes-to-merging). | |
-|config --Matlab --merging --sources |[ELEMENT_ID, ELEMENT_ID, ...] |must |array of one or more identifiers of to be merged sources; defined by elements[]{ELEMENT_ID} above | | |
-|config --Matlab --checking |struct |opt | checking for legal function calls in source code |Performed after merging. If omitted, no checking will be done.| |
-|config --Matlab --checking --sources |[ELEMENT_ID, ELEMENT_ID, ...] |must |array of identifiers of to be checked sources; given by elements[]{ELEMENT_ID} above | | |
-|config --Matlab --checking --allowedCalls |string |must |*allowed* call names separated by WS; only idents (no braces, no func args) | | |
-|config --Matlab --interpreting |struct |opt | |If necessary, there may be sub keys later.|
-|config --Matlab --interpreting --timelimitInSeconds |int |opt |CPU time limit |For semantics see [Notes to "timelimitInSeconds"](#notes-to-timelimitinseconds). | |
-|config --Matlab --stopAfterPhase | one of {"merging", "checking", *"interpreting"*} |opt |chain: merging -> checking -> interpreting |If omitted, CC tries to execute all given phases (same as *"interpreting"*). | |
-|config --C |struct |opt | configuration for C programming|Chain: merging -> compiling -> [checking] -> linking -> running. Currently checking is the only phase which can be omitted, if there is a program to be run. | |
-|config --C++ |struct |opt | configuration for C++ programming|Chain: merging -> compiling -> linking -> running. Checking is not supported for C++. | |
-|config --Java |struct |opt | configuration for Java programming|Chain: merging -> compiling -> running. Checking is not supported for Java. | Checking is supported?! See below various attributes...|
-|config --C/C++/Java --merging |struct or [] |must / opt (if stopped before) | | See [Notes to merging](#notes-to-merging). | Can it be stopped before? |
-|config --C/C++/Java --merging --sources |[ELEMENT_ID, ELEMENT_ID, ...] | xor must |array of one or more identifiers of to be merged sources; defined by elements[]{ELEMENT_ID} above | Xor must: this xor *config --C/C++/Java --merging []*. This alternative is for compiling a single source file, generated by a single merge. | Omit and make it always explicit? | 
-|config --C/C++/Java --merging --mergeID |MERGE_ID |opt |identifier of merged sources; has to be unique in union set of: elements[]{ELEMENT_ID} above, together with all mergeIDs (in case of multiple merges) | If given, merge results can be explicitly defined as sources to be compiled by config-- C/C++/Java --compiling --sources; and/or mapped to a file by "elementMap" above. A merge result not being compiled explicitly or implicitly has to be elementMap'ped to become visible as a file to started commands: e.g. compiler (including it as header file) or executable (loading it as input file). | |
-|config --C/C++/Java --merging [] |{ "sources": [ELEMENT_ID, ELEMENT_ID, ...], "mergeID": MERGE_ID }, ... |xor must |array of one or more structs as defined by previous **two** items | Xor must: this xor *config --C/C++ --merging --sources* and (opt) *config --C/C++ --merging --mergeID*. This alternative is for compiling multiple source files, generated by multiple merges.| |
-|config --C/C++/Java --compiling |struct |must / opt (if stopped before) | | | |
-|config --C/C++/Java --compiling --sources|[MERGE_ID, MERGE_ID, ...] |opt | Explicit compilation: MERGE_IDs have to be mergeIDs from merging phase, no mergeID should occur multiple times here. Overrides (implicit) default behavior.| If given, only referenced sources will be compiled (explicitly). If omitted, compilation may be done implicitly by not elementMap'ing some merge result (gets automatically generated filename then), elementMap'ing to a file with suited suffix ('.c', '.cpp', '.java') and name/path (Java). Also see config --C/C++/Java --merging --mergeID and elementMap.| Allow only explicit way? |
-|config --C/C++ --compiling --compiler |string |must |compiler to be used, e.g. "gcc" | | |
-|config --C/C++ --compiling --flags |string |must |CFLAGS |e.g. "-O2" or "" | |
-|config --Java --compiling --flags |string |opt |compile flags |e.g. "-v" | |
-|config --C/Java --checking |struct |opt | checking for illegal function calls in source code |Performed after compiling, because compiler gives better syntax error messages. Can be omitted, if no checking should be done.| How can it be omitted?  |
-|config --C/Java --checking --sources |[ELEMENT_ID, ELEMENT_ID, ...] |must |array of identifiers of to be checked sources; given by elements[]{ELEMENT_ID} above | |
-|config --C --checking --behavior | one of {*mergeAndInclude*, "element"} | **Ignored!** Hardwired semantics is "mergeAndInclude".|"mergeAndInclude": merged elements will be checked alltogether, types are given by header #include's; *"element"*: each element will be checked for itself, some predefined standard types| For more details see [C checking semantics](#c-checking-semantics).| |
-|config --C --checking --forbiddenCalls |string |must |*forbidden* call names separated by WS; only idents (no braces, no func args) | | |
-|config --Java --checking --forbiddenCalls |string |opt |*forbidden* call name expressions separated by WS | For semantics see [Java checking semantics](#java-checking-semantics).| |
-|config --Java --checking --allowedCalls |string |opt |*allowed* call name expressions separated by WS | For semantics see [Java checking semantics](#java-checking-semantics).| |
-|config --C/C++ --linking |struct |must / opt (if stopped before) | | | |
-|config --C/C++ --linking --flags |string |must |LFLAGS |e.g. "" | |
-|config --C/C++/Java --running |struct |must / opt (if stopped before) | | | |
-|config --C/C++/Java --running --commandLineArguments |string |opt |arguments given to main() function |Outlook: mechanism for transforming input values (e.g. by sliders) into CLI arguments. | To be addressed now? |
-|config --C/C++/Java --running --timelimitInSeconds |int |opt |CPU time limit |For semantics see [Notes to "timelimitInSeconds"](#notes-to-timelimitinseconds). | |
-|config --Java --running --flags |string |opt |flags given to JVM | | |
-|config --Java --running --mainClass |string |opt (if unique) / must (if not unique) |class containing "public static void main(String[] args) {" |"args" may be another name. If main function is unique, its correct class should be detected automatically.| |
-|config --C --stopAfterPhase | one of {"merging", "compiling", "checking", "linking", *"running"*} |opt |chain: merging -> compiling -> checking -> linking -> running |If omitted, CC tries to execute all given phases (same as *"running"*). | |
-|config --C++ --stopAfterPhase |one of {"merging", "compiling", "linking", *"running"*} |opt |chain: merging -> compiling -> linking -> running |If omitted, CC tries to execute all given phases (same as *"running"*). |  |
-|config --Java --stopAfterPhase |one of {"merging", "compiling", *"running"*} |opt |chain: merging -> compiling -> running |If omitted, CC tries to execute all given phases (same as *"running"*). | checking? |
-|config --DuMuX |struct |opt | configuration for DuMuX|Chain: running. There is a first simple chain for just running preinstalled executables. Later this will be extended. | |
-|config --DuMuX --running |struct |must | | | |
-|config --DuMuX --running --executable |string |must |name of executable to run (as in backend file system)| | |
-|config --DuMuX --running --commandLineArguments |string |opt |additional command line args| | |
-|config --DuMuX --running --timelimitInSeconds |int |opt |CPU time limit |For semantics see [Notes to "timelimitInSeconds"](#notes-to-timelimitinseconds). | |
-|config --DuMuX --running --observe_stderr |bool (*false*)|opt |if true, transfer intermediate stderr Results| | Is this implemented?|
+|identifier | string (UUID) | must | the identifier of this computation template | can be generated by the frontend launcher | |
+|version | string | opt | version of the json specification | should be given for backwards compatibility |
+|metadata | struct | opt | contains information for frontend | | |
+|metadata --displayName | string | opt | name of computation template shown in frontend | | Makes 'opt' sense for frontend? |
+|metadata --description |string (plain text) |opt |short description |Mostly a few lines. A longer description in different formats can be put in "elements" (see below). | There is nothing 'below'. Where are descriptions actually used in the frontend? |
+|environment |one of {"C", "C++", "Java", "Matlab", "Octave", "Container", "DuMuX"} | must | Specifies the environment used for the Computation. It defines language, runtime, libraries and tools | | |
+|files | [ {...}, {...}, ... ] |must |array containing [File objects](#json-objects-in-files): there has to be at least one element | | |
+|parameters | {PARAM_ID, PARAM_ID, ...} | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique PARAM_ID (string) and is a [JSON object](#json-object-parameter). | For security reasons free text *gui_type*, i.e., text input field or editor, are not allowed here. |
+|configuration | struct |opt/must (depends on environment) | Environment specific configurations | Different phases can be configured like compiling, checking (for legal function calls in source code), ... | 
+|configuration --compiling.sources | [FILE_ID, FILE_ID, ...] | must | Array of identifiers of [JSON File objects](#json-objects-in-files). Explicit compilation (only referenced sources will be compiled). | for **C, C++, Java**; The frontend should suggest defaults here, e.g. by suited file suffix ('.c', '.cpp', '.java'). |  name/path (Java) for implicit compiling? check backend?|
+|configuration --compiling.compiler |string |must |compiler to be used, e.g. "gcc" | for **C, C++** | |
+|configuration --compiling.flags |string |must for **C, C++**; optional for **Java** |CFLAGS for **C/C++**; compile flags for **Java** |e.g. "gcc" for **C/C++**; "-O2" or "" for **Java** | |
+|configuration --checking.sources |[PART_ID, PART_ID, ...] |must if checking should be performed |array of identifiers of to be checked sources; given by parts[]{PART_ID} (see [below](#json-objects-in-parts)) | for **Matlab, Octave, C, Java**; frontend should suggest all "modifiable" and "template" parts here |  |
+|configuration --checking.allowedCalls |string |must if checking should be performed |for **Matlab/Octave**: *allowed* call names separated by WS; only idents (no braces, no func args)<br>for **Java**: *allowed* call name expressions separated by WS | for **Java** semantics see [Java checking semantics](#java-checking-semantics). | |
+|configuration --checking.forbiddenCalls |string |must if checking should be performed |for **C**: *forbidden* call names separated by WS; only idents (no braces, no func args)<br>for **Java**: *forbidden* call name expressions separated by WS | for **C** semantics see [C checking semantics](#c-checking-semantics)); for **Java** semantics see [Java checking semantics](#java-checking-semantics).  | |
+|configuration --linking.flags |string |must |LFLAGS | for **C, C++**; e.g. "" | |
+|configuration --running.stdinFilename | FILE_ID | must | the file identifier that is passed to **Matlab/Octave** via standard-in | |
+|configuration --running.timelimitInSeconds |int |opt |CPU time limit | for all **environments**; for semantics see [Notes to "timelimitInSeconds"](#notes-to-timelimitinseconds). | |
+|configuration --running.commandLineArguments |string |opt | for **C, C++, Java**: arguments given to main() function; for **DuMuX, Container**: additional command line args | mustache template syntax can be used to transform input values (e.g. of sliders) into CLI arguments (see *parameters*-attribute) | |
+|configuration --running.flags |string |opt |flags given to JVM | for **Java** | |
+|configuration --running.mainClass |string |opt (if unique) / must (if not unique) |class containing "public static void main(String[] args) {" | for **Java**: "args" may be another name. If main function is unique, its correct class should be detected automatically.| |
+|configuration --running.executable |string |must |name of executable to run (as in backend file system)| for **DuMuX** | |
+|configuration --running.entrypoint | string | must | executable to run inside the container | for **Container**; can contain mustache template syntax for injecting PARAM_IDs (see *parameters*-attribute) |
+|configuration --running.observe_stderr |bool (*false*)|opt |if true, transfer intermediate stderr Results| for **DuMuX, Container**| Is this implemented?|
+|configuration --resources.image | url | must | location of the image to be executed | for **Container**; has to be a tar |
+|configuration --resources.volume | string | must | path in the container where data is placed | for **Container** | we need workaround for kata containers?! |
+|configuration --resources.memory | string | opt (*64mb*)| memory limit for the container | for **Container** | |
+|configuration --resources.numCPUs | int | opt | number of CPUs for the container | for **Container** | default?; kubernetes map to softlimit cpu-shares...|
+
+### C checking semantics
+08.05.2013: Semantics is "mergeAndInclude" for both prod systems and devel system ("element" unused).
+
+ * **"mergeAndInclude"** (default): Checked will be the merge result of elements after being preprocessed by the C preprocessor, so #include's are allowed and honored. Types have to be defined by the corresponding system headers (e.g. by `#include <stdio.h>`) and no predefined standard types should be expected. It's possible to have illegal function calls in source elements (being part of some merge) **not** being checked (typically teacher code). This means, that during checking it has to and will be looked, in which source element an illegal function call happens, for knowing, if this actually is an error case.
+ * *__"element"__* (unused): Each element has to contain correct C code for itself. In addition to basic types some standard types defined in system headers are predefined (e.g. FILE, size_t). Using types from the outside -- e.g. other elements defining them or #include's in teacher code elements -- does **not** work.
+
+Common for both: no preprocessor commands are allowed in to be checked elements, with only one exception: #include's are allowed in case of "mergeAndInclude". The reason for the latter is to give students access to source elements serving as headers - editable for them or not. Functions from system headers could be #include'd, too.
+
+The teacher has the responsibility to put unwished system calls like system() and others from libc into "forbiddenCalls".
+Another point of control is to avoid linking with libs, whose functions shouldn't be used (this does not work with libc (automatically linked)).
+
+
+### Java checking semantics
+```
+Matching expressions for use in "allowedCalls" and "forbiddenCalls"
+
+'**' is for pure prefix matching; '*' for more fine-granular matching.
+
+Examples of matching expressions:
+- java.io.*   matches all calls to methods in all classes in package, but does not match calls to methods in classes in subpackages;
+- java.io.**  matches all calls to methods in all classes in package, _and_ in all classes in subpackages (if they exist);
+
+- java.io.Foo    matches all calls to methods in class Foo, _and_ to methods in inner classes;
+- java.io.Foo.*  "       "   "     "  "       "  "     "  , but _not_ to methods in inner classes (eg. to java.io.Foo$Bar.callMe);
+
+- java.io.Foo.callMe     matches (only) the call to method callMe in Foo;
+- java.io.Foo$Bar.callMe matches (only) the call to method callMe in inner class Foo$Bar.
+
+If used in "forbiddenCalls" only (property "allowedCalls" missing):
+- java.io.*   forbids all calls to methods in all classes in package, but allows calls to methods in classes in subpackages;
+- java.io.**  forbids all calls to methods in all classes in package, _and_ in all classes in subpackages (if they exist);
+
+- java.io.Foo    forbids all calls to methods in class Foo, _and_ to methods in inner classes;
+- java.io.Foo.*  "       "   "     "  "       "  "     "  , but _not_ to methods in inner classes (eg. to java.io.Foo$Bar.callMe);
+
+- java.io.Foo.callMe     forbids (only) the call to method callMe in Foo;
+- java.io.Foo$Bar.callMe forbids (only) the call to method callMe in inner class Foo$Bar.
+
+One or more of these expressions may be given by "allowedCalls" and/or "forbiddenCalls", separated by WS; e.g.
+  "forbiddenCalls": "java.io.** java.lang.Class"
+.
+
+
+An allowed() or forbidden() predicate gives true,
+- if one of its corresponding matching expressions - an entry in property "allowedCalls" resp. "forbiddenCalls" - matches, or
+- if there is no corresponding property given at all.
+Otherwise it gives false.
+
+All calls will be filtered by following composed predicate for getting allowed ones:
+  allowed(call) && ! forbidden(call)   <=>  ! forbidden(call) && allowed(call)
+.
+
+If only one part is given, this predicate reduces to:
+  allowed(call)
+resp.
+  ! forbidden(call)
+.
+
+Default for not given part of predicate is
+- 'no forbidden': ! forbidden(call) == true, and
+- 'all allowed' : allowed(call)     == true.
+(opposite defaults would render the given part useless).
+
+If sets 'allowed' and 'forbidden'
+- are disjunct         -> 'allowed' are allowed and all other forbidden.
+- have an intersection -> ('allowed' minus intersection) is allowed (all other forbidden).
+
+With this logic it is possible to define
+- a negative list by giving 'forbiddenCalls' only, or
+- a positive one by giving "allowedCalls", or
+- a mixture of both.
+```
+
+
+### Notes to "timelimitInSeconds"
+There is a default CPU time limit (see RLIMIT_CPU of 'man setrlimit') for running or interpreting, which depends on backend configuration. This is good for terminating non-terminating programs, e.g. endless loops.
+
+Optional attribute "timelimitInSeconds" may lower this default CPU time limit; if it is higher than default, it will be ignored.
+
+Setting it to a value as much as possible below default is good for backend response time under high load; especially, if default is configured for performing expensive computations.
+
+
  
+### JSON objects in files
+
+An object in array files[] has the following members:
+
+|Key |Type (an enum default is marked by _italics_) |Opt / Must |Description|Comment
+|----|----------------------------------------------|-----------|-----------|-------
+|identifier | string (UUID) | must |for later referencing, has to be unique | can be autogenerated by frontend |
+|path | string | must | absolute path to file | It is *not* allowed to start with '/' |
+|metadata | struct | opt | contains information for frontend | | |
+|metadata --syntaxHighlighting | string (*text*) | opt | Mode of the ace editor. List can be found in on [github](https://github.com/ajaxorg/ace/tree/master/lib/ace/mode) | Examples: "ini", "c_cpp", "matlab", "java". See also [Ace demo](http://ajaxorg.github.io/ace-builds/kitchen-sink.html) | |
+|parts | [{...}, {...}, ...] | must | array containing [part objects](#json-objects-in-parts). There has to be at least one. |
+
+
+### JSON objects in parts
+
+An object in array parts[] has the following members:
+
+|Key |Type (an enum default is marked by _italics_) |Opt / Must |Description|Comment|AS
+|----|----------------------------------------------|-----------|-----------|-------|--
+|identifier | string | must |for later referencing, has to be unique | can be autogenerated by frontend |
+|access | one of {"invisible", "visible", "modifiable", "template"} | must | defines the access level of this part for the user | see [Notes on access levels](#notes-on-access-levels-in-parts) for more details |
+|metadata | struct | opt | contains information mainly for the frontend |
+|metadata --name |string |opt | additional description of this part | To be shown in the frontend | Where? Is it used?
+|metadata --emphasis | One of {"low", *"medium"*, "high"} |opt |info for rendering | | Still needed? |
+|metadata --PARAM_ID | struct | opt | definition of [parameters](#json-object-parameter) that are injected to *content* at runtime | Any number of parameters can be specified, but the PARAM_ID has to be unique.
+|content |string |must |base64url-encoded source code | Can contain mustache expressions with PARAM_IDs if the access type of this part is "template".
+
+#### Notes on access levels in parts
+
+Four access levels can be specified inside a part:
+
+* **invisible**: The *content* is not shown to a user, i.e., student or re-user of a software. This can be used to hide irrelevant source code from the user, to focus on the important parts, etc...
+* **visible**: The *content* is shown to a user, but can not be changed by him/her.
+* **modifiable**: The *content* is shown to a user and can be changed. This comprise functions students should implement or input files of a research software that can be changed by a re-user.
+* **template**: The *content* is shown to a user, but can not be changed. Additionally, GUI elements like input fields, sliders, buttons, etc. that are specified within the *metadata* can be set by the user and the template is then filled with these parameter values. This access-level can be used to simplify complex research software configurations for the re-user. 
+
+### JSON object Parameter
+
+An PARAM_ID-object, like *\_\_BINARY\_\_*, has the following members:
+
+|Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
+|---------------|----------------------------------------|-----------|------------|--------|
+|guiType | one of {*"editor"*, "input_field", "checkbox", "radio", "dropdown", "toggle", "slider"} | must | specifies how the frontend renders the parameter | |
+|name | string | must | Label for the parameter | frontend feature |
+|type | one of {"number", "text"} | opt | Type of the input field |  | 
+|value | number for numerical "input_field"; array of numbers for a range slider | opt | the default value(s) shown in frontend | |
+|values | array of strings | must for *gui_type* "checkbox", "radio", "dropdown", "toggle" | specifies the allowed values | |
+|min | number | opt | minimal allowed value | |
+|max | number | opt | maximal allowed value | |
+|step | number | opt | defines together with *min* and *max* attributes a finite set of allowed values | | 
+|validation | one of {"range", "pattern", "anyof", "oneof"} | must | See [Parameter validation semantics](#parameter-checking-semantics) for details | |
+|selected | array of strings for *gui_type* "checkbox"/"toggle"; string for *gui_type* "radio" | opt | specifies defaults value/values for frontend | the strings have to be part of *values*; for "toogle" given values mean *true* |
+|disabled | array of strings | opt | Shows disabled options in frontend | sting has to be part of *values*; suited, e.g., to show possibilities that are part of a software, but deactivated |
+|multiple | bool | opt (*false*) | Specifies for *gui_type* "dropdown"/"slider" if multiple values can be selected| If true, *selected*/*value* has to be an array; a dropdown list is then rendered as listbox |
+|vertical | bool | opt (*false*) | Specifies for *gui_type* "slider" whether it is rendered horizontal or vertical |
+|pattern | string | opt | A regex pattern for validation | |
+
+#### Parameter Validation Semantics
+
+Four types of validation are implemented at the moment:
+
+* **range**: A numerical value is checked whether is is between *min* and *max*. If *step* is given a finite number of possible values is computed and the value has to be within this set.
+* **pattern**: A regex pattern that the text value has to fulfill.
+* **oneof**: The value has to be included in *values* and, if given, not in *disabled*.
+* **anyof**: All values have to be included in *values* and, if given, not in *disabled*.

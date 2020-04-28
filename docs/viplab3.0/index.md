@@ -21,10 +21,15 @@ Terms (ViPLab specific)
 * **frontend launcher** entrypoints for the user, that start the frontend, e.g. viplab-question-plugin-for-ilias or dataverse-viplab-extension
 * **computation** a CC computes a *Result* of a *Computation Task* complementing a *Computation Template* (*Computation Task* and - referenced - *Computation Template* being input, *Result* output of computation).
 
+Flow of information
+-------------------
+Describe who is sending which kind of message and gets what back
+
 JSON messages
 --------------
 
 [Computation Template](/viplab3.0/computation_template) <BR>
 [Computation Task](/viplab3.0/computation_task) <BR>
+[Computation](/viplab3.0/computation) <BR>
 [Computation Result](/viplab3.0/computation_result) <BR>
 [Computation Interrupt](/viplab3.0/computation_interrupt)
