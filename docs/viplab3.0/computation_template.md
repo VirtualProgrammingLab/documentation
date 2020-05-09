@@ -97,6 +97,7 @@ Note: `//` with text following until EOL is a comment,
 |metadata | struct | opt | contains information for frontend | | |
 |metadata --displayName | string | opt | name of computation template shown in frontend | | Makes 'opt' sense for frontend? |
 |metadata --description |string (plain text) |opt |short description |Mostly a few lines. A longer description in different formats can be put in "elements" (see below). | There is nothing 'below'. Where are descriptions actually used in the frontend? |
+|metadata --viewer | one or more (list) of {"Image", "ParaView", "ViPLabGraphics"} | opt | When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable. | | |
 |environment |one of {"C", "C++", "Java", "Matlab", "Octave", "Container", "DuMuX"} | must | Specifies the environment used for the Computation. It defines language, runtime, libraries and tools | | |
 |files | [ {...}, {...}, ... ] |must |array containing [File objects](#json-objects-in-files): there has to be at least one element | | |
 |parameters | {PARAM_ID, PARAM_ID, ...} | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique PARAM_ID (string) and is a [JSON object](#json-object-parameter). | For security reasons free text *gui_type*, i.e., text input field or editor, are not allowed here. |
