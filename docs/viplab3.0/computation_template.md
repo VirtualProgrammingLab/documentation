@@ -115,10 +115,10 @@ Note: `//` with text following until EOL is a comment,
 |configuration --running.flags |string |opt |flags given to JVM | for **Java** | |
 |configuration --running.mainClass |string |opt (if unique) / must (if not unique) |class containing "public static void main(String[] args) {" | for **Java**: "args" may be another name. If main function is unique, its correct class should be detected automatically.| |
 |configuration --running.executable |string |must |name of executable to run (as in backend file system)| for **DuMuX** | |
-|configuration --running.entrypoint | string | must | executable to run inside the container | for **Container**; can contain mustache template syntax for injecting PARAM_IDs (see *parameters*-attribute) |
-|configuration --running.observe_stderr |bool (*false*)|opt |if true, transfer intermediate stderr Results| for **DuMuX, Container**| Is this implemented?|
+|configuration --running.entrypoint | string | opt | executable to run inside the container | for **Container**; can contain mustache template syntax for injecting PARAM_IDs (see *parameters*-attribute) |
+|configuration --running.intermediateFilesPattern | string |opt | regex-expression in stdout which file is ready to be transferred | for **Container**| Is this implemented?|
 |configuration --resources.image | url | must | location of the image to be executed | for **Container**; has to be a tar |
-|configuration --resources.volume | string | must | path in the container where data is placed | for **Container** | we need workaround for kata containers?! |
+|configuration --resources.volume | string | opt | path in the container where data is placed | for **Container** | we need workaround for kata containers?! |
 |configuration --resources.memory | string | opt (*64mb*)| memory limit for the container | for **Container** | |
 |configuration --resources.numCPUs | int | opt | number of CPUs for the container | for **Container** | default?; kubernetes map to softlimit cpu-shares...|
 
