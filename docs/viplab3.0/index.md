@@ -25,9 +25,12 @@ Flow of information
 -------------------
 Describe who is sending which kind of message and gets what back
 
+Versioning rules
+----------------
+[Versioning rules](/viplab3.0/versioning)<BR>
+
 JSON messages
 --------------
-
 [Computation Template](/viplab3.0/computation_template) <BR>
 [Computation Task](/viplab3.0/computation_task) <BR>
 [Computation](/viplab3.0/computation) <BR>
