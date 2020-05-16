@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - master
+      - viplab3.0-json
 
 jobs:
   deploy:
