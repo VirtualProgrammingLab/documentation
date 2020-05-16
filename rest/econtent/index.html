@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Econtent - ViPLab</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">ViPLab</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../ecs2/" class="dropdown-item">Core ECS</a>
+</li>
+                                    
+<li>
+    <a href="../../ecs2/example/" class="dropdown-item">Beispiele</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">ECS REST Interface</a>
+</li>
+                                    
+<li>
+    <a href="../auths/" class="dropdown-item">Auths</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Econtent</a>
+</li>
+                                    
+<li>
+    <a href="../eventqueues/" class="dropdown-item">Eventqueues</a>
+</li>
+                                    
+<li>
+    <a href="../memberships/" class="dropdown-item">memberships</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/exercises/" class="dropdown-item">/numlab/exercises</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/interrupts/" class="dropdown-item">Interrupts</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/results/" class="dropdown-item">/numlab/results</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/solutions/" class="dropdown-item">/numlab/solutions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab3.0/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation/" class="dropdown-item">Computation JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_result/" class="dropdown-item">Computation Result JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_task/" class="dropdown-item">Computation Task JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_template/" class="dropdown-item">Computation Template JSON Message</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../auths/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../eventqueues/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h3 id="econtents">econtents</h3>
+<p><code>GET, econtents:</code> Listet alle verfügbaren eContent-Angebote des anfragenden Participanten auf, sofern er mit einer seiner MembershipIDs (<code>mid</code>) in <code>eligibleMembers</code> eines <code>econtents</code> vorkommt. Das Attribut <code>eligibleMembers</code> listet dabei alle MembershipIDs (<code>mid</code>) auf, die den Econtent verlinken bzw. referenzieren dürfen. Die dem Attribut <code>owner</code> zugeordnete <code>mid</code> repräsentiert die Heimatplattform bzw. den eigentlichen Anbieter des Econtent.</p>
+<pre><code>https://infolms.rus.uni-stuttgart.de:7923/econtents
+[
+{
+&quot;url&quot;    : &quot;https://il3.stgt.de/course23&quot;,
+&quot;title&quot;  : &quot;HM II Einführung&quot;,
+&quot;eligibleMembers&quot; : [1,3],
+&quot;eid&quot;: 1,
+&quot;owner&quot;: 1,
+...
+},
+{
+&quot;url&quot;    : &quot;https://il3.stgt.de/course15&quot;,
+&quot;title&quot;  : &quot;Datenverarbeitung I&quot;,
+&quot;eligibleMembers&quot; : [2,3,5],
+&quot;eid&quot;: 43,
+&quot;owner&quot;: 2,
+...
+}
+]
+</code></pre>
+
+<p><code>GET, econtents/&lt;eid&gt;:</code> Gibt eContent mit der eContentID= <eid> zurück. Dies funktioniert auch, wenn der aufrufende Participant nicht in <code>eligibleMembers</code> des <code>econtents</code> gelistet ist, sondern dort als <code>owner</code> eingetragen ist:</p>
+<pre><code>https://infolms.rus.uni-stuttgart.de:7923/econtent/125
+[
+{
+&quot;url&quot;    : &quot;https://il3.stgt.de/course23&quot;,
+&quot;title&quot;  : &quot;HM II Einführung&quot;,
+&quot;eid&quot;: 125
+...
+}
+]
+</code></pre>
+
+<p><code>POST, econtents:</code> Generiert neuen eContent. Nachfolgend sind alle möglichen Attribute für den Course-Econtent aufgeführt. Es müssen mindestens "url", "title", "eligibleMembers", "etype", "status","lang" und "owner" angegeben werden. Wertebereiche bzw. Infos für einzelne Attribute:</p>
+<ul>
+<li>"status" : "online" | "offline"</li>
+<li>"etype" : "application/ecs-course"</li>
+<li>"eligibleMembers" : gültige MembershipIDs (<code>mid</code>). Für gewöhnlich gewonnen aus Abfrage der <code>memberships</code> Resource welche dem Dozenten zur Auswahl über Formular                  dargestellt werden.</li>
+<li>"lang" : "de_DE"</li>
+<li>"owner": gültige MembershipIDs (<code>mid</code>), d.h. der Participant muss dieser <code>mid</code> zugeordnet sein.</li>
+</ul>
+<pre><code>https://infolms.rus.uni-stuttgart.de:7923/econtents
+
+{
+  &quot;timePlace&quot;: {
+    &quot;room&quot;: &quot;Raum M 2.11&quot;,
+    &quot;cycle&quot;: &quot;wöch.&quot;,
+    &quot;begin&quot;: &quot;2008-01-10T13:30:00+01:00&quot;,
+    &quot;end&quot;: &quot;2008-01-10T15:00:00+01:00&quot;
+  },
+  &quot;lecturer&quot;: [
+    &quot;Prof. Dr. Stephan Nussberger&quot;,
+    &quot;Dipl.-Ing. Markus Sewald&quot;
+  ],
+  &quot;courseID&quot;: &quot;course5:220&quot;,
+  &quot;semesterHours&quot;: &quot;5&quot;,
+  &quot;study_courses&quot;: [
+    &quot;Technische Biologie&quot;,
+    &quot;Elektrotechnik&quot;
+  ],
+  &quot;url&quot;: &quot;https://ilias3.uni-stuttgart.de/goto.php?target=crs_2737&amp;client_id=Uni_Stuttgart&quot;,
+  &quot;title&quot;: &quot;Hochgeschwindigkeitskommunikationsnetze&quot;,
+  &quot;abstract&quot;: &quot;Moderne media access Verfahren als Wegbereiter der Hochgeschwindigkeitskommunikation.&quot;,
+  &quot;eligibleMembers&quot;: [2,1,3],
+  &quot;owner&quot;: 1,
+  &quot;courseType&quot;: &quot;Vorlesung&quot;,
+  &quot;lang&quot;: &quot;de_DE&quot;,
+  &quot;etype&quot;: &quot;application/ecs-course&quot;,
+  &quot;status&quot;: &quot;online&quot;,
+  &quot;credits&quot;: &quot;10&quot;,
+  &quot;term&quot;: &quot;WS 06/07&quot;
+}
+</code></pre>
+
+<p><code>eligibleMembers</code> sind <a href="../memberships#mid">MembershipIDs</a>. </p>
+<p><code>PUT, econtents/&lt;eid&gt;:</code> Updated eContent mit der eContentID=\&lt;eid>:</p>
+<pre><code>https://infolms.rus.uni-stuttgart.de:7923/econtents/125
+
+{
+&quot;lecturer&quot;  : [
+  &quot;Prof. Uli Ganzgenau&quot;,
+  &quot;Dr. Udo Grenzwert&quot;,
+  &quot;Dipl.-Ing Manfred Durchblick&quot;
+],
+&quot;credits&quot;: 23
+}
+</code></pre>
+
+<p><code>DELETE, econtents/&lt;eid&gt;</code> Löscht eContent mit der eContentID=<eid> :</p>
+<pre><code>https://infolms.rus.uni-stuttgart.de:7923/econtents/125
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

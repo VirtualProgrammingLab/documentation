@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Auths - ViPLab</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">ViPLab</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../ecs2/" class="dropdown-item">Core ECS</a>
+</li>
+                                    
+<li>
+    <a href="../../ecs2/example/" class="dropdown-item">Beispiele</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">ECS REST Interface</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Auths</a>
+</li>
+                                    
+<li>
+    <a href="../econtent/" class="dropdown-item">Econtent</a>
+</li>
+                                    
+<li>
+    <a href="../eventqueues/" class="dropdown-item">Eventqueues</a>
+</li>
+                                    
+<li>
+    <a href="../memberships/" class="dropdown-item">memberships</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/exercises/" class="dropdown-item">/numlab/exercises</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/interrupts/" class="dropdown-item">Interrupts</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/results/" class="dropdown-item">/numlab/results</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/solutions/" class="dropdown-item">/numlab/solutions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab3.0/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation/" class="dropdown-item">Computation JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_result/" class="dropdown-item">Computation Result JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_task/" class="dropdown-item">Computation Task JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_template/" class="dropdown-item">Computation Template JSON Message</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../econtent/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#auths" class="nav-link">auths</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="auths">auths</h1>
+<p><code>POST, auths:</code> Der ECS speichert einen eindeutigen <code>hash</code> Wert zur späteren Autorisation. Zusätzlich müssen noch die <code>mid</code> des konsumierenden Participanten und <code>eid</code> des Econtent angegeben werden. Optional sind <code>sov</code> (start of validation time) und <code>eov</code> (end of validation time). Ein <code>auth</code> Eintrag hat bei Nichtangabe von <code>sov, eov</code> eine vom ECS bestimmte Lebensdauer (Standard 30 Sekunden), d.h. wird nach Anlegen eines Auth Objekts dieses nicht innerhalb der nächsten 30sec abgerufen, verfällt der Auth Eintrag und ein nachträglicher Autorisationsversuch schlägt fehl. Diese Zeitspanne sollte für den anschliessenden Forward und die Anfrage des econtentanbietenden Participanten ausreichen. Werden hingegen <code>sov, eov</code> angegeben, steht der Auth Eintrag nur innerhalb dieser beiden Zeiten für eine Autorisation zur Verfügung (asynchrones konsumieren von Econtentlinks). Liefert als HTTP Status Code entweder "201 Created" für eine erfolgreiches Anlegen oder "400 bzw. 404" für Fehler. Auth Einträge können nur von Participanten gemacht werden, dessen <code>mid</code> als <code>owner</code> für den jeweiligen <code>eid</code> im entsprechenden Econtent eingetragen sind (ansonsten HTTP Status Code 404). {#auths_abr} Dem anfragenden Participanten wird zusätzlich ein optionales und eindeutiges Kürzel <code>abr</code> des  konsumierenden Participanten zur Verfügung gestellt. Dies kann, wenn vorhanden, z.B. zur zusätzlichen Kennzeichnung von neu anzulegenden Accounts auf dem Econtent anbietenden Participanten verwendet werden (siehe auch <a href="memberships#abr">memberships</a>).</p>
+<p>Wertebereiche bzw. Infos für einzelne Attribute:</p>
+<ul>
+<li>"hash" : Eine einfache Möglichkeit zur Generierung eines eindeutigen Hash's: {{{ echo "<code>date</code> ecs.uni-stuttgart.de" | sha1sum}}}, also einen sha1 Hash über das aktuelle Systemdatum und seinen jeweiligen DNS. Der Hash darf eine Länge von 256 Zeichen nicht überschreiten. Der Algorithmus zur Erzeugung des Hashwertes sollte geheim und/oder Zufallskomponenten enthalten.</li>
+<li>"sov" : steht für {{{start of validation}}} time. Zeitangabe im Format nach rfc3339. Optionales Datum. Muss immer gemeinsam mit {{{eov}}} angegeben werden.</li>
+<li>"eov" : steht für {{{end of validation}}} time. Zeitangabe im Format nach rfc3339. Optionales Datum. Muss immer gemeinsam mit {{{sov}}} angegeben werden.</li>
+</ul>
+<pre><code>https://infolms.rus.uni-stuttgart.de:7923/auths
+[
+{
+  &quot;hash&quot;:  &quot;87c1141e5ec3adf194b2ea600974b79f494027ff&quot;,
+  &quot;mid&quot; :  1,
+  &quot;eid&quot; :  1,
+  &quot;sov&quot; :  &quot;2008-01-07T13:30+01:00&quot;,
+  &quot;eov&quot; :  &quot;2008-02-14T15:00+01:00&quot;
+},
+...
+]
+</code></pre>
+
+<p><code>GET, auths/&lt;hash&gt;:</code>: Gibt entsprechend nachgefragte {{{auths}}} Resource zurück. Bei vorhandenem Hash (<hash>) wird  als HTTP Status Code "200 OK" und der entsprechende Auths-Eintrag zurückgegeben, ansonsten HTTP Status Code "404" für eine unberechtigte Anfrage.</p>
+<pre><code>https://infolms.rus.uni-stuttgart.de:7923/auths/87c1141e5ec3adf194b2ea600974b79f494027ff
+
+[
+{
+  &quot;hash&quot;:  &quot;87c1141e5ec3adf194b2ea600974b79f494027ff&quot;,
+  &quot;mid&quot; :  1,
+  &quot;eid&quot; :  1,
+  &quot;sov&quot; :  &quot;2008-01-07T13:30+01:00&quot;,
+  &quot;eov&quot; :  &quot;2008-02-14T15:00+01:00&quot;,
+  &quot;abr&quot; :  &quot;S&quot;
+}
+]
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

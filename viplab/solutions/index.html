@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>/numlab/solutions - ViPLab</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">ViPLab</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../ecs2/" class="dropdown-item">Core ECS</a>
+</li>
+                                    
+<li>
+    <a href="../../ecs2/example/" class="dropdown-item">Beispiele</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../rest/" class="dropdown-item">ECS REST Interface</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/auths/" class="dropdown-item">Auths</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/econtent/" class="dropdown-item">Econtent</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/eventqueues/" class="dropdown-item">Eventqueues</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/memberships/" class="dropdown-item">memberships</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../exercises/" class="dropdown-item">/numlab/exercises</a>
+</li>
+                                    
+<li>
+    <a href="../interrupts/" class="dropdown-item">Interrupts</a>
+</li>
+                                    
+<li>
+    <a href="../results/" class="dropdown-item">/numlab/results</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">/numlab/solutions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab3.0/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation/" class="dropdown-item">Computation JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_result/" class="dropdown-item">Computation Result JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_task/" class="dropdown-item">Computation Task JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_template/" class="dropdown-item">Computation Template JSON Message</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../results/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../viplab3.0/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#numlabsolutions" class="nav-link">/numlab/solutions</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#interface" class="nav-link">Interface</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#message" class="nav-link">Message</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="numlabsolutions">/numlab/solutions</h1>
+<p>Message queue.</p>
+<p>Solutions (made by students) to (referenced) Exercises.</p>
+<p><a href="#solution-json-format">Solutions Json format</a> uses <a href="/viplab/exercises/#exercise-json-format">Excercise JSON Format</a>.</p>
+<h2 id="interface">Interface</h2>
+<p>POST, GET (see <a href="/ecs2#queue-resource">''English section name unknown so far.''</a>)</p>
+<h3 id="generic">Generic</h3>
+<ul>
+<li><strong>POST resourceURL (push)</strong> creates Solution.</li>
+<li><strong>POST resourceURL/fifo (pull)</strong> gets first Solution and removes it from the queue.</li>
+<li><strong>GET resourceURL/fifo (look)</strong> gets first Solution (fifo) without removing it from the queue.</li>
+</ul>
+<h3 id="viplab-specific">VipLab Specific</h3>
+<p>POST resourceURL (push) will be used by SCs, POST resourceURL/fifo (pull) by CCs.</p>
+<p>Student clients (SCs) push Solutions into this queue; computation clients (CCs) pulls them from there (all CCs share this queue). For getting next Solution the former one has to be removed (by POST resourceURL/fifo (pull)).</p>
+<p>GET</p>
+<ul>
+<li>will <strong>not</strong> be used by CC: using POST resourceURL/fifo (pull) assures that each Solution will be computed by <em>one</em> CC (transaction semantics; if GET would be used, same Solution could be taken from multiple ones);</li>
+<li>may be used for debugging purposes.</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>Solution comes from SC and serves as input for CC: it is <strong>not</strong> the result from the following computation.</li>
+<li>POST resourceURL/fifo (pull) returns a <em>single</em> solution (not e.g. a list of multiple URLs).</li>
+</ul>
+<h2 id="message">Message</h2>
+<h3 id="solution-json-definition-by-example-informal">Solution JSON Definition by Example (informal)</h3>
+<pre><code>{ &quot;Solution&quot; : // wrapper
+{ &quot;postTime&quot; : &quot;1985-04-13T17:10:00.52Z&quot;, // generated by SC
+  &quot;ID&quot; : &quot;#37&quot;, // generated by SC
+  &quot;evaluationService&quot;: {
+    &quot;jobID&quot;:&quot;1234abc&quot;,
+    &quot;jobSender&quot;:&quot;2&quot;
+  }
+  &quot;comment&quot; : &quot;Die war aber schwer!&quot;,
+  &quot;exercise&quot;: &quot;https://ecs.uni-stuttgart.de/numlab/exercises/4711&quot;, // URL to existing exercise
+  &quot;exerciseModifications&quot; : // contains modified parts of referenced exercise
+  { &quot;elements&quot; :
+    [
+      { &quot;identifier&quot;: &quot;codeFromStudent&quot;, // must: identifier of (text) element, 
+                                         // has to be the *same* as in original from Exercise
+        &quot;value&quot;     : &quot;void bar() { printf(\&quot;bar!\\n\&quot;);\n}\n&quot; // changed source from student 
+                                                               // ('\\n' quoting gives '\n' after decoding)
+        // Other fields defining this (text) element must *not* be repeated here.
+      }
+      // unchanged elements needn't be repeated here
+    ]
+  }
+}
+} // &quot;Solution&quot; wrapper
+</code></pre>
+
+<h3 id="solution-json-format">Solution JSON Format</h3>
+<p>wrapper "Solution" around the following:</p>
+<table>
+<thead>
+<tr>
+<th>Key [--Subkey]</th>
+<th>Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+<th>AS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>postTime</td>
+<td>string UTC</td>
+<td>must</td>
+<td>timestamp</td>
+<td>Timestamp from SC: in addition a CC side timestamp should be made (for security reasons).</td>
+<td>Needed? What is the security reason?</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>string</td>
+<td>must</td>
+<td>unique Solution ID created by SC (automatically)</td>
+<td>Needed for associating computed Results to Solution (think of long computations, where one overruns another).</td>
+<td></td>
+</tr>
+<tr>
+<td>evaluationService</td>
+<td>struct</td>
+<td>opt</td>
+<td><strong>jobID:</strong> evaluation job identification (string)<BR><strong>jobSender:</strong> membership id of evaluation job sender (string)</td>
+<td>Only relevant for evaluation service. Computation backend must not change these values. Needed for associating results to evaluation jobs (VIP 2.1).</td>
+<td></td>
+</tr>
+<tr>
+<td>comment</td>
+<td>string</td>
+<td>opt</td>
+<td>comment from student</td>
+<td></td>
+<td>implemented in frontend?</td>
+</tr>
+<tr>
+<td>exercise</td>
+<td>string URL</td>
+<td>must</td>
+<td>existing exercise at ECS server</td>
+<td></td>
+<td>insert complete computation-template here?</td>
+</tr>
+<tr>
+<td>exerciseModifications</td>
+<td>struct</td>
+<td>opt</td>
+<td>modifications of Exercise having same structure as Exercise: <BR>- "exerciseModifications" corresponds to "Exercise" as root;<BR>- leaves of this structure are only "identifier":value and "value":value pairs (no others allowed)</td>
+<td>It contains student's work defining this solution for - URL referenced - Exercise. If omitted, an unchanged Exercise is given as solution: this may make sense, if an unchanged Exercise is computable.<BR>To be a modifiable object taken from Excercise: <BR>- it has to have members "identifier", "modifiable", "value"; and<BR>- its member "modifiable" has to be true.</td>
+<td></td>
+</tr>
+<tr>
+<td>exerciseModifications --elements[]</td>
+<td>[ {...}, {...}, ... ]</td>
+<td>must</td>
+<td>array containing <em>modified</em>  <a href="/viplab/exercises/#json-objects-in-exercise-elements">JSON objects in Exercise--elements[]</a>: there has to be at least one element</td>
+<td>Semantics for CC: <BR>- modified version <em>here</em> will be recognized by having the same "identifier" as the original one;<BR>- modified version wins;<BR>- objects just existing in original version will be taken as they are (merge effect).</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

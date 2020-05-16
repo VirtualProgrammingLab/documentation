@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>/numlab/results - ViPLab</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">ViPLab</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../ecs2/" class="dropdown-item">Core ECS</a>
+</li>
+                                    
+<li>
+    <a href="../../ecs2/example/" class="dropdown-item">Beispiele</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../rest/" class="dropdown-item">ECS REST Interface</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/auths/" class="dropdown-item">Auths</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/econtent/" class="dropdown-item">Econtent</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/eventqueues/" class="dropdown-item">Eventqueues</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/memberships/" class="dropdown-item">memberships</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../exercises/" class="dropdown-item">/numlab/exercises</a>
+</li>
+                                    
+<li>
+    <a href="../interrupts/" class="dropdown-item">Interrupts</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">/numlab/results</a>
+</li>
+                                    
+<li>
+    <a href="../solutions/" class="dropdown-item">/numlab/solutions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab3.0/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation/" class="dropdown-item">Computation JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_result/" class="dropdown-item">Computation Result JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_task/" class="dropdown-item">Computation Task JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_template/" class="dropdown-item">Computation Template JSON Message</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../interrupts/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../solutions/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#numlabresults" class="nav-link">/numlab/results</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#interface" class="nav-link">Interface</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#message" class="nav-link">Message</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="numlabresults">/numlab/results</h1>
+<p>Message queue.</p>
+<p><a href="#result-json-format">Result JSON Format</a> uses <a href="/viplab/solutions#solution-json-format">Solution JSON Format</a>.</p>
+<h2 id="interface">Interface</h2>
+<p>POST, GET (<a href="/ecs2#message-resource">see ''English section name unknown so far.''</a>)</p>
+<h3 id="generic">Generic</h3>
+<ul>
+<li><strong>POST resourceURL (push)</strong> creates Result.</li>
+<li><strong>POST resourceURL/fifo (pull)</strong> gets first Result and removes it from the queue.</li>
+<li><strong>GET resourceURL/fifo (look)</strong> gets first Result (fifo) without removing it from the queue.</li>
+</ul>
+<p>For getting Results in sensible time, clients have to poll the queue continuously.</p>
+<h3 id="viplab-specific">ViPLab Specific</h3>
+<p>POST resourceURL (push) will be used by CCs, POST resourceURL/fifo (pull) by SCs. GET may be used by SCs (but it shouldn't) or for debugging purposes.</p>
+<p>Computation clients (CCs) push computation Results into this queue; a student client (SC) pulls them from there (logically each SC has its own queue separated from others). For getting next Result an SC has to pull the former.</p>
+<h2 id="message">Message</h2>
+<h3 id="result-json-definition-by-example-informal">Result JSON Definition by Example (informal)</h3>
+<pre><code>{
+    &quot;Result&quot; : {
+        &quot;ID&quot; : &quot;one chunk 2012-07-25 17:59:50&quot;,
+        &quot;status&quot; : &quot;final&quot;,
+        &quot;computation&quot; : {
+            &quot;startTime&quot; : &quot;2012-07-25 17:59:49&quot;,
+            &quot;duration&quot; : &quot;555ms&quot;,
+            &quot;finishTime&quot; : &quot;2012-07-25 17:59:50&quot;,
+            &quot;CC_versionLong&quot; : &quot;[ViP CCv2.16 (C chain)v1.9 (Matlab chain)v2.6.1 (Octave chain)v1.4.1 (DuMuX chain)v1.2 (C++ chain)v1.3 (Tue Jun 26 19:10:42 CEST 2012)]&quot;,
+            &quot;CC_version&quot; : &quot;ViP CCv2.16&quot;,
+            &quot;chain_version&quot; : &quot;(C chain)v1.9&quot;,
+            &quot;technicalInfo&quot; : {
+                &quot;host&quot; : &quot;numlab&quot;,
+                &quot;PID&quot; : &quot;6405&quot;,
+                &quot;ID&quot; : &quot;#1&quot;
+            },
+            &quot;userInfo&quot; : {
+                &quot;summary&quot; : &quot;(C chain)v1.9 failed.&quot;,
+                &quot;elements&quot; : [
+                    {
+                        &quot;severity&quot; : &quot;info&quot;,
+                        &quot;type&quot; : &quot;compiler&quot;,
+                        &quot;message&quot; : &quot;source_0.c: In function \u2018trapez\u2019:&quot;,
+                        &quot;output&quot; : {
+                            &quot;elementID&quot; : &quot;compile_stderr_0.txt&quot;,
+                            &quot;extract&quot; : &quot;source_0.c: In function \u2018trapez\u2019:&quot;,
+                            &quot;begin&quot; : 0,
+                            &quot;end&quot; : 37
+                        }
+                    },
+                    {
+                        &quot;severity&quot; : &quot;warning&quot;,
+                        &quot;type&quot; : &quot;compiler&quot;,
+                        &quot;message&quot; : &quot;source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]&quot;,
+                        &quot;source&quot; : {
+                            &quot;elementID&quot; : &quot;codeFromStudent&quot;,
+                            &quot;extract&quot; : &quot;  double x = 0;&quot;,
+                            &quot;begin&quot; : 406,
+                            &quot;end&quot; : 421,
+                            &quot;line&quot; : 15,
+                            &quot;col&quot; : 10
+                        },
+                        &quot;output&quot; : {
+                            &quot;elementID&quot; : &quot;compile_stderr_0.txt&quot;,
+                            &quot;extract&quot; : &quot;source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]&quot;,
+                            &quot;begin&quot; : 38,
+                            &quot;end&quot; : 108
+                        }
+                    },
+                    {
+                        &quot;severity&quot; : &quot;error&quot;,
+                        &quot;type&quot; : &quot;callcheck&quot;,
+                        &quot;message&quot; : &quot;[C function filtering] Function call not allowed:\n\&quot;system\&quot;; original source: codeFromStudent, line (corrected): 20, col: 3\nForbidden calls:\nsystem.\n&quot;,
+                        &quot;source&quot; : {
+                            &quot;elementID&quot; : &quot;codeFromStudent&quot;,
+                            &quot;extract&quot; : &quot;  system(\&quot;/bin/rm /tmp/foo.txt\&quot;); // illegal call (should be catched by checker)&quot;,
+                            &quot;begin&quot; : 325,
+                            &quot;end&quot; : 405,
+                            &quot;line&quot; : 14,
+                            &quot;col&quot; : 3
+                        }
+                    }
+                ]
+            }
+        },
+        &quot;Solution&quot; : {
+            &quot;postTime&quot; : &quot;2009-09-20T04:15:01.22Z&quot;,
+            &quot;ID&quot; : &quot;[with illegal call] 127.32.15.3#127&quot;,
+            &quot;comment&quot; : &quot;Die war aber schwer!&quot;,
+            &quot;exercise&quot; : &quot;https://nfldevvipecs.rus.uni-stuttgart.de/numlab/exercises/442641&quot;,
+            &quot;exerciseModifications&quot; : {
+                &quot;elements&quot; : [
+                    {
+                        &quot;identifier&quot; : &quot;codeFromStudent&quot;,
+                        &quot;value&quot; : &quot;typedef double (funcPtr)(double); // type of function to be integrated\n\n/* Definition der zu integrierenden Funktion */\ndouble f(double x)\n{\n  return x * x; // Beispiel\n}\n\ndouble trapez(double a, double b, int n, funcPtr f)\n{\n  double sum = 0; // init\n  /* Ab hier kommt die Funktionalitaet der integrierenden Funktion.. */\n\n  system(\&quot;/bin/rm /tmp/foo.txt\&quot;); // illegal call (should be catched by checker)\n  double x = 0;\n  int k;\n  if (n &lt; 1) return 0; // avoid endless recursion\n\n  // untere Grenze\n  sum+=f(a)/2;\n  // Schleife ueber die inneren Punkte\n  for(k=1; k &lt; n; k++)\n  {\n    sum+=f(a+(b-a)*k/n);\n  }\n  // obere Grenze\n  sum+=f(b)/2;\n  // Skalieren\n  sum*=(b-a)/n;\n\n  return sum; // result\n}\n&quot;
+                    }
+                ]
+            }
+        },
+        &quot;elements&quot; : [
+        ]
+    }
+}
+</code></pre>
+
+<h3 id="result-json-format">Result JSON Format</h3>
+<p>wrapper "Result" around the following</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>string</td>
+<td>must</td>
+<td>unique Result ID created by CC (automatically)</td>
+<td>For tracking and debugging purposes.</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>string</td>
+<td>opt</td>
+<td>comment from CC</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>One of {"final", "intermediate"}</td>
+<td>must</td>
+<td>"final": last Result of computation<BR>"intermediate": more Results expected</td>
+<td>If there is only one Result, it status should be "final". If there are multiple Results, status of all before "final" should be "intermediate".</td>
+</tr>
+<tr>
+<td>index</td>
+<td>uint</td>
+<td>- must: if there are multiple Results<BR>- opt: if there is only one "final" Result</td>
+<td>counts starting from 0</td>
+<td>Note: "final" Result gets last index.</td>
+</tr>
+<tr>
+<td>computation --startTime</td>
+<td>datetimeString</td>
+<td>must</td>
+<td>May be local or universal time.</td>
+<td>Just after getting a Solution.</td>
+</tr>
+<tr>
+<td>computation --duration</td>
+<td>durationString</td>
+<td>must</td>
+<td>e.g. "128ms"</td>
+<td>Computation duration time since startTime (increases with each intermediate Result).</td>
+</tr>
+<tr>
+<td>computation --finishTime</td>
+<td>datetimeString</td>
+<td>must, iff status == "final"</td>
+<td>May be local or universal time.</td>
+<td>Just before posting final Result.</td>
+</tr>
+<tr>
+<td>computation --CC_versionLong</td>
+<td>string</td>
+<td>must</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>computation --CC_version</td>
+<td>string</td>
+<td>must</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>computation --chain_version</td>
+<td>string</td>
+<td>must</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>computation --technicalInfo</td>
+<td>struct</td>
+<td>must</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>computation --technicalInfo --host</td>
+<td>string</td>
+<td>must</td>
+<td>CC host</td>
+<td></td>
+</tr>
+<tr>
+<td>computation --technicalInfo --PID</td>
+<td>unsigned</td>
+<td>must</td>
+<td>CC PID</td>
+<td></td>
+</tr>
+<tr>
+<td>computation --technicalInfo --ID</td>
+<td>string</td>
+<td>must</td>
+<td></td>
+<td>Info for finding log files (may be number of computations).</td>
+</tr>
+<tr>
+<td>computation --technicalInfo --&lt;key&gt;</td>
+<td>&lt;val_type&gt;</td>
+<td>opt</td>
+<td>&lt;key&gt;: locally unique, &lt;val_type&gt;: arbitrary type</td>
+<td>For allowing further key/val pairs if there should be a need.</td>
+</tr>
+<tr>
+<td>computation --userInfo</td>
+<td>struct</td>
+<td>must</td>
+<td>see <a href="#json-object-in-result-userinfo">Result userInfo object spec</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Solution</td>
+<td>struct</td>
+<td>must</td>
+<td>exact copy of Solution (<a href="/viplab/solutions#solution-json-format">Solution JSON Format</a>) which this Result has been computed for</td>
+<td>Having Solution--ID is important for SC: think of posting multiple different Solutions with waiting for different Results. And having all <em>dynamic</em> data together is good!</td>
+</tr>
+<tr>
+<td>elements</td>
+<td>[ {...}, {...}, ... ]</td>
+<td>must</td>
+<td>array of objects containing elements described in the following: there has to be at least one of them</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="json-objects-in-result-elements">JSON objects in Result--elements[]</h3>
+<p>An object in (array) elements[] has the following properties:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Key</strong></th>
+<th><strong>Value Type</strong> (an enum default is marked by <em>italics</em>)</th>
+<th><strong>Opt / Must</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Comment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>identifier</td>
+<td>string</td>
+<td>must</td>
+<td>for later referencing, has to be unique</td>
+<td>Technical: e.g. it could be created by using a filename (of a file being source of value property).</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>opt</td>
+<td>name, need <strong>not</strong> be unique</td>
+<td>User info: may be shown in SC.</td>
+</tr>
+<tr>
+<td>MIMEtype</td>
+<td>One of {<em>"text/plain"</em>, "text/html", "text/uri-list", "image/png", "application/x-vgf", "application/x-vgf3", "application/x-vgfc"}</td>
+<td>opt</td>
+<td>info for interpreting value property</td>
+<td>- "text/uri-list": links to websides to be presented in SC;<BR>- "image/png": encoding unclear so far;<BR>- "application/x-vgf": generated graphics output in 'ViP graphics format';<BR>- "application/x-vgf3": generated graphics output in 'ViP graphics format 3D';<BR>- "application/x-vgfc": generated graphics output in 'ViP graphics format contour plot'.</td>
+</tr>
+<tr>
+<td>emphasis</td>
+<td>One of {"low", <em>"medium"</em>, "high"}</td>
+<td>opt</td>
+<td>info for rendering</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>must</td>
+<td>text or other content</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Notes:
+* There is a - mandatory - unique ID for objects in elements[] for referencing them later: this is especially useful, if the number of elements is variable.
+* If an - optional - key with default value is missing, it should be interpreted the same as being there and set to its default.
+* Advanced: a numOfFinalResults/finalResultNo mechanism could be of interest later: needed for sequencing computed Results (think of multiple Results for one Solution, which are computed distributed).</p>
+<h3 id="json-object-in-result-userinfo">JSON object in Result--userInfo</h3>
+<p>An userInfo object (struct) has the following properties:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Key</strong></th>
+<th><strong>Value Type</strong></th>
+<th><strong>Opt/Must</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Comment</strong></th>
+<th><strong>AS</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>summary</td>
+<td>string</td>
+<td>opt</td>
+<td>summary of all info_element's: e.g. one warning, one error may have a summary "An error occured."</td>
+<td>E.g.: "[Error] Backend has detected an error: no result!" or "Success!"</td>
+<td></td>
+</tr>
+<tr>
+<td>elements</td>
+<td>[{...}, {...}, ...]</td>
+<td>opt</td>
+<td>array of <em>info_element</em>s</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element</td>
+<td>struct</td>
+<td>opt</td>
+<td>JSON object inside <em>elements</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --severity</td>
+<td>One of {"error", "warning", "info"}</td>
+<td>must</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --type</td>
+<td>One of {"system", "chain", "output", "callcheck", "interpreter", "compiler", "linker", "executable"}</td>
+<td>must</td>
+<td>For all chains: {"system, "chain", "output"}; for Octave/Matlab: {"callcheck", "interpreter"}; for C: {"callcheck", "compiler", "linker", "executable"}; for DuMuX: {"executable"}</td>
+<td>If type equals "system", <em>whole</em> Result if of interest for a bug report.</td>
+<td>Java??</td>
+</tr>
+<tr>
+<td>info_element --message</td>
+<td>string</td>
+<td>must</td>
+<td>summary of one message to the user; it sould not contain wrong error locations (file, line, col). Together with "soruce"/"line" or "col" (containing corrected locations) it should give the most interesting info.</td>
+<td>may be empty string (',' in optional location_part)</td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --source</td>
+<td>struct</td>
+<td>opt</td>
+<td>contains location information</td>
+<td>only allowed if "type" in {"compiler", "interpreter", "callcheck"}</td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --source --elementID</td>
+<td>ELEMENT_ID (string)</td>
+<td>must</td>
+<td>identifier of element from Solution/Exercise elements with source <em>input</em>, which has triggered (error/warning/...) message</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --source --line</td>
+<td>1..uint_max</td>
+<td>must</td>
+<td>Location of error/warning ...</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --source --col</td>
+<td>1..uint_max</td>
+<td>opt</td>
+<td>... referring to position in triggering input element.</td>
+<td>It is optional, since there are messages containing line info only</td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --output</td>
+<td>struct</td>
+<td>opt</td>
+<td>for output of tool detecting something</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --output --elementID</td>
+<td>ELEMENT_ID (string)</td>
+<td>must</td>
+<td>identifier of element from Result elements with interpreter/compiler <em>output</em>, which contains error/warning message</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --source/output --extract</td>
+<td>string</td>
+<td>must</td>
+<td>Part of referenced element. Extracted from message triggering input.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --source/output --begin</td>
+<td>unsigned int</td>
+<td>must</td>
+<td>Offset of extract into ...</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>info_element --source/output --end</td>
+<td>unsigned int</td>
+<td>must</td>
+<td>... referenced element: C-like (zero-based).</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Notes:
+* There are error messages containing multiple error triggering locations. This leads to multiple info_elements containing same "message" and "output", but different "source" objects. Note: another way would be to specify "sources":[{},...] as alternative to "source":{}.
+* "type": "fatal" may be introduced later
+* Compiler output may contain multiple error positions; only the first one should be extracted.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

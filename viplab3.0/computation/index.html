@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Computation JSON Message - ViPLab</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">ViPLab</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../ecs2/" class="dropdown-item">Core ECS</a>
+</li>
+                                    
+<li>
+    <a href="../../ecs2/example/" class="dropdown-item">Beispiele</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../rest/" class="dropdown-item">ECS REST Interface</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/auths/" class="dropdown-item">Auths</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/econtent/" class="dropdown-item">Econtent</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/eventqueues/" class="dropdown-item">Eventqueues</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/memberships/" class="dropdown-item">memberships</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/exercises/" class="dropdown-item">/numlab/exercises</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/interrupts/" class="dropdown-item">Interrupts</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/results/" class="dropdown-item">/numlab/results</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/solutions/" class="dropdown-item">/numlab/solutions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Computation JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../computation_result/" class="dropdown-item">Computation Result JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../computation_task/" class="dropdown-item">Computation Task JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../computation_template/" class="dropdown-item">Computation Template JSON Message</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../computation_result/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#computation-json-message" class="nav-link">Computation JSON Message</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#example-informal" class="nav-link">Example (informal)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#explaining-the-json-format" class="nav-link">Explaining the JSON Format</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="computation-json-message">Computation JSON Message</h1>
+<p>A <em>computation</em> represents the combination of a <em>computation template</em> and a
+corresponding <em>computation task</em>. It is the input of any backend.</p>
+<p>The JSON message of a <em>computation</em> is very similar to a <em>computation template</em>,
+so the interested reader is also referred to <a href="/viplab3.0/computation_template">its documentation</a>.</p>
+<h2 id="example-informal">Example (informal)</h2>
+<p>Note: <code>//</code> with text following until EOL is a comment,</p>
+<ul>
+<li>which is not covered by the JSON spec, and</li>
+<li>should not be contained in message sends in real;</li>
+<li>but nevertheless it would help, if JSON parsers could just ignore them.</li>
+</ul>
+<pre><code>{ &quot;identifier&quot;  : &quot;4598393-95bf-409a-98a5-ee375982c3e&quot;, // uuid, created by websocket api
+  &quot;environment&quot; : &quot;C&quot;, // important for interpreting configuration 
+  &quot;files&quot; : // must: at least one array element
+  [
+    { &quot;identifier&quot;: &quot;22483f42-95bf-984a-98a5-ee9485c85c3e&quot;, // uuid from template 
+      &quot;path&quot;      : &quot;code.c&quot;                                // filename on backend 
+      &quot;parts&quot; : // must: at least one array element
+      [ 
+        { &quot;identifier&quot;: &quot;preamble&quot;,  // identifier from template
+          &quot;access&quot;    : &quot;visible&quot;,   // access from template
+          &quot;content&quot;   : &quot;I2luY2x1ZGUgPHN0ZGlvLmg-Cg&quot;      // source (base64url encoded) 
+                                                          // decoded: #include &lt;stdio.h&gt;\n
+        },
+        { &quot;identifier&quot;: &quot;codeFromStudent&quot;, // identifier from template
+          &quot;access&quot;    : &quot;modifiable&quot;,             
+          &quot;content&quot; : &quot;dm9pZCBiYXIoKSB7IHByaW50ZigiYmFyIQoiKTsKfQo&quot; // content from task
+                                    // decoded: void bar() { printf(\&quot;bar!\\n\&quot;);\n}\n 
+        },
+        { &quot;identifier&quot;: &quot;postscript&quot;, // identifier from template
+          &quot;access&quot;    : &quot;visible&quot;,
+          &quot;content&quot; : &quot;aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ&quot; // source
+                                                // decoded: int main() { bar(); return 0; }
+        }
+      ] // parts[]
+    }
+  ], // files[]
+  &quot;configuration&quot; :
+  { &quot;compiling.compiler&quot; : &quot;gcc&quot;,                  
+    &quot;compiling.flags&quot;    : &quot;-O2 -Wall&quot;            
+    &quot;checking.sources&quot;   : [&quot;codeFromStudent&quot;],    // identifier to parts
+    &quot;checking.forbiddenCalls&quot;: &quot;system execve&quot;     // forbidden call names separated by WS
+    &quot;linking.flags&quot;      : &quot;-lm&quot;                 
+    &quot;running.commandLineArguments&quot; : &quot;--stepwidth 0.5&quot;
+                                            // mustache template with injected arguments
+  }
+}
+</code></pre>
+
+<h2 id="explaining-the-json-format">Explaining the JSON Format</h2>
+<table>
+<thead>
+<tr>
+<th>Key [--Subkey]</th>
+<th>Type (a default is marked by <em>italics</em>)</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>identifier</td>
+<td>string (UUID)</td>
+<td>must</td>
+<td>the identifier of this computation</td>
+<td>is generated by the websocket api</td>
+</tr>
+<tr>
+<td>environment</td>
+<td>one of {"C", "C++", "Java", "Matlab", "Octave", "Container", "DuMuX"}</td>
+<td>must</td>
+<td>Specifies the environment used for the Computation. It defines language, runtime, libraries and tools</td>
+<td></td>
+</tr>
+<tr>
+<td>files</td>
+<td>[ {...}, {...}, ... ]</td>
+<td>must</td>
+<td>array containing <a href="#json-objects-in-files">File objects</a>: there has to be at least one element</td>
+<td></td>
+</tr>
+<tr>
+<td>configuration</td>
+<td>struct</td>
+<td>opt/must (depends on environment)</td>
+<td>Environment specific configurations</td>
+<td>Different phases can be configured like compiling, checking (for legal function calls in source code), ...</td>
+</tr>
+<tr>
+<td>configuration --compiling.sources</td>
+<td>[FILE_ID, FILE_ID, ...]</td>
+<td>must</td>
+<td>Array of identifiers of <a href="#json-objects-in-files">JSON File objects</a>. Explicit compilation (only referenced sources will be compiled).</td>
+<td>for <strong>C, C++, Java</strong></td>
+</tr>
+<tr>
+<td>configuration --compiling.compiler</td>
+<td>string</td>
+<td>must</td>
+<td>compiler to be used, e.g. "gcc"</td>
+<td>for <strong>C, C++</strong></td>
+</tr>
+<tr>
+<td>configuration --compiling.flags</td>
+<td>string</td>
+<td>must for <strong>C, C++</strong>; optional for <strong>Java</strong></td>
+<td>CFLAGS for <strong>C/C++</strong>; compile flags for <strong>Java</strong></td>
+<td>e.g. "gcc" for <strong>C/C++</strong>; "-O2" or "" for <strong>Java</strong></td>
+</tr>
+<tr>
+<td>configuration --checking.sources</td>
+<td>[PART_ID, PART_ID, ...]</td>
+<td>must if checking should be performed</td>
+<td>array of identifiers of to be checked sources; given by parts[]{PART_ID} (see <a href="#json-objects-in-parts">below</a>)</td>
+<td>for <strong>Matlab, Octave, C, Java</strong></td>
+</tr>
+<tr>
+<td>configuration --checking.allowedCalls</td>
+<td>string</td>
+<td>must if checking should be performed</td>
+<td>for <strong>Matlab/Octave</strong>: <em>allowed</em> call names separated by WS; only idents (no braces, no func args)<br>for <strong>Java</strong>: <em>allowed</em> call name expressions separated by WS</td>
+<td>for <strong>Java</strong> semantics see <a href="/viplab3.0/computation_template/#java-checking-semantics">Java checking semantics</a>.</td>
+</tr>
+<tr>
+<td>configuration --checking.forbiddenCalls</td>
+<td>string</td>
+<td>must if checking should be performed</td>
+<td>for <strong>C</strong>: <em>forbidden</em> call names separated by WS; only idents (no braces, no func args)<br>for <strong>Java</strong>: <em>forbidden</em> call name expressions separated by WS</td>
+<td>for <strong>C</strong> semantics see <a href="/viplab3.0/computation_template/#c-checking-semantics">C checking semantics</a>); for <strong>Java</strong> semantics see <a href="/viplab3.0/computation_template/#java-checking-semantics">Java checking semantics</a>.</td>
+</tr>
+<tr>
+<td>configuration --linking.flags</td>
+<td>string</td>
+<td>must</td>
+<td>LFLAGS</td>
+<td>for <strong>C, C++</strong>; e.g. ""</td>
+</tr>
+<tr>
+<td>configuration --running.stdinFilename</td>
+<td>FILE_ID</td>
+<td>must</td>
+<td>the file identifier that is passed to <strong>Matlab/Octave</strong> via standard-in</td>
+<td></td>
+</tr>
+<tr>
+<td>configuration --running.timelimitInSeconds</td>
+<td>int</td>
+<td>opt</td>
+<td>CPU time limit</td>
+<td>for all <strong>environments</strong>; for semantics see <a href="/viplab3.0/computation_template/#notes-to-timelimitinseconds">Notes to "timelimitInSeconds"</a>.</td>
+</tr>
+<tr>
+<td>configuration --running.commandLineArguments</td>
+<td>string</td>
+<td>opt</td>
+<td>for <strong>C, C++, Java</strong>: arguments given to main() function; for <strong>DuMuX, Container</strong>: additional command line args</td>
+<td></td>
+</tr>
+<tr>
+<td>configuration --running.flags</td>
+<td>string</td>
+<td>opt</td>
+<td>flags given to JVM</td>
+<td>for <strong>Java</strong></td>
+</tr>
+<tr>
+<td>configuration --running.mainClass</td>
+<td>string</td>
+<td>opt (if unique) / must (if not unique)</td>
+<td>class containing "public static void main(String[] args) {"</td>
+<td>for <strong>Java</strong>: "args" may be another name. If main function is unique, its correct class should be detected automatically.</td>
+</tr>
+<tr>
+<td>configuration --running.executable</td>
+<td>string</td>
+<td>must</td>
+<td>name of executable to run (as in backend file system)</td>
+<td>for <strong>DuMuX</strong></td>
+</tr>
+<tr>
+<td>configuration --running.entrypoint</td>
+<td>string</td>
+<td>must</td>
+<td>executable to run inside the container</td>
+<td>for <strong>Container</strong></td>
+</tr>
+<tr>
+<td>configuration --running.observe_stderr</td>
+<td>bool (<em>false</em>)</td>
+<td>opt</td>
+<td>if true, transfer intermediate stderr Results</td>
+<td>for <strong>DuMuX, Container</strong></td>
+</tr>
+<tr>
+<td>configuration --resources.image</td>
+<td>url</td>
+<td>must</td>
+<td>location of the image to be executed</td>
+<td>for <strong>Container</strong>; has to be a tar</td>
+</tr>
+<tr>
+<td>configuration --resources.volume</td>
+<td>string</td>
+<td>must</td>
+<td>path in the container where data is placed</td>
+<td>for <strong>Container</strong></td>
+</tr>
+<tr>
+<td>configuration --resources.memory</td>
+<td>string</td>
+<td>opt (<em>64mb</em>)</td>
+<td>memory limit for the container</td>
+<td>for <strong>Container</strong></td>
+</tr>
+<tr>
+<td>configuration --resources.numCPUs</td>
+<td>int</td>
+<td>opt</td>
+<td>number of CPUs for the container</td>
+<td>for <strong>Container</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="json-objects-in-files">JSON objects in files</h3>
+<p>An object in array files[] has the following members:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type (an enum default is marked by <em>italics</em>)</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>identifier</td>
+<td>string (UUID)</td>
+<td>must</td>
+<td>reference to a computation template file</td>
+<td></td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>must</td>
+<td>absolute path to file</td>
+<td>It is <em>not</em> allowed to start with '/'</td>
+</tr>
+<tr>
+<td>parts</td>
+<td>[{...}, {...}, ...]</td>
+<td>must</td>
+<td>array containing <a href="#json-objects-in-parts">part objects</a>. There has to be at least one.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="json-objects-in-parts">JSON objects in parts</h3>
+<p>An object in array parts[] has the following members:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type (an enum default is marked by <em>italics</em>)</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>identifier</td>
+<td>string</td>
+<td>must</td>
+<td>reference to a computation template part</td>
+<td></td>
+</tr>
+<tr>
+<td>access</td>
+<td>one of {"invisible", "visible", "modifiable", "template"}</td>
+<td>must</td>
+<td>the access level of this part</td>
+<td>equals to the access level of this part in the computation template</td>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>must</td>
+<td>base64url-encoded source code</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

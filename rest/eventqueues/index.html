@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Eventqueues - ViPLab</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">ViPLab</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../ecs2/" class="dropdown-item">Core ECS</a>
+</li>
+                                    
+<li>
+    <a href="../../ecs2/example/" class="dropdown-item">Beispiele</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">ECS REST Interface</a>
+</li>
+                                    
+<li>
+    <a href="../auths/" class="dropdown-item">Auths</a>
+</li>
+                                    
+<li>
+    <a href="../econtent/" class="dropdown-item">Econtent</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Eventqueues</a>
+</li>
+                                    
+<li>
+    <a href="../memberships/" class="dropdown-item">memberships</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/exercises/" class="dropdown-item">/numlab/exercises</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/interrupts/" class="dropdown-item">Interrupts</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/results/" class="dropdown-item">/numlab/results</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/solutions/" class="dropdown-item">/numlab/solutions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab3.0/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation/" class="dropdown-item">Computation JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_result/" class="dropdown-item">Computation Result JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_task/" class="dropdown-item">Computation Task JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_template/" class="dropdown-item">Computation Template JSON Message</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../econtent/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../memberships/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#eventqueues" class="nav-link">eventqueues</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#commandqueue" class="nav-link">Commandqueue</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="eventqueues">eventqueues</h2>
+<p><code>GET, eventqueues:</code>:Informiert einen Participanten über etwaige Zustandsänderungen seiner zugriffsberechtigten <code>econtents</code> Objekte. Ein Abruf der <code>eventqueues</code> Resource liefert alle dem ECS zum Zeitpunkt des Abrufes bekannten Zustandsänderungen der jeweiligen <code>econtents</code> Objekte in Form einer <code>eid</code> (Econtents ID) und eines <code>op</code> Codes (operation code) dem aufrufenden Participanten zurück. Die <code>eid</code> repräsentiert natürlich den zustandsveränderten Econtent und der <code>op</code> Code gibt die Art der Veränderung an, welche die Resource auf dem ECS erfahren hat. Dabei haben die <code>op</code> Codes folgende Bedeutung:</p>
+<ul>
+<li>"create": Auf dem ECS wurde ein neuer Econtent angelegt. Dem Participanten steht deshalb ein neuer Econtent zur Verfügung.</li>
+<li>"update": Ein bestehender Econtent hat auf dem ECS eine Zustandsänderung erfahren. Zustandsänderung kann in diesem Fall jedwede Aenderung eines Metadatums sein. Dies kann für den Participanten unter anderem ein Löschen oder neu Anlegen eines Econtentlinks bedeuten oder eben ein aktualisieren eines bestehenden Links.</li>
+<li>"delete": Der Econtent wurde auf dem ECS gelöscht. Alle Econtentlinks die diesen Econtent betreffen müssen auf dem Participanten gelöscht werden. </li>
+</ul>
+<p>Es obliegt dem Participanten, ob und wann eine Aktualisierung seiner Econtent Objekte durch sukzessives Abrufen der <code>econtents/&lt;eid&gt;</code> Objekte vom ECS erfolgt. Ruft ein Participant seine <code>econtents</code> Resource ab (alle für ihn zugriffsberechtigte Econtent-Objkete werden zurückgegeben), dann setzt der ECS die Eventqueue des Participanten zurück (alle Einträge werden gelöscht). Dies sollte immer dann erfolgen, wenn ein Participant sich neu beim ECS anmeldet. Erst nach mindestens einmaligem Abruf der <code>econtents</code> Resource (Erstsynchronisation) enthält die jeweilige Eventqueue gültige Daten für ihren Participanten und kann dann für die weitere Synchronisation verwendet werden. Frägt der Participant daraufhin seine eventqueues Resource ab, bekommt er eine leere Liste. Dasselbe geschieht auch nach Abruf der <code>eventqueues</code> Resource. Ein fehlerfreier Aufruf wird mit einem HTTP Status Code "200 OK" quittiert. Bekommt ein Participant nach Abruf einer <code>eventqueues/&lt;eid&gt;</code> Resource den  HTTP Status Code "404 Not Found" zurück, hat er dies so zu behandeln, als hätte er über seine Eventqueue einen <code>"op":"delete"</code> bzgl. der <eid> erhalten. </p>
+<pre><code>https://ecs.uni-stuttgart.de:7923/eventqueues
+[
+{&quot;econtents&quot;:{&quot;eid&quot;:45,&quot;op&quot;:&quot;create&quot;}},
+{&quot;econtents&quot;:{&quot;eid&quot;:31,&quot;op&quot;:&quot;update&quot;}},
+...
+]
+</code></pre>
+
+<h2 id="commandqueue">Commandqueue</h2>
+<p>Die Eventqueue wird erweitert zu einer Commandqueue.<BR>
+Die neuen Objekte der Eventqueue (Commands) sollen eine Art "remote control" bzgl. der Participanten erm&ouml;glichen. Dies dient in erster Linie dazu, eine Neusynchronisation zwischen Participant und ECS herzustellen, ohne dass dazu ein h&auml;ndisches Eingreifen seitens der Administratoren der Participanten vonn&ouml;ten w&auml;re. Diese Commands werden ausschlie&szlig;lich vom ECS Admin manuell getriggert. </p>
+<ol>
+<li>
+<p>Der Participant liest die Resourcen <code>memberships</code> und <code>econtents</code> neu ein:
+ <code>{"cmd":{"admin":"reset"}}</code></p>
+</li>
+<li>
+<p>Der Participant reexportiert (l&ouml;schen und neuanlegen) seinen freigegebenen Econtent und liest anschlie&szlig;end die Resourcen <code>memberships</code> und <code>econtents</code> neu ein:</p>
+</li>
+</ol>
+<pre><code> {&quot;cmd&quot;:{&quot;admin&quot;:&quot;reset_all&quot;}}
+</code></pre>
+
+<p>Vornehmlich f&uuml;r Testzwecke kann jeder Participant die jeweiligen Commands auch selbst triggern, indem er einfach folgende Resourcen aufruft (POST):</p>
+<ol>
+<li><code>POST, eventqueues/adminReset</code></li>
+<li><code>POST, eventqueues/adminResetAll</code></li>
+</ol>
+<p>Ein fehlerfreier Aufruf wird mit einem HTTP Status Code "201 Created" quittiert andernfalls "500 Internal Server Error". Danach kann der Participant &uuml;ber seine <code>eventqueue</code> Resource die Kommandos abholen und ausf&uuml;hren.</p>
+<p>Ein <code>curl</code> Aufruf zum Triggern der <code>eventqueues/adminReset</code> Resource f&uuml;r den <code>beluga</code> Participanten k&ouml;nnte demnach folgenderma&szlig;en aussehen:</p>
+<pre><code>curl --cacert freeit-ca-cert.pem --cert beluga-cert.pem  --key beluga-key.pem  --pass &quot;nixfuerungut&quot; -H &quot;Content-Type: application/json&quot;  -H &quot;Accept: application/json&quot;  -i -X POST https://ecs.uni-stuttgart.de:7923/eventqueues/adminReset
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Beispiele - ViPLab</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">ViPLab</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Core ECS</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Beispiele</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../rest/" class="dropdown-item">ECS REST Interface</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/auths/" class="dropdown-item">Auths</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/econtent/" class="dropdown-item">Econtent</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/eventqueues/" class="dropdown-item">Eventqueues</a>
+</li>
+                                    
+<li>
+    <a href="../../rest/memberships/" class="dropdown-item">memberships</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/exercises/" class="dropdown-item">/numlab/exercises</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/interrupts/" class="dropdown-item">Interrupts</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/results/" class="dropdown-item">/numlab/results</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab/solutions/" class="dropdown-item">/numlab/solutions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../viplab3.0/" class="dropdown-item">Index</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation/" class="dropdown-item">Computation JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_result/" class="dropdown-item">Computation Result JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_task/" class="dropdown-item">Computation Task JSON Message</a>
+</li>
+                                    
+<li>
+    <a href="../../viplab3.0/computation_template/" class="dropdown-item">Computation Template JSON Message</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../rest/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#beispiele" class="nav-link">Beispiele</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#persistente-message-erzeugen-x509-zertifizierter-client" class="nav-link">Persistente Message erzeugen (X.509 zertifizierter Client)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#eintrag-in-message-queue-erzeugen-anonymer-client" class="nav-link">Eintrag in Message-Queue erzeugen (anonymer Client)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#abfragen-einer-message-queue-durch-authentisierten-participanten" class="nav-link">Abfragen einer Message Queue durch authentisierten Participanten</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#abfragen-einer-message-queue-durch-anonymen-participanten" class="nav-link">Abfragen einer Message Queue durch anonymen Participanten</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#exercises-filter-plugin" class="nav-link">Exercises Filter-Plugin</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="beispiele">Beispiele</h1>
+<p>Als Client wird [[http://de.wikipedia.org/wiki/CURL|curl]] verwendet.</p>
+<h2 id="persistente-message-erzeugen-x509-zertifizierter-client">Persistente Message erzeugen (X.509 zertifizierter Client)</h2>
+<p>Unter der Ressource {{{https://ecs.uni-stuttgart.de/numlab/exercises}}} neue
+persistente Message erzeugen (POST auf
+<code>https://ecs.uni-stuttgart.de/numlab/exercises</code>). Message wird an 
+participant mit membership id <code>8</code> adressiert:</p>
+<pre><code>curl -i -X POST 
+--cacert freeit-root-ca.cert.pem  --cert client.cert.pem --key client.key.pem --pass &quot;ganzgeheim&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-H &quot;X-EcsReceiverMemberships: 8&quot; \
+-d '
+{
+  &quot;identifier&quot;  : &quot;Numerik II, SS10, Aufgabe 1, v1.0&quot;,
+  &quot;comment&quot;     : &quot;Um die Studenten mal richtig zu fordern.&quot;,
+  &quot;name&quot;        : &quot;Aufgabe 1&quot;,
+  &quot;description&quot; : &quot;Schreiben Sie eine C-Funktion...&quot;
+}
+' \
+https://ecs.uni-stuttgart.de/numlab/exercises
+</code></pre>
+
+<p>Mögliche Antwort:</p>
+<pre><code>HTTP/1.1 201 Created
+Location: https://ecs.uni-stuttgart.de/numlab/exercises/274
+Content-Type: application/json; charset=utf-8
+
+&lt;leerer http-body&gt;
+</code></pre>
+
+<h2 id="eintrag-in-message-queue-erzeugen-anonymer-client">Eintrag in Message-Queue erzeugen (anonymer Client)</h2>
+<p>Unter der Ressource {{{https://ecs.uni-stuttgart.de/numlab/solutions}}} neue
+Message in Message-Queue erzeugen (POST auf
+{{{https://ecs.uni-stuttgart.de/numlab/solutions}}}). Message wird an
+participant mit membership id {{{8}}} adressiert. Der Client besitzt zum
+Zeitpunkt der Anfrage noch kein gültiges Cookie (anonym). Ihm wird dieses durch
+den Respond-Header (Rückantwort vom ECS) mitgeteilt (siehe auch Core ECS):</p>
+<pre><code>curl -i -X POST 
+-H &quot;Content-Type: application/json&quot; \
+-H &quot;X-EcsReceiverMemberships: 8&quot; \
+-d '
+{
+  &quot;comment&quot; : &quot;Die war aber schwer!&quot;,
+  &quot;texts&quot; :
+    [
+      { &quot;name&quot;      : &quot;editable source&quot;,
+        &quot;editable&quot;  : false,
+        &quot;type&quot;      : &quot;C&quot;,
+        &quot;emphasis&quot;  : &quot;medium&quot;,
+        &quot;content&quot;   : &quot;void bar() { printf(&quot;bar!\n&quot;); }&quot;
+      }
+    ],
+  &quot;solutionPostingTime&quot; : &quot;1985-04-13T17:10:00.52Z&quot;
+}
+' \
+http://ecs.uni-stuttgart.de/numlab/solutions
+</code></pre>
+
+<p>Mögliche Antwort:</p>
+<pre><code>HTTP/1.1 201 Created
+Location: http://ecs.uni-stuttgart.de/numlab/solutions/89
+Set-Cookie: ecs_anonymous=59c3aaeead64514b83abcea9f81cece9; path=/
+
+&lt;leerer http-body&gt;
+</code></pre>
+
+<h2 id="abfragen-einer-message-queue-durch-authentisierten-participanten">Abfragen einer Message Queue durch authentisierten Participanten</h2>
+<p>Die Queue Ressource {{{https://ecs.uni-stuttgart.de/numlab/solutions}}} soll
+von einem authentisierten Participanten (z.B. Computation client) abgefragt
+werden. Keine clientseitige zertifikatsbasierte Authentisierung (kein
+Clientzertifikat und kein Clientpasswort), sondern nur eine serverseitige
+Authentifikation (mit dem freeit-root-ca.cert.pem Rootzertifikat Prüfung des ECS
+Serverzertifikats):</p>
+<pre><code>curl -i \
+--cacert freeit-root-ca.cert.pem \
+-H &quot;X-EcsAuthId: tunichtgut&quot; \
+-H &quot;Accept: application/json&quot; \
+-X POST https://ecs.uni-stuttgart.de/numlab/solutions/fifo
+</code></pre>
+
+<p>Mögliche Antwort:</p>
+<pre><code>HTTP/1.1 200 OK
+Connection: close
+Date: Thu, 03 Dec 2009 15:08:33 GMT
+ETag: &quot;45fd14239a00353b4877cb1bd12822Xt&quot;
+Last-Modified: Tue, 13 Oct 2009 15:23:53 GMT
+Content-Type: application/json; charset=utf-8
+X-Runtime: 32
+Content-Length: 310
+Cache-Control: private, max-age=5
+
+&lt;BODY&gt;
+</code></pre>
+
+<h2 id="abfragen-einer-message-queue-durch-anonymen-participanten">Abfragen einer Message Queue durch anonymen Participanten</h2>
+<p>Die Queue Ressource <code>https://ecs.uni-stuttgart.de/numlab/results</code> soll
+von einem durch Cookie identifizierten (Cookie:
+ecs_anonymous=92cee57f228a999bbf3c0bbf162d9cf20210a9cb), anonymen Participanten
+(z.B. Presentation client) abgefragt werden (serverseitige Authentifikation mit
+dem freeit-root-ca.cert.pem Rootzertifikat):</p>
+<pre><code>curl -i \
+--cacert freeit-root-ca.cert.pem \
+-H &quot;Cookie: ecs_anonymous=59c3aaeead64514b83abcea9f81cece9&quot; \
+-H &quot;Accept: application/json&quot; \
+-X POST https://ecs.uni-stuttgart.de/numlab/solutions/fifo
+</code></pre>
+
+<p>Mögliche Antwort:</p>
+<pre><code>HTTP/1.1 200 OK
+Server: nginx/0.7.65
+Date: Mon, 29 Mar 2010 23:31:53 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+ETag: &quot;86c90986c7397a6df3779550ccf99b9e&quot;
+Last-Modified: Mon, 29 Mar 2010 23:29:32 GMT
+X-EcsReceiverCommunities: 3
+X-EcsSender: 8
+X-Runtime: 202
+Content-Length: 25
+Set-Cookie: ecs_anonymous=92cee57f228a999bbf3c0bbf162d9cf20210a9cb; path=/; expires=Tue, 30-Mar-2010 00:31:53 GMT
+Cache-Control: private, max-age=5
+
+&lt;BODY&gt;
+</code></pre>
+
+<h2 id="exercises-filter-plugin">Exercises Filter-Plugin</h2>
+<p><strong>Filterung einer Exercises Message-Ressource nach dem {{{name}}} Property:</strong>*</p>
+<pre><code>curl -i -X GET http://ecs.uni-stuttgart.de/numlab/exercises/27?properties=name
+</code></pre>
+
+<p>Mögliche Antwort:</p>
+<pre><code>HTTP/1.1 200 OK
+Connection: close
+Date: Thu, 03 Dec 2009 15:08:33 GMT
+ETag: &quot;45fd14239a00353b4877cb1bd12822ed&quot;
+Last-Modified: Tue, 13 Oct 2009 15:23:53 GMT
+Content-Type: text/html; charset=utf-8
+X-Runtime: 32
+Content-Length: 310
+Cache-Control: private, max-age=5
+
+{ &quot;Exercise&quot; :
+  {
+  &quot;name&quot; : &quot;Aufgabe 1: C-Funktion zur Integralberechnung&quot;
+  }
+} 
+</code></pre>
+
+<p><strong>Filterung einer Exercises Message-Ressource nach dem {{{name}}} und {{{description}}} Property:</strong></p>
+<pre><code>curl -i -X GET http://ecs.uni-stuttgart.de/numlab/exercises/27?properties=name,description
+</code></pre>
+
+<p>Mögliche Antwort:</p>
+<pre><code>HTTP/1.1 200 OK
+Connection: close
+Date: Thu, 03 Dec 2009 15:08:33 GMT
+ETag: &quot;45fd14239a00353b4877cb1bd12822ed&quot;
+Last-Modified: Tue, 13 Oct 2009 15:23:53 GMT
+Content-Type: text/html; charset=utf-8
+X-Runtime: 32
+Content-Length: 310
+Cache-Control: private, max-age=5
+
+{ &quot;Exercise&quot; :
+  {
+  &quot;name&quot; : &quot;Aufgabe 1: C-Funktion zur Integralberechnung&quot;,
+  &quot;description&quot; : &quot;Schreiben Sie eine C-Funktion trapez(a,b,n,f) zur numerischen Berechnung des Integrals einer Funktion f im Intervall [a,b] mit Hilfe der aufsummierten Sehnentrapezregel mit n äquidistanten Stützstellen.&quot;
+  }
+} 
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
