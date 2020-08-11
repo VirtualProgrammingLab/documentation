@@ -22,14 +22,41 @@ allow e.g. upgrading/migrating the different components.
 * Version all endpoints, but not the objects
 * Version all objects, but not the endpoints
 * Version parts of the objects and all of the endpoints.
+* Version all objects and all of the endpoints.
 
 ## Decision Outcome
 
+It has been decided to version all long living objects, and all endpoints. The reason for requiring all objects to have version tags is for consistency
+reasons. Endpoints will only accept objects versions of one major version. Breaking changes will require to define a new version. Incremental 
+updates, which only extend the object are allowed. All systems are expected to handle these incremental updates gracefully. This means that a
+version 3.1.x message returned by the api must be accept by a 3.0.x client. The additional information contained by the api may be discarded. The same
+rules apply when a 3.1.x client talks to a 3.0.x api. The api will process the message according to the 3.0.x rules and extra information might be discarded.
+
+The client has to determine the correct endpoint versions to use. When the client will use a ComputationTemplate with version 3.x.x the corresponding
+websocket api will be ws://example.com/v3/compuation. All other messages used in any further communication between the websocket-api and the client
+are also expected to be version 3.x.x. There is no possiblity to mix different versions. If a client wants to use a v4 api, he has to reconnect to the correct
+endpoint at ws://example.com/v4/compuation
+
+The objects have been devided into two groups:
+- Long living object: These objects are expected to be stored by clients. These objects are ComputationTemplate, the ComputationTask and the ComputationResult
+- Action Wrappers: Computation and Result
+
+The long living objects all have a version attribute as their top level json object, making it easy to get the information. The Action Wrappers only exist during the communication between the client and the api and thus will not contain any version information, as it can be derived from the version of the api they are being used with.
 
 ### Positive Consequences
 
+Providing version information allows api and the client to be updated independently. It also allows the objects being held by the client to be easily identified without the need to either store this information somewhere external, where is might get lost or require some method to identify it based on the attributes available.
+
 ### Negative Consequences
 
+The version needs to stored on all objects, which requires additional space and bandwidth. Also this information needs to be processed in the endpoints. But this in neglactable considered to the need of upgrading different systems of different third party users at once.
+
 ## Pros and Cons of the Options
+
+Versioning either only the endpoints would still cause the issue, that a client needs to keep track of which implicit version an object has, to make sure he picks
+the right endpoint. This might also lead to the fact, that one might try to send the data to the wrong endpoint, since it is not known where it should belong.
+Only versioning the endpoints would require to add a lot of version identification cold on the api side, which should be avoided.
+
+Between the last to options, the only difference is, that the actions wrappers are not being versioned. This tradeoff has been made due to the fact, that they should never be stored somewhere and that they are considered stable for one api version. Adding actions or changing the wrappers itself will cause a upgrade of the api version.
 
 ## Links
