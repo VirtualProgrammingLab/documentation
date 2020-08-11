@@ -28,8 +28,8 @@ Describe who is sending which kind of message and gets what back
 JSON messages
 --------------
 
-[Computation Template](/viplab3.0/computation_template) <BR>
-[Computation Task](/viplab3.0/computation_task) <BR>
-[Computation](/viplab3.0/computation) <BR>
-[Computation Result](/viplab3.0/computation_result) <BR>
-[Computation Interrupt](/viplab3.0/computation_interrupt)
+[Computation Template](computation_template.md) <BR>
+[Computation Task](computation_task.md) <BR>
+[Computation](computation.md) <BR>
+[Computation Result](computation_result.md) <BR>
+[Computation Interrupt](computation_interrupt.md)

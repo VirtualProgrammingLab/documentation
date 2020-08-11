@@ -4,7 +4,7 @@ A *computation* represents the combination of a *computation template* and a
 corresponding *computation task*. It is the input of any backend.
 
 The JSON message of a *computation* is very similar to a *computation template*,
-so the interested reader is also referred to [its documentation](/viplab3.0/computation_template).
+so the interested reader is also referred to [its documentation](computation_template.md).
 
 ## Example (informal)
 Note: `//` with text following until EOL is a comment,
@@ -64,11 +64,11 @@ Note: `//` with text following until EOL is a comment,
 |configuration --compiling.compiler |string |must |compiler to be used, e.g. "gcc" | for **C, C++** |
 |configuration --compiling.flags |string |must for **C, C++**; optional for **Java** |CFLAGS for **C/C++**; compile flags for **Java** |e.g. "gcc" for **C/C++**; "-O2" or "" for **Java** | |
 |configuration --checking.sources |[PART_ID, PART_ID, ...] |must if checking should be performed |array of identifiers of to be checked sources; given by parts[]{PART_ID} (see [below](#json-objects-in-parts)) | for **Matlab, Octave, C, Java** |
-|configuration --checking.allowedCalls |string |must if checking should be performed |for **Matlab/Octave**: *allowed* call names separated by WS; only idents (no braces, no func args)<br>for **Java**: *allowed* call name expressions separated by WS | for **Java** semantics see [Java checking semantics](/viplab3.0/computation_template/#java-checking-semantics). | 
-|configuration --checking.forbiddenCalls |string |must if checking should be performed |for **C**: *forbidden* call names separated by WS; only idents (no braces, no func args)<br>for **Java**: *forbidden* call name expressions separated by WS | for **C** semantics see [C checking semantics](/viplab3.0/computation_template/#c-checking-semantics)); for **Java** semantics see [Java checking semantics](/viplab3.0/computation_template/#java-checking-semantics).  | 
+|configuration --checking.allowedCalls |string |must if checking should be performed |for **Matlab/Octave**: *allowed* call names separated by WS; only idents (no braces, no func args)<br>for **Java**: *allowed* call name expressions separated by WS | for **Java** semantics see [Java checking semantics](computation_template.md#java-checking-semantics). | 
+|configuration --checking.forbiddenCalls |string |must if checking should be performed |for **C**: *forbidden* call names separated by WS; only idents (no braces, no func args)<br>for **Java**: *forbidden* call name expressions separated by WS | for **C** semantics see [C checking semantics](computation_template.md#c-checking-semantics)); for **Java** semantics see [Java checking semantics](computation_template.md/#java-checking-semantics).  | 
 |configuration --linking.flags |string |must |LFLAGS | for **C, C++**; e.g. "" | 
 |configuration --running.stdinFilename | FILE_ID | must | the file identifier that is passed to **Matlab/Octave** via standard-in | |
-|configuration --running.timelimitInSeconds |int |opt |CPU time limit | for all **environments**; for semantics see [Notes to "timelimitInSeconds"](/viplab3.0/computation_template/#notes-to-timelimitinseconds). | |
+|configuration --running.timelimitInSeconds |int |opt |CPU time limit | for all **environments**; for semantics see [Notes to "timelimitInSeconds"](computation_template.md/#notes-to-timelimitinseconds). | |
 |configuration --running.commandLineArguments |string |opt | for **C, C++, Java**: arguments given to main() function; for **DuMuX, Container**: additional command line args | 
 |configuration --running.flags |string |opt |flags given to JVM | for **Java** | |
 |configuration --running.mainClass |string |opt (if unique) / must (if not unique) |class containing "public static void main(String[] args) {" | for **Java**: "args" may be another name. If main function is unique, its correct class should be detected automatically.| |
