@@ -22,7 +22,8 @@ and result objects, like stdout, stderr, images, links, etc.
     },
   "artifacts" : [ // additional artifacts (files, notifications, etc)
     {
-      "type": "notifications", // the only required field for an artifact
+      "type": "notifications", // each artifact requires a type and
+      "identifier" : "1dd479d9-c9bd-4711-aed8-5bfb3ec5fcfa", // and an identifier
       "summary" : "(C chain)v1.9 failed.",
       "elements" : [
         {
@@ -72,18 +73,21 @@ and result objects, like stdout, stderr, images, links, etc.
     },
     {
       "type" : "file",
+      "identifier" : "de762095-6cd2-439f-80eb-313e85d33869",
       "MIMEtype": "png",
       "path" : "/images/img.png",
       "content": "" // base64url encoded content
     },
     {
       "type" : "file",
+      "identifier" : "10516761-d937-4ba4-a82f-dc2847d45032",
       "MIMEtype": "png",
       "path" : "/images/img2.png",
       "content": "" // base64url encoded content
     },
     {
       "type" : "s3file",
+      "identifier" : "cc3c1cf9-c02d-4694-902c-93c298d68c51",
       "MIMEtype": "png",
       "path" : "/images/img.png",
       "url": "https://s3.temporary.file.url/img.png"
