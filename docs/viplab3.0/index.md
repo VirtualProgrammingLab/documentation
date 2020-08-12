@@ -25,6 +25,10 @@ Flow of information
 -------------------
 Describe who is sending which kind of message and gets what back
 
+Versioning rules
+----------------
+[Versioning rules](/viplab3.0/versioning)<BR>
+
 JSON messages
 --------------
 
