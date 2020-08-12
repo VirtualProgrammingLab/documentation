@@ -35,10 +35,10 @@ In the context of a learning environment, a *computation task* can be seen as a
 |Key [--Subkey] |Type |Opt / Must |Description |Comment | AS |
 |------|-----|-----|-----|----|----|
 | template | string (UUID) | must | computation template identifier | | 
-| arguments | {PARAM_ID: value, ..., PARAM_ID: value} | opt | arguments of, e.g., *configuration.commandLineArguments* extracted by the frontend | see [computation template](/viplab3.0/computation_template/#explaining-the-json-format) |
+| arguments | {PARAM_ID: value, ..., PARAM_ID: value} | opt | arguments of, e.g., *configuration.commandLineArguments* extracted by the frontend | see [computation template](computation_template.md#explaining-the-json-format) |
 | metadata | struct | opt | contains information for frontend | | |
 | metadata --comment | string | opt | comment from user | | implemented in frontend?
-| parts | [{...}, {...}, ...] | opt | array containing *modified* [part objects](/viplab3.0/computation_template/#json-objects-in-parts). Only *identifier*- and *content*-attributes are allowed. Only "modifiable" or "template" parts can be referenced here (see *access*-attribute). | The frontend creates the content for "template" parts. See [notes](#notes-for-template-parts). |  
+| parts | [{...}, {...}, ...] | opt | array containing *modified* [part objects](computation_template.md#json-objects-in-parts). Only *identifier*- and *content*-attributes are allowed. Only "modifiable" or "template" parts can be referenced here (see *access*-attribute). | The frontend creates the content for "template" parts. See [notes](#notes-for-template-parts). |  
 
 
 ### Notes for template parts
