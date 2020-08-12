@@ -9,62 +9,85 @@ and result objects, like stdout, stderr, images, links, etc.
 ## Example (informal)
 
 ```
-{ "computation" : "4598393-95bf-409a-98a5-ee375982c3e",  // uuid of corresponding computation
+{
+  "identifier" : "86165eea-14df-4a76-805a-09b21441cbf7",
+  "version" : "3.0.0"
+  "computation" : "4598393-95bf-409a-98a5-ee375982c3e",  // uuid of corresponding computation
   "status" : "final", // final and intermediate, 
   "timestamp" :   // creation time of this message in ISO-8601
-  "notifications" : { // injected user info object
-    "summary" : "(C chain)v1.9 failed.",
-    "elements" : [
-        {
-            "severity" : "info",
-            "type" : "compiler",
-            "message" : "source_0.c: In function \u2018trapez\u2019:",
-            "output" : {
-                "elementID" : "compile_stderr_0.txt",
-                "extract" : "source_0.c: In function \u2018trapez\u2019:",
-                "begin" : 0,
-                "end" : 37
-            }
-        },
-        {
-            "severity" : "warning",
-            "type" : "compiler",
-            "message" : "source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]",
-            "source" : {
-                "elementID" : "codeFromStudent",
-                "extract" : "  double x = 0;",
-                "begin" : 406,
-                "end" : 421,
-                "line" : 15,
-                "col" : 10
-            },
-            "output" : {
-                "elementID" : "compile_stderr_0.txt",
-                "extract" : "source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]",
-                "begin" : 38,
-                "end" : 108
-            }
-        },
-        {
-            "severity" : "error",
-            "type" : "callcheck",
-            "message" : "[C function filtering] Function call not allowed:\n\"system\"; original source: codeFromStudent, line (corrected): 20, col: 3\nForbidden calls:\nsystem.\n",
-            "source" : {
-                "elementID" : "codeFromStudent",
-                "extract" : "  system(\"/bin/rm /tmp/foo.txt\"); // illegal call (should be catched by checker)",
-                "begin" : 325,
-                "end" : 405,
-                "line" : 14,
-                "col" : 3
-            }
-        }
-    ]
-  },
   "output" :
-  { "stdout" : "", // base64url encoded content
-    "stderr" : "", // base64url encoded content
-  },
-  "files" : [ // additional files
+    {
+      "stdout" : "", // base64url encoded content, mandatory, even if empty
+      "stderr" : "", // base64url encoded content, mandatory, even if empty
+    },
+  "artifacts" : [ // additional artifacts (files, notifications, etc)
+    {
+      "type": "notifications", // the only required field for an artifact
+      "summary" : "(C chain)v1.9 failed.",
+      "elements" : [
+        {
+          "severity" : "info",
+          "type" : "compiler",
+          "message" : "source_0.c: In function \u2018trapez\u2019:",
+          "output" : {
+            "elementID" : "compile_stderr_0.txt",
+            "extract" : "source_0.c: In function \u2018trapez\u2019:",
+            "begin" : 0,
+            "end" : 37
+          }
+        },
+        {
+          "severity" : "warning",
+          "type" : "compiler",
+          "message" : "source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]",
+          "source" : {
+              "elementID" : "codeFromStudent",
+              "extract" : "  double x = 0;",
+              "begin" : 406,
+              "end" : 421,
+              "line" : 15,
+              "col" : 10
+          },
+          "output" : {
+              "elementID" : "compile_stderr_0.txt",
+              "extract" : "source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]",
+              "begin" : 38,
+              "end" : 108
+          }
+        },
+        {
+          "severity" : "error",
+          "type" : "callcheck",
+          "message" : "[C function filtering] Function call not allowed:\n\"system\"; original source: codeFromStudent, line (corrected): 20, col: 3\nForbidden calls:\nsystem.\n",
+          "source" : {
+              "elementID" : "codeFromStudent",
+              "extract" : "  system(\"/bin/rm /tmp/foo.txt\"); // illegal call (should be catched by checker)",
+              "begin" : 325,
+              "end" : 405,
+              "line" : 14,
+              "col" : 3
+          }
+        }
+      ]
+    },
+    {
+      "type" : "file",
+      "MIMEtype": "png",
+      "path" : "/images/img.png",
+      "content": "" // base64url encoded content
+    },
+    {
+      "type" : "file",
+      "MIMEtype": "png",
+      "path" : "/images/img2.png",
+      "content": "" // base64url encoded content
+    },
+    {
+      "type" : "s3file",
+      "MIMEtype": "png",
+      "path" : "/images/img.png",
+      "url": "https://s3.temporary.file.url/img.png"
+    }
   ]
 }
 ```
@@ -75,8 +98,9 @@ wrapper "Result" around the following
 
 |Key            |Value Type |Opt / Must |Description |Comment |
 |---------------|-----------|-----------|------------|--------|
-|ID                   |string     |must | unique Result ID created by CC (automatically) | For tracking and debugging purposes. |
-|comment              |string     |opt              | comment from CC | |
+|identifier     |string (uuid) |must       | unique Result ID created by CC (automatically) | For tracking and debugging purposes. |
+|version | string | opt | version of the json specification | should be given for backwards compatibility |
+|computation |    string (uuid) |must              | identifier of the computation that is responsible for this result | |
 |status | One of {"final", "intermediate"} |must | "final": last Result of computation<BR>"intermediate": more Results expected | If there is only one Result, it status should be "final". If there are multiple Results, status of all before "final" should be "intermediate".|
 |index |uint |- must: if there are multiple Results<BR>- opt: if there is only one "final" Result | counts starting from 0 | Note: "final" Result gets last index. |
 |computation --startTime  | datetimeString | must | May be local or universal time. | Just after getting a Solution.|
