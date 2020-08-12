@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Auths - ViPLab</title>
+        <title>JSON Object Versioning Rules - ViPLab</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -49,28 +49,28 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown active">
+                            <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../" class="dropdown-item">ECS REST Interface</a>
+    <a href="../../rest/" class="dropdown-item">ECS REST Interface</a>
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">Auths</a>
+    <a href="../../rest/auths/" class="dropdown-item">Auths</a>
 </li>
                                     
 <li>
-    <a href="../econtent/" class="dropdown-item">Econtent</a>
+    <a href="../../rest/econtent/" class="dropdown-item">Econtent</a>
 </li>
                                     
 <li>
-    <a href="../eventqueues/" class="dropdown-item">Eventqueues</a>
+    <a href="../../rest/eventqueues/" class="dropdown-item">Eventqueues</a>
 </li>
                                     
 <li>
-    <a href="../memberships/" class="dropdown-item">memberships</a>
+    <a href="../../rest/memberships/" class="dropdown-item">memberships</a>
 </li>
                                 </ul>
                             </li>
@@ -99,32 +99,32 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../../viplab3.0/" class="dropdown-item">Index</a>
+    <a href="../" class="dropdown-item">Index</a>
 </li>
                                     
 <li>
-    <a href="../../viplab3.0/computation/" class="dropdown-item">Computation JSON Message</a>
+    <a href="../computation/" class="dropdown-item">Computation JSON Message</a>
 </li>
                                     
 <li>
-    <a href="../../viplab3.0/computation_result/" class="dropdown-item">Computation Result JSON Message</a>
+    <a href="../computation_result/" class="dropdown-item">Computation Result JSON Message</a>
 </li>
                                     
 <li>
-    <a href="../../viplab3.0/computation_task/" class="dropdown-item">Computation Task JSON Message</a>
+    <a href="../computation_task/" class="dropdown-item">Computation Task JSON Message</a>
 </li>
                                     
 <li>
-    <a href="../../viplab3.0/computation_template/" class="dropdown-item">Computation Template JSON Message</a>
+    <a href="../computation_template/" class="dropdown-item">Computation Template JSON Message</a>
 </li>
                                     
 <li>
-    <a href="../../viplab3.0/versioning/" class="dropdown-item">JSON Object Versioning Rules</a>
+    <a href="./" class="dropdown-item active">JSON Object Versioning Rules</a>
 </li>
                                 </ul>
                             </li>
@@ -137,12 +137,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../" class="nav-link">
+                                <a rel="prev" href="../computation_template/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../econtent/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -164,8 +164,32 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#auths" class="nav-link">auths</a>
+            <li class="nav-item" data-level="1"><a href="#json-object-versioning-rules" class="nav-link">JSON Object Versioning Rules</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#context-and-problem-statement" class="nav-link">Context and Problem Statement</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#decision-drivers" class="nav-link">Decision Drivers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#considered-options" class="nav-link">Considered Options</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#decision-outcome" class="nav-link">Decision Outcome</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#pros-and-cons-of-the-options" class="nav-link">Pros and Cons of the Options</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#links" class="nav-link">Links</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -173,41 +197,54 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="auths">auths</h1>
-<p><code>POST, auths:</code> Der ECS speichert einen eindeutigen <code>hash</code> Wert zur späteren Autorisation. Zusätzlich müssen noch die <code>mid</code> des konsumierenden Participanten und <code>eid</code> des Econtent angegeben werden. Optional sind <code>sov</code> (start of validation time) und <code>eov</code> (end of validation time). Ein <code>auth</code> Eintrag hat bei Nichtangabe von <code>sov, eov</code> eine vom ECS bestimmte Lebensdauer (Standard 30 Sekunden), d.h. wird nach Anlegen eines Auth Objekts dieses nicht innerhalb der nächsten 30sec abgerufen, verfällt der Auth Eintrag und ein nachträglicher Autorisationsversuch schlägt fehl. Diese Zeitspanne sollte für den anschliessenden Forward und die Anfrage des econtentanbietenden Participanten ausreichen. Werden hingegen <code>sov, eov</code> angegeben, steht der Auth Eintrag nur innerhalb dieser beiden Zeiten für eine Autorisation zur Verfügung (asynchrones konsumieren von Econtentlinks). Liefert als HTTP Status Code entweder "201 Created" für eine erfolgreiches Anlegen oder "400 bzw. 404" für Fehler. Auth Einträge können nur von Participanten gemacht werden, dessen <code>mid</code> als <code>owner</code> für den jeweiligen <code>eid</code> im entsprechenden Econtent eingetragen sind (ansonsten HTTP Status Code 404). {#auths_abr} Dem anfragenden Participanten wird zusätzlich ein optionales und eindeutiges Kürzel <code>abr</code> des  konsumierenden Participanten zur Verfügung gestellt. Dies kann, wenn vorhanden, z.B. zur zusätzlichen Kennzeichnung von neu anzulegenden Accounts auf dem Econtent anbietenden Participanten verwendet werden (siehe auch <a href="memberships#abr">memberships</a>).</p>
-<p>Wertebereiche bzw. Infos für einzelne Attribute:</p>
+<h1 id="json-object-versioning-rules">JSON Object Versioning Rules</h1>
 <ul>
-<li>"hash" : Eine einfache Möglichkeit zur Generierung eines eindeutigen Hash's: {{{ echo "<code>date</code> ecs.uni-stuttgart.de" | sha1sum}}}, also einen sha1 Hash über das aktuelle Systemdatum und seinen jeweiligen DNS. Der Hash darf eine Länge von 256 Zeichen nicht überschreiten. Der Algorithmus zur Erzeugung des Hashwertes sollte geheim und/oder Zufallskomponenten enthalten.</li>
-<li>"sov" : steht für {{{start of validation}}} time. Zeitangabe im Format nach rfc3339. Optionales Datum. Muss immer gemeinsam mit {{{eov}}} angegeben werden.</li>
-<li>"eov" : steht für {{{end of validation}}} time. Zeitangabe im Format nach rfc3339. Optionales Datum. Muss immer gemeinsam mit {{{sov}}} angegeben werden.</li>
+<li>Status: proposed</li>
+<li>Deciders: Leon Kiefer, Per Pascal Seeland</li>
+<li>Date: 2020-05-14</li>
 </ul>
-<pre><code>https://infolms.rus.uni-stuttgart.de:7923/auths
-[
-{
-  &quot;hash&quot;:  &quot;87c1141e5ec3adf194b2ea600974b79f494027ff&quot;,
-  &quot;mid&quot; :  1,
-  &quot;eid&quot; :  1,
-  &quot;sov&quot; :  &quot;2008-01-07T13:30+01:00&quot;,
-  &quot;eov&quot; :  &quot;2008-02-14T15:00+01:00&quot;
-},
-...
-]
-</code></pre>
-
-<p><code>GET, auths/&lt;hash&gt;:</code>: Gibt entsprechend nachgefragte {{{auths}}} Resource zurück. Bei vorhandenem Hash (<hash>) wird  als HTTP Status Code "200 OK" und der entsprechende Auths-Eintrag zurückgegeben, ansonsten HTTP Status Code "404" für eine unberechtigte Anfrage.</p>
-<pre><code>https://infolms.rus.uni-stuttgart.de:7923/auths/87c1141e5ec3adf194b2ea600974b79f494027ff
-
-[
-{
-  &quot;hash&quot;:  &quot;87c1141e5ec3adf194b2ea600974b79f494027ff&quot;,
-  &quot;mid&quot; :  1,
-  &quot;eid&quot; :  1,
-  &quot;sov&quot; :  &quot;2008-01-07T13:30+01:00&quot;,
-  &quot;eov&quot; :  &quot;2008-02-14T15:00+01:00&quot;,
-  &quot;abr&quot; :  &quot;S&quot;
-}
-]
-</code></pre></div>
+<p>Technical Story: https://github.com/VirtualProgrammingLab/documentation/issues/1</p>
+<h2 id="context-and-problem-statement">Context and Problem Statement</h2>
+<p>The ViPLab Projects defines a set of JSON-objects, which are used in the different components of the project. Since ViPLab itself does not 
+store any data, these objects have to be stored by third party systems. These will be, depending on the context they are used in either LMS (like ILIAS)
+or data repositories (like dataverse). There needs to be a way to identify the version of the different objects stored by the third party system to 
+allow e.g. upgrading/migrating the different components. </p>
+<h2 id="decision-drivers">Decision Drivers</h2>
+<ul>
+<li>Provide a way to identify the version of the objects and also provide a path for e.g. upgrading the API endpoints used by those systems.</li>
+</ul>
+<h2 id="considered-options">Considered Options</h2>
+<ul>
+<li>Version all endpoints, but not the objects</li>
+<li>Version all objects, but not the endpoints</li>
+<li>Version parts of the objects and all of the endpoints.</li>
+<li>Version all objects and all of the endpoints.</li>
+</ul>
+<h2 id="decision-outcome">Decision Outcome</h2>
+<p>It has been decided to version all long living objects, and all endpoints. The reason for requiring all objects to have version tags is for consistency
+reasons. Endpoints will only accept objects versions of one major version. Breaking changes will require to define a new version. Incremental 
+updates, which only extend the object are allowed. All systems are expected to handle these incremental updates gracefully. This means that a
+version 3.1.x message returned by the api must be accept by a 3.0.x client. The additional information contained by the api may be discarded. The same
+rules apply when a 3.1.x client talks to a 3.0.x api. The api will process the message according to the 3.0.x rules and extra information might be discarded.</p>
+<p>The client has to determine the correct endpoint versions to use. When the client will use a ComputationTemplate with version 3.x.x the corresponding
+websocket api will be ws://example.com/v3/computation. All other messages used in any further communication between the websocket-api and the client
+are also expected to be version 3.x.x. There is no possiblity to mix different versions. If a client wants to use a v4 api, he has to reconnect to the correct
+endpoint at ws://example.com/v4/computation</p>
+<p>The objects have been devided into three groups:
+- Long living object: ComputationTemplate, ComputationTask and ComputationResult
+- Wrappers: Computation
+- Message Types: CreateComputation and Result</p>
+<p>All long living objects are expected to be stored by clients and have version attribute on their top level of the json object, making it easy to get the information. Wrappers only exist during the communication between the client and the api and thus will not contain any version information, as it can be derived from the version of the api version they are being used with. Their only functionality is to group long living objects during a request. Messages Types are the messages used for the communication of the client with the websocket api. Like the wrappers they belong to a specific endpoint version and are also not versioned.</p>
+<h3 id="positive-consequences">Positive Consequences</h3>
+<p>Providing version information allows api and the client to be updated independently. It also allows the objects being held by the client to be easily identified without the need to either store this information somewhere external, where is might get lost or require some method to identify it based on the attributes available.</p>
+<h3 id="negative-consequences">Negative Consequences</h3>
+<p>The version needs to stored on all objects, which requires additional space and bandwidth. Also this information needs to be processed in the endpoints. But this in neglactable considered to the need of upgrading different systems of different third party users at once.</p>
+<h2 id="pros-and-cons-of-the-options">Pros and Cons of the Options</h2>
+<p>Versioning either only the endpoints would still cause the issue, that a client needs to keep track of which implicit version an object has, to make sure he picks
+the right endpoint. This might also lead to the fact, that one might try to send the data to the wrong endpoint, since it is not known where it should belong.
+Only versioning the endpoints would require to add a lot of version identification cold on the api side, which should be avoided.</p>
+<p>Between the last to options, the only difference is, that the actions wrappers are not being versioned. This tradeoff has been made due to the fact, that they should never be stored somewhere and that they are considered stable for one api version. Adding actions or changing the wrappers itself will cause a upgrade of the api version.</p>
+<h2 id="links">Links</h2></div>
             </div>
         </div>
 
