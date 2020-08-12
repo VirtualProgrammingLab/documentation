@@ -33,15 +33,17 @@ version 3.1.x message returned by the api must be accept by a 3.0.x client. The 
 rules apply when a 3.1.x client talks to a 3.0.x api. The api will process the message according to the 3.0.x rules and extra information might be discarded.
 
 The client has to determine the correct endpoint versions to use. When the client will use a ComputationTemplate with version 3.x.x the corresponding
-websocket api will be ws://example.com/v3/compuation. All other messages used in any further communication between the websocket-api and the client
+websocket api will be ws://example.com/v3/computation. All other messages used in any further communication between the websocket-api and the client
 are also expected to be version 3.x.x. There is no possiblity to mix different versions. If a client wants to use a v4 api, he has to reconnect to the correct
-endpoint at ws://example.com/v4/compuation
+endpoint at ws://example.com/v4/computation
 
-The objects have been devided into two groups:
-- Long living object: These objects are expected to be stored by clients. These objects are ComputationTemplate, the ComputationTask and the ComputationResult
-- Action Wrappers: Computation and Result
+The objects have been devided into three groups:
+- Long living object: ComputationTemplate, ComputationTask and ComputationResult
+- Wrappers: Computation
+- Message Types: CreateComputation and Result
 
-The long living objects all have a version attribute as their top level json object, making it easy to get the information. The Action Wrappers only exist during the communication between the client and the api and thus will not contain any version information, as it can be derived from the version of the api they are being used with.
+All long living objects are expected to be stored by clients and have version attribute on their top level of the json object, making it easy to get the information. Wrappers only exist during the communication between the client and the api and thus will not contain any version information, as it can be derived from the version of the api version they are being used with. Their only functionality is to group long living objects during a request. Messages Types are the messages used for the communication of the client with the websocket api. Like the wrappers they belong to a specific endpoint version and are also not versioned.
+
 
 ### Positive Consequences
 
