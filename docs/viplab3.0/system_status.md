@@ -1,0 +1,3 @@
+# System status JSON message
+
+to inform frontend about computations in-preparation...

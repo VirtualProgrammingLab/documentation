@@ -27,13 +27,22 @@ Describe who is sending which kind of message and gets what back
 
 Versioning rules
 ----------------
-[Versioning rules](/viplab3.0/versioning)<BR>
+[Versioning rules](versioning.md)
 
-JSON messages
+Long living JSON messages
 --------------
 
-[Computation Template](computation_template.md) <BR>
-[Computation Task](computation_task.md) <BR>
-[Computation](computation.md) <BR>
-[Computation Result](computation_result.md) <BR>
-[Computation Interrupt](computation_interrupt.md)
+* [Computation Template](computation_template.md)
+* [Computation Task](computation_task.md)
+* [Computation Result](computation_result.md)
+
+Wrapper
+---------
+* [Computation](computation.md)
+
+Message Types
+-------------
+* [CreateComputation](create_computation.md)
+* [Result](result.md)
+* [System status](system_status.md) (not implemented yet)
+* [Computation Interrupt](computation_interrupt.md) (not implemented yet)
