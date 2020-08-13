@@ -180,7 +180,7 @@ Each notifications artifact contains at least one summary and unlimited number o
 | elements |  array of notification objects | opt | the more detailed notification objects for this notifications object| |
 
 
-#### notifications artifact JSON object
+#### notification artifact JSON object
 |Key            |Value Type |Opt / Must |Description |Comment | AS |
 |---------------|-----------|-----------|------------|--------|----|
 | severity | string | must | One of {"error", "warning", "info"} | | |
