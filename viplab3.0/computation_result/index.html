@@ -124,6 +124,10 @@
 </li>
                                     
 <li>
+    <a href="../system_status/" class="dropdown-item">System status JSON message</a>
+</li>
+                                    
+<li>
     <a href="../versioning/" class="dropdown-item">JSON Object Versioning Rules</a>
 </li>
                                 </ul>
@@ -170,7 +174,15 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#system-status-json-message" class="nav-link">System status JSON message</a>
+            <li class="nav-item" data-level="2"><a href="#result-artifacts" class="nav-link">Result Artifacts</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#specification-of-the-json-formats" class="nav-link">Specification of the JSON formats</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#leftovers-from-viplab-20" class="nav-link">Leftovers from Viplab 2.0</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -182,73 +194,116 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="computation-result-json-message">Computation Result JSON Message</h1>
-<p>A <em>computation result</em>  is the result of a <em>computation</em>.
-It contains information about the success or failure (showing details for students)
-and result objects, like stdout, stderr, images, links, etc.</p>
-<p><strong>This documentation is in progress and contains NOT the final specification</strong></p>
+<p>A <em>computation result</em>  is the result of a <em>computation</em>. It always contains
+the stdout and stderr of of the computation. In addition, it may containIt contains 
+arbitrary information contained in one or more artifacts. Artifacts
+are information about the success or failure (showing details for students)
+and result objects, like files, images, links, etc.</p>
 <h2 id="example-informal">Example (informal)</h2>
-<pre><code>{ &quot;computation&quot; : &quot;4598393-95bf-409a-98a5-ee375982c3e&quot;,  // uuid of corresponding computation
+<pre><code>{
+  &quot;identifier&quot; : &quot;86165eea-14df-4a76-805a-09b21441cbf7&quot;,
+  &quot;version&quot; : &quot;3.0.0&quot;
+  &quot;computation&quot; : &quot;4598393-95bf-409a-98a5-ee375982c3e&quot;,  // uuid of corresponding computation
   &quot;status&quot; : &quot;final&quot;, // final and intermediate, 
   &quot;timestamp&quot; :   // creation time of this message in ISO-8601
-  &quot;notifications&quot; : { // injected user info object
-    &quot;summary&quot; : &quot;(C chain)v1.9 failed.&quot;,
-    &quot;elements&quot; : [
-        {
-            &quot;severity&quot; : &quot;info&quot;,
-            &quot;type&quot; : &quot;compiler&quot;,
-            &quot;message&quot; : &quot;source_0.c: In function \u2018trapez\u2019:&quot;,
-            &quot;output&quot; : {
-                &quot;elementID&quot; : &quot;compile_stderr_0.txt&quot;,
-                &quot;extract&quot; : &quot;source_0.c: In function \u2018trapez\u2019:&quot;,
-                &quot;begin&quot; : 0,
-                &quot;end&quot; : 37
-            }
-        },
-        {
-            &quot;severity&quot; : &quot;warning&quot;,
-            &quot;type&quot; : &quot;compiler&quot;,
-            &quot;message&quot; : &quot;source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]&quot;,
-            &quot;source&quot; : {
-                &quot;elementID&quot; : &quot;codeFromStudent&quot;,
-                &quot;extract&quot; : &quot;  double x = 0;&quot;,
-                &quot;begin&quot; : 406,
-                &quot;end&quot; : 421,
-                &quot;line&quot; : 15,
-                &quot;col&quot; : 10
-            },
-            &quot;output&quot; : {
-                &quot;elementID&quot; : &quot;compile_stderr_0.txt&quot;,
-                &quot;extract&quot; : &quot;source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]&quot;,
-                &quot;begin&quot; : 38,
-                &quot;end&quot; : 108
-            }
-        },
-        {
-            &quot;severity&quot; : &quot;error&quot;,
-            &quot;type&quot; : &quot;callcheck&quot;,
-            &quot;message&quot; : &quot;[C function filtering] Function call not allowed:\n\&quot;system\&quot;; original source: codeFromStudent, line (corrected): 20, col: 3\nForbidden calls:\nsystem.\n&quot;,
-            &quot;source&quot; : {
-                &quot;elementID&quot; : &quot;codeFromStudent&quot;,
-                &quot;extract&quot; : &quot;  system(\&quot;/bin/rm /tmp/foo.txt\&quot;); // illegal call (should be catched by checker)&quot;,
-                &quot;begin&quot; : 325,
-                &quot;end&quot; : 405,
-                &quot;line&quot; : 14,
-                &quot;col&quot; : 3
-            }
-        }
-    ]
-  },
   &quot;output&quot; :
-  { &quot;stdout&quot; : &quot;&quot;, // base64url encoded content
-    &quot;stderr&quot; : &quot;&quot;, // base64url encoded content
-  },
-  &quot;files&quot; : [ // additional files
+    {
+      &quot;stdout&quot; : &quot;&quot;, // base64url encoded content, mandatory, even if empty
+      &quot;stderr&quot; : &quot;&quot;, // base64url encoded content, mandatory, even if empty
+    },
+  &quot;artifacts&quot; : [ // additional artifacts (files, notifications, etc)
+    {
+      &quot;type&quot;: &quot;notifications&quot;, // each artifact requires a type and
+      &quot;identifier&quot; : &quot;1dd479d9-c9bd-4711-aed8-5bfb3ec5fcfa&quot;, // and an identifier
+      &quot;summary&quot; : &quot;(C chain)v1.9 failed.&quot;,
+      &quot;elements&quot; : [
+        {
+          &quot;severity&quot; : &quot;info&quot;,
+          &quot;type&quot; : &quot;compiler&quot;,
+          &quot;message&quot; : &quot;source_0.c: In function \u2018trapez\u2019:&quot;,
+          &quot;output&quot; : {
+            &quot;source&quot; : &quot;stderr&quot;,
+            &quot;extract&quot; : &quot;source_0.c: In function \u2018trapez\u2019:&quot;,
+            &quot;begin&quot; : 0,
+            &quot;end&quot; : 37
+          }
+        },
+        {
+          &quot;severity&quot; : &quot;warning&quot;,
+          &quot;type&quot; : &quot;compiler&quot;,
+          &quot;message&quot; : &quot;source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]&quot;,
+          &quot;origin&quot; : {
+              &quot;source&quot; : &quot;parts://7a1808d0-c997-4e28-acdf-bfda3ce70960&quot;, //code the student can edit
+              &quot;extract&quot; : &quot;  double x = 0;&quot;,
+              &quot;begin&quot; : 406,
+              &quot;end&quot; : 421,
+              &quot;line&quot; : 15,
+              &quot;col&quot; : 10
+          },
+          &quot;output&quot; : {
+              &quot;source&quot; : &quot;stderr&quot;,
+              &quot;extract&quot; : &quot;source_0.c:21:10: warning: unused variable \u2018x\u2019 [-Wunused-variable]&quot;,
+              &quot;begin&quot; : 38,
+              &quot;end&quot; : 108
+          }
+        },
+        {
+          &quot;severity&quot; : &quot;error&quot;,
+          &quot;type&quot; : &quot;callcheck&quot;,
+          &quot;message&quot; : &quot;[C function filtering] Function call not allowed:\n\&quot;system\&quot;; original source: codeFromStudent, line (corrected): 20, col: 3\nForbidden calls:\nsystem.\n&quot;,
+          &quot;origin&quot; : {
+              &quot;elementID&quot; : &quot;parts://7a1808d0-c997-4e28-acdf-bfda3ce70960&quot;,
+              &quot;extract&quot; : &quot;  system(\&quot;/bin/rm /tmp/foo.txt\&quot;); // illegal call (should be catched by checker)&quot;,
+              &quot;begin&quot; : 325,
+              &quot;end&quot; : 405,
+              &quot;line&quot; : 14,
+              &quot;col&quot; : 3
+          }
+        }
+      ]
+    },
+    {
+      &quot;type&quot; : &quot;file&quot;,
+      &quot;identifier&quot; : &quot;de762095-6cd2-439f-80eb-313e85d33869&quot;,
+      &quot;MIMEtype&quot;: &quot;image/png&quot;,
+      &quot;path&quot; : &quot;/images/img.png&quot;,
+      &quot;content&quot;: &quot;&quot; // base64url encoded content
+    },
+    {
+      &quot;type&quot; : &quot;file&quot;,
+      &quot;identifier&quot; : &quot;10516761-d937-4ba4-a82f-dc2847d45032&quot;,
+      &quot;MIMEtype&quot;: &quot;image/png&quot;,
+      &quot;path&quot; : &quot;/images/img2.png&quot;,
+      &quot;content&quot;: &quot;&quot; // base64url encoded content
+    },
+    {
+      &quot;type&quot; : &quot;s3file&quot;,
+      &quot;identifier&quot; : &quot;cc3c1cf9-c02d-4694-902c-93c298d68c51&quot;,
+      &quot;MIMEtype&quot;: &quot;application/gzip&quot;,
+      &quot;path&quot; : &quot;/largefile/result.tar.gz&quot;,
+      &quot;url&quot;: &quot;https://s3.temporary.file.url/result.tar.gz&quot;,
+      &quot;size&quot; : 123456789,
+      &quot;hash&quot; : &quot;sha512:hashcode_of_file&quot;
+    }
   ]
 }
 </code></pre>
 
-<h3 id="result-json-format">Result JSON Format</h3>
-<p>wrapper "Result" around the following</p>
+<h2 id="result-artifacts">Result Artifacts</h2>
+<p>Each computation ends with a ComputationResult containing at least the output generated on stdout and stderr. </p>
+<p>All additional information about an executed computation like created files is contained inside an arbitrary number of artifacts.
+Each artifact containes at least an identifier and a type describing the content. The main purposes of this concept is to allow a 
+standard way how to extend what information can be created and returned during a computation.</p>
+<h3 id="artifact-types">artifact types</h3>
+<p>In addition to the two mandatory fields for each artifact, each artifact has a specific set of additional fields. Currently, the following list of 
+artifact types are defined with a given set fields:</p>
+<ul>
+<li>file</li>
+<li>s3file</li>
+<li>notifications</li>
+</ul>
+<h2 id="specification-of-the-json-formats">Specification of the JSON formats</h2>
+<h3 id="computationresult-json-object">ComputationResult JSON object</h3>
 <table>
 <thead>
 <tr>
@@ -261,17 +316,24 @@ and result objects, like stdout, stderr, images, links, etc.</p>
 </thead>
 <tbody>
 <tr>
-<td>ID</td>
-<td>string</td>
+<td>identifier</td>
+<td>string (uuid)</td>
 <td>must</td>
-<td>unique Result ID created by CC (automatically)</td>
-<td>For tracking and debugging purposes.</td>
+<td>unique ComputationResult ID</td>
+<td></td>
 </tr>
 <tr>
-<td>comment</td>
+<td>version</td>
 <td>string</td>
-<td>opt</td>
-<td>comment from CC</td>
+<td>must</td>
+<td>version of the json specification used. The major version must match the version of the ComputationTask</td>
+<td></td>
+</tr>
+<tr>
+<td>computation</td>
+<td>string (uuid)</td>
+<td>must</td>
+<td>identifier of the computation that is responsible for this result</td>
 <td></td>
 </tr>
 <tr>
@@ -282,308 +344,447 @@ and result objects, like stdout, stderr, images, links, etc.</p>
 <td>If there is only one Result, it status should be "final". If there are multiple Results, status of all before "final" should be "intermediate".</td>
 </tr>
 <tr>
-<td>index</td>
-<td>uint</td>
-<td>- must: if there are multiple Results<BR>- opt: if there is only one "final" Result</td>
-<td>counts starting from 0</td>
-<td>Note: "final" Result gets last index.</td>
-</tr>
-<tr>
-<td>computation --startTime</td>
-<td>datetimeString</td>
+<td>timestamp</td>
+<td>ISO-8601 datetimeString</td>
 <td>must</td>
-<td>May be local or universal time.</td>
-<td>Just after getting a Solution.</td>
+<td>Timestamp when this result is generated. Need for ordering of intermediate result</td>
+<td></td>
 </tr>
 <tr>
-<td>computation --duration</td>
-<td>durationString</td>
+<td>output</td>
+<td>output json object</td>
 <td>must</td>
-<td>e.g. "128ms"</td>
-<td>Computation duration time since startTime (increases with each intermediate Result).</td>
-</tr>
-<tr>
-<td>computation --finishTime</td>
-<td>datetimeString</td>
-<td>must, iff status == "final"</td>
-<td>May be local or universal time.</td>
-<td>Just before posting final Result.</td>
-</tr>
-<tr>
-<td>computation --CC_versionLong</td>
-<td>string</td>
-<td>must</td>
-<td></td>
+<td>an object containing stdout and stderr</td>
 <td></td>
 </tr>
 <tr>
-<td>computation --CC_version</td>
-<td>string</td>
-<td>must</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>computation --chain_version</td>
-<td>string</td>
-<td>must</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>computation --technicalInfo</td>
-<td>struct</td>
-<td>must</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>computation --technicalInfo --host</td>
-<td>string</td>
-<td>must</td>
-<td>CC host</td>
-<td></td>
-</tr>
-<tr>
-<td>computation --technicalInfo --PID</td>
-<td>unsigned</td>
-<td>must</td>
-<td>CC PID</td>
-<td></td>
-</tr>
-<tr>
-<td>computation --technicalInfo --ID</td>
-<td>string</td>
-<td>must</td>
-<td></td>
-<td>Info for finding log files (may be number of computations).</td>
-</tr>
-<tr>
-<td>computation --technicalInfo --&lt;key&gt;</td>
-<td>&lt;val_type&gt;</td>
+<td>artifacts</td>
+<td>array of artifact objects</td>
 <td>opt</td>
-<td>&lt;key&gt;: locally unique, &lt;val_type&gt;: arbitrary type</td>
-<td>For allowing further key/val pairs if there should be a need.</td>
-</tr>
-<tr>
-<td>computation --userInfo</td>
-<td>struct</td>
-<td>must</td>
-<td>see <a href="#json-object-in-result-userinfo">Result userInfo object spec</a></td>
-<td></td>
-</tr>
-<tr>
-<td>Solution</td>
-<td>struct</td>
-<td>must</td>
-<td>exact copy of Solution (<a href="/viplab/solutions#solution-json-format">Solution JSON Format</a>) which this Result has been computed for</td>
-<td>Having Solution--ID is important for SC: think of posting multiple different Solutions with waiting for different Results. And having all <em>dynamic</em> data together is good!</td>
-</tr>
-<tr>
-<td>elements</td>
-<td>[ {...}, {...}, ... ]</td>
-<td>must</td>
-<td>array of objects containing elements described in the following: there has to be at least one of them</td>
+<td>array of objects containing artifacts described at <a href="#artifact-json-object-format">Artifacts</a></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="json-objects-in-result-elements">JSON objects in Result--elements[]</h3>
-<p>An object in (array) elements[] has the following properties:</p>
+<h3 id="output-json-object-format">output JSON object format</h3>
 <table>
 <thead>
 <tr>
-<th><strong>Key</strong></th>
-<th><strong>Value Type</strong> (an enum default is marked by <em>italics</em>)</th>
-<th><strong>Opt / Must</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Comment</strong></th>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stdout</td>
+<td>string</td>
+<td>must</td>
+<td>the stdout of the exection, base64url encode</td>
+<td>must be provided even if empty</td>
+</tr>
+<tr>
+<td>stderr</td>
+<td>string</td>
+<td>must</td>
+<td>the stderr of the exection, base64url encode</td>
+<td>must be provided even if empty</td>
+</tr>
+</tbody>
+</table>
+<h3 id="artifact-json-objects">artifact JSON objects</h3>
+<p>The base artifact object that needs to be extended all other artifacts defined.</p>
+<h4 id="artifact-json-object">artifact JSON object</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>identifier</td>
-<td>string</td>
+<td>string (uuid)</td>
 <td>must</td>
-<td>for later referencing, has to be unique</td>
-<td>Technical: e.g. it could be created by using a filename (of a file being source of value property).</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>opt</td>
-<td>name, need <strong>not</strong> be unique</td>
-<td>User info: may be shown in SC.</td>
-</tr>
-<tr>
-<td>MIMEtype</td>
-<td>One of {<em>"text/plain"</em>, "text/html", "text/uri-list", "image/png", "application/x-vgf", "application/x-vgf3", "application/x-vgfc"}</td>
-<td>opt</td>
-<td>info for interpreting value property</td>
-<td>- "text/uri-list": links to websides to be presented in SC;<BR>- "image/png": encoding unclear so far;<BR>- "application/x-vgf": generated graphics output in 'ViP graphics format';<BR>- "application/x-vgf3": generated graphics output in 'ViP graphics format 3D';<BR>- "application/x-vgfc": generated graphics output in 'ViP graphics format contour plot'.</td>
-</tr>
-<tr>
-<td>emphasis</td>
-<td>One of {"low", <em>"medium"</em>, "high"}</td>
-<td>opt</td>
-<td>info for rendering</td>
+<td>unique id for this artifact</td>
 <td></td>
 </tr>
 <tr>
-<td>value</td>
+<td>type</td>
 <td>string</td>
 <td>must</td>
-<td>text or other content</td>
+<td>the type of this artifact</td>
+<td>The type may be used by the client to determine how to display the artifact</td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-artifact-json-object">file artifact JSON object</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>must</td>
+<td>the path in which the content had been created during the computation</td>
+<td></td>
+</tr>
+<tr>
+<td>MIMEtype</td>
+<td>string</td>
+<td>must</td>
+<td>MIMEtype of the content</td>
+<td></td>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>must</td>
+<td>base64url encoded content of the file</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p>Notes:
-* There is a - mandatory - unique ID for objects in elements[] for referencing them later: this is especially useful, if the number of elements is variable.
-* If an - optional - key with default value is missing, it should be interpreted the same as being there and set to its default.
-* Advanced: a numOfFinalResults/finalResultNo mechanism could be of interest later: needed for sequencing computed Results (think of multiple Results for one Solution, which are computed distributed).</p>
-<h3 id="json-object-in-result-userinfo">JSON object in Result--userInfo</h3>
-<p>An userInfo object (struct) has the following properties:</p>
+<p>In Viplab 2.0, the following MIMEtypes where allowed. They contain some custom defined types, which need to be keep supported:</p>
+<ul>
+<li>text/plain</li>
+<li>text/html</li>
+<li>text/uri-list": links to websides to be presented in SC</li>
+<li>image/png"</li>
+<li>application/x-vgf: generated graphics output in 'ViP graphics format'</li>
+<li>application/x-vgf3: generated graphics output in 'ViP graphics format 3D'</li>
+<li>application/x-vgfc: generated graphics output in 'ViP graphics format contour plot'.|</li>
+</ul>
+<h4 id="s3file-artifact-json-object">s3file artifact JSON object</h4>
 <table>
 <thead>
 <tr>
-<th><strong>Key</strong></th>
-<th><strong>Value Type</strong></th>
-<th><strong>Opt/Must</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Comment</strong></th>
-<th><strong>AS</strong></th>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>must</td>
+<td>the path in which the content had been created during the computation</td>
+<td></td>
+</tr>
+<tr>
+<td>MIMEtype</td>
+<td>string</td>
+<td>must</td>
+<td>MIMEtype of the content</td>
+<td></td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>must</td>
+<td>url on which the content of the file can be retrieved</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>int</td>
+<td>must</td>
+<td>size in bytes of the file stored on the external system</td>
+<td></td>
+</tr>
+<tr>
+<td>hash</td>
+<td>string</td>
+<td>must</td>
+<td>the hash of the remote file in the format usedhash:hashcode_of_file, e.g. sha512:a12355....</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="notifications-artifact-json-object">notifications artifact JSON object</h4>
+<p>Each notifications artifact contains at least one summary and unlimited number of notification elemets providing more details</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>summary</td>
 <td>string</td>
-<td>opt</td>
+<td>must</td>
 <td>summary of all info_element's: e.g. one warning, one error may have a summary "An error occured."</td>
 <td>E.g.: "[Error] Backend has detected an error: no result!" or "Success!"</td>
-<td></td>
 </tr>
 <tr>
-<td>elements</td>
-<td>[{...}, {...}, ...]</td>
+<td>notifications</td>
+<td>array of notification objects</td>
 <td>opt</td>
-<td>array of <em>info_element</em>s</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element</td>
-<td>struct</td>
-<td>opt</td>
-<td>JSON object inside <em>elements</em></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --severity</td>
-<td>One of {"error", "warning", "info"}</td>
-<td>must</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --type</td>
-<td>One of {"system", "chain", "output", "callcheck", "interpreter", "compiler", "linker", "executable"}</td>
-<td>must</td>
-<td>For all chains: {"system, "chain", "output"}; for Octave/Matlab: {"callcheck", "interpreter"}; for C: {"callcheck", "compiler", "linker", "executable"}; for DuMuX: {"executable"}</td>
-<td>If type equals "system", <em>whole</em> Result if of interest for a bug report.</td>
-<td>Java??</td>
-</tr>
-<tr>
-<td>info_element --message</td>
-<td>string</td>
-<td>must</td>
-<td>summary of one message to the user; it sould not contain wrong error locations (file, line, col). Together with "soruce"/"line" or "col" (containing corrected locations) it should give the most interesting info.</td>
-<td>may be empty string (',' in optional location_part)</td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --source</td>
-<td>struct</td>
-<td>opt</td>
-<td>contains location information</td>
-<td>only allowed if "type" in {"compiler", "interpreter", "callcheck"}</td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --source --elementID</td>
-<td>ELEMENT_ID (string)</td>
-<td>must</td>
-<td>identifier of element from Solution/Exercise elements with source <em>input</em>, which has triggered (error/warning/...) message</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --source --line</td>
-<td>1..uint_max</td>
-<td>must</td>
-<td>Location of error/warning ...</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --source --col</td>
-<td>1..uint_max</td>
-<td>opt</td>
-<td>... referring to position in triggering input element.</td>
-<td>It is optional, since there are messages containing line info only</td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --output</td>
-<td>struct</td>
-<td>opt</td>
-<td>for output of tool detecting something</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --output --elementID</td>
-<td>ELEMENT_ID (string)</td>
-<td>must</td>
-<td>identifier of element from Result elements with interpreter/compiler <em>output</em>, which contains error/warning message</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --source/output --extract</td>
-<td>string</td>
-<td>must</td>
-<td>Part of referenced element. Extracted from message triggering input.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --source/output --begin</td>
-<td>unsigned int</td>
-<td>must</td>
-<td>Offset of extract into ...</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>info_element --source/output --end</td>
-<td>unsigned int</td>
-<td>must</td>
-<td>... referenced element: C-like (zero-based).</td>
-<td></td>
+<td>the more detailed notification objects for this notifications object</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p>Notes:
-* There are error messages containing multiple error triggering locations. This leads to multiple info_elements containing same "message" and "output", but different "source" objects. Note: another way would be to specify "sources":[{},...] as alternative to "source":{}.
-* "type": "fatal" may be introduced later
-* Compiler output may contain multiple error positions; only the first one should be extracted.</p>
-<h2 id="system-status-json-message">System status JSON message</h2>
-<p>to inform frontend about computations in-preparation...</p></div>
+<h4 id="notification-json-object">notification JSON object</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>severity</td>
+<td>string</td>
+<td>must</td>
+<td>One of {"error", "warning", "info"}</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>must</td>
+<td>One of {"system", "chain", "output", "callcheck", "interpreter", "compiler", "linker", "executable"}</td>
+<td>For all chains: {"system, "chain", "output"}; for Octave/Matlab: {"callcheck", "interpreter"}; for C: {"callcheck", "compiler", "linker", "executable"}; for Java: {"callcheck", "compiler", "executable"}; for DuMuX: {"executable"}  If type equals "system", <em>whole</em> Result if of interest for a bug report.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>must</td>
+<td>summary of one message to the user; it should not contain wrong error locations (file, line, col). Together with "source"/"line" or "col" (containing corrected locations) it should give the most interesting info.</td>
+<td>may be empty string (',' in optional location_part)</td>
+</tr>
+<tr>
+<td>origin</td>
+<td>notification origin json object</td>
+<td>opt</td>
+<td>If the message can be linked to a part from the ComputationTask, the original position can be found inside</td>
+<td>only allowed if "type" in {"compiler", "interpreter", "callcheck"}</td>
+</tr>
+<tr>
+<td>output</td>
+<td>notification output json object</td>
+<td>opt</td>
+<td>The position and text from either stdout or stderr (see <a href="#output-json-object-format">Output</a>) which caused notification.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<ul>
+<li>There are error messages containing multiple error triggering locations. This leads to multiple info_elements containing same "message" and "output", but different "source" objects. Note: another way would be to specify "sources":[{},...] as alternative to "source":{}.</li>
+<li>"type": "fatal" may be introduced later</li>
+<li>Compiler output may contain multiple error positions; only the first one should be extracted.</li>
+</ul>
+<h5 id="notification-origin-json-object">notification origin JSON object</h5>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source</td>
+<td>string</td>
+<td>must</td>
+<td>identifier of part from <a href="../computation_task/">ComputationTask</a> which has triggered (error/warning/...) message</td>
+<td></td>
+</tr>
+<tr>
+<td>extract</td>
+<td>string</td>
+<td>must</td>
+<td>Part of referenced part. Extracted from message triggering input.</td>
+<td></td>
+</tr>
+<tr>
+<td>begin</td>
+<td>unsigned int</td>
+<td>must</td>
+<td>Offset of extract into ...</td>
+<td></td>
+</tr>
+<tr>
+<td>end</td>
+<td>unsigned int</td>
+<td>must</td>
+<td>... referenced part: C-like (zero-based).</td>
+<td></td>
+</tr>
+<tr>
+<td>line</td>
+<td>1..uint_max</td>
+<td>must</td>
+<td>Location of error/warning ...</td>
+<td></td>
+</tr>
+<tr>
+<td>col</td>
+<td>1..uint_max</td>
+<td>opt</td>
+<td>... referring to position in triggering part.</td>
+<td>It is optional, since there are messages containing line info only</td>
+</tr>
+</tbody>
+</table>
+<h5 id="notification-output-json-object">notification output JSON object</h5>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source</td>
+<td>string</td>
+<td>must</td>
+<td>part of <a href="#output-json-object-format">Output</a>, which contained the message</td>
+<td></td>
+</tr>
+<tr>
+<td>extract</td>
+<td>string</td>
+<td>must</td>
+<td>Part of referenced output. Extracted from message triggering input.</td>
+<td></td>
+</tr>
+<tr>
+<td>begin</td>
+<td>unsigned int</td>
+<td>must</td>
+<td>Offset of extract into ...</td>
+<td></td>
+</tr>
+<tr>
+<td>end</td>
+<td>unsigned int</td>
+<td>must</td>
+<td>... referenced element: C-like (zero-based).</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="leftovers-from-viplab-20">Leftovers from Viplab 2.0</h2>
+<p>might be converted later, just keep around as inspration</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>startTime</td>
+<td>datetimeString</td>
+<td>must</td>
+<td>May be local or universal time.</td>
+<td>Just after getting a Solution.</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>durationString</td>
+<td>must</td>
+<td>e.g. "128ms"</td>
+<td>Computation duration time since startTime (increases with each intermediate Result).</td>
+</tr>
+<tr>
+<td>finishTime</td>
+<td>datetimeString</td>
+<td>must, iff status == "final"</td>
+<td>May be local or universal time.</td>
+<td>Just before posting final Result.</td>
+</tr>
+<tr>
+<td>CC_versionLong</td>
+<td>string</td>
+<td>must</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC_version</td>
+<td>string</td>
+<td>must</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chain_version</td>
+<td>string</td>
+<td>must</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>technicalInfo</td>
+<td>struct</td>
+<td>must</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>technicalInfo/host</td>
+<td>string</td>
+<td>must</td>
+<td>CC host</td>
+<td></td>
+</tr>
+<tr>
+<td>technicalInfo/PID</td>
+<td>unsigned</td>
+<td>must</td>
+<td>CC PID</td>
+<td></td>
+</tr>
+<tr>
+<td>technicalInfo/&lt;key&gt;</td>
+<td>&lt;val_type&gt;</td>
+<td>opt</td>
+<td>&lt;key&gt;: locally unique, &lt;val_type&gt;: arbitrary type</td>
+<td>For allowing further key/val pairs if there should be a need.</td>
+</tr>
+</tbody>
+</table></div>
             </div>
         </div>
 
