@@ -188,8 +188,8 @@ Each notifications artifact contains at least one summary and unlimited number o
 | severity | string | must | One of {"error", "warning", "info"} | | |
 | type | string | must | One of {"system", "chain", "output", "callcheck", "interpreter", "compiler", "linker", "executable"} | For all chains: {"system, "chain", "output"}; for Octave/Matlab: {"callcheck", "interpreter"}; for C: {"callcheck", "compiler", "linker", "executable"}; for Java: {"callcheck", "compiler", "executable"}; for DuMuX: {"executable"}  If type equals "system", *whole* Result if of interest for a bug report. |
 | message | string | must | summary of one message to the user; it should not contain wrong error locations (file, line, col). Together with "source"/"line" or "col" (containing corrected locations) it should give the most interesting info. | may be empty string (',' in optional location_part) |
-| origin  | origin json object | opt | If the message can be linked to part from the ComputationTask, the original position can be found inside | only allowed if "type" in {"compiler", "interpreter", "callcheck"} |
-| output | output | opt | the [Output](#output-json-object-format)from which this notification has be extracted from. Either stdout or stderr | |
+| origin  | notification origin json object | opt | If the message can be linked to a part from the ComputationTask, the original position can be found inside | only allowed if "type" in {"compiler", "interpreter", "callcheck"} |
+| output | notification output json object | opt | The position and text from either stdout or stderr (see [Output](#output-json-object-format)) which caused notification.||
 
 
 Notes:
