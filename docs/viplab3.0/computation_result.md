@@ -91,7 +91,8 @@ and result objects, like files, images, links, etc.
       "MIMEtype": "application/gzip",
       "path" : "/largefile/result.tar.gz",
       "url": "https://s3.temporary.file.url/result.tar.gz",
-      "size" : 123456789
+      "size" : 123456789,
+      "hash" : "sha512:hashcode_of_file"
     }
   ]
 }
@@ -148,7 +149,7 @@ The base artifact object that needs to be extended all other artifacts defined.
 |Key            |Value Type |Opt / Must |Description |Comment |
 |---------------|-----------|-----------|------------|--------|
 | path          | string    | must      | the path in which the content had been created during the computation | |
-| MIMEtype      | string    | must      | MIMEtype of the conten | | 
+| MIMEtype      | string    | must      | MIMEtype of the content | |
 | content       | string    | must      | base64url encoded content of the file | | 
 
 In Viplab 2.0, the following MIMEtypes where allowed. They contain some custom defined types, which need to be keep supported:
@@ -166,28 +167,29 @@ In Viplab 2.0, the following MIMEtypes where allowed. They contain some custom d
 |Key            |Value Type |Opt / Must |Description |Comment |
 |---------------|-----------|-----------|------------|--------|
 | path          | string    | must      | the path in which the content had been created during the computation | |
-| MIMEtype      | string    | must      | MIMEtype of the conten | | 
+| MIMEtype      | string    | must      | MIMEtype of the content | |
 | url           | string    | must      | url on which the content of the file can be retrieved | | 
 | size          | int       | must      | size in bytes of the file stored on the external system | |
+| hash          | string    | must      | the hash of the remote file in the format usedhash:hashcode_of_file, e.g. sha512:a12355.... ||
 
 
 #### notifications artifact JSON object
 Each notifications artifact contains at least one summary and unlimited number of notification elemets providing more details
 
-|Key            |Value Type |Opt / Must |Description |Comment | AS |
-|---------------|-----------|-----------|------------|--------|----|
+|Key            |Value Type |Opt / Must |Description |Comment |
+|---------------|-----------|-----------|------------|--------|
 | summary | string | must | summary of all info_element's: e.g. one warning, one error may have a summary "An error occured." | E.g.: "[Error] Backend has detected an error: no result!" or "Success!" |
-| elements |  array of notification objects | opt | the more detailed notification objects for this notifications object| |
+| notifications |  array of notification objects | opt | the more detailed notification objects for this notifications object| |
 
 
-#### notification artifact JSON object
-|Key            |Value Type |Opt / Must |Description |Comment | AS |
-|---------------|-----------|-----------|------------|--------|----|
+#### notification JSON object
+|Key            |Value Type |Opt / Must |Description |Comment |
+|---------------|-----------|-----------|------------|--------|
 | severity | string | must | One of {"error", "warning", "info"} | | |
-| type | string | must | One of {"system", "chain", "output", "callcheck", "interpreter", "compiler", "linker", "executable"} | For all chains: {"system, "chain", "output"}; for Octave/Matlab: {"callcheck", "interpreter"}; for C: {"callcheck", "compiler", "linker", "executable"}; for DuMuX: {"executable"} | If type equals "system", *whole* Result if of interest for a bug report. | Java?? |
+| type | string | must | One of {"system", "chain", "output", "callcheck", "interpreter", "compiler", "linker", "executable"} | For all chains: {"system, "chain", "output"}; for Octave/Matlab: {"callcheck", "interpreter"}; for C: {"callcheck", "compiler", "linker", "executable"}; for Java: {"callcheck", "compiler", "executable"}; for DuMuX: {"executable"}  If type equals "system", *whole* Result if of interest for a bug report. |
 | message | string | must | summary of one message to the user; it should not contain wrong error locations (file, line, col). Together with "source"/"line" or "col" (containing corrected locations) it should give the most interesting info. | may be empty string (',' in optional location_part) |
-| origin  | origin json object | opt | If the message can be linked to part from the ComputationTemplate, the original position can be found inside | only allowed if "type" in {"compiler", "interpreter", "callcheck"} | 
-| output | output | opt | the original message from which this notification has be extracted from | | 
+| origin  | origin json object | opt | If the message can be linked to part from the ComputationTask, the original position can be found inside | only allowed if "type" in {"compiler", "interpreter", "callcheck"} |
+| output | output | opt | the [Output](#output-json-object-format)from which this notification has be extracted from. Either stdout or stderr | |
 
 
 Notes:
@@ -197,21 +199,21 @@ Notes:
 * Compiler output may contain multiple error positions; only the first one should be extracted.
 
 
-##### notification origin actifact
-|Key            |Value Type |Opt / Must |Description |Comment | AS |
-|---------------|-----------|-----------|------------|--------|----|
-|source | string | must | identifier of element from Solution/Exercise elements with source *input*, which has triggered (error/warning/...) message |
-|extract | string | must | Part of referenced element. Extracted from message triggering input. |
+##### notification origin JSON object
+|Key            |Value Type |Opt / Must |Description |Comment |
+|---------------|-----------|-----------|------------|--------|
+|source | string | must | identifier of part from [ComputationTask](computation_task.md) which has triggered (error/warning/...) message |
+|extract | string | must | Part of referenced part. Extracted from message triggering input. |
 |begin | unsigned int | must | Offset of extract into ... |
-|end | unsigned int | must | ... referenced element: C-like (zero-based). |
+|end | unsigned int | must | ... referenced part: C-like (zero-based). |
 |line |1..uint_max | must | Location of error/warning ... |
-|col |1..uint_max | opt | ... referring to position in triggering input element. | It is optional, since there are messages containing line info only |
+|col |1..uint_max | opt | ... referring to position in triggering part. | It is optional, since there are messages containing line info only |
 
-##### notification output actifact
-|Key            |Value Type |Opt / Must |Description |Comment | AS |
-|---------------|-----------|-----------|------------|--------|----|
-|source | string | must | identifier of element from Result elements with interpreter/compiler *output*, which contains error/warning message |
-|extract | string | must | Part of referenced element. Extracted from message triggering input. |
+##### notification output JSON object
+|Key            |Value Type |Opt / Must |Description |Comment |
+|---------------|-----------|-----------|------------|--------|
+|source | string | must | part of [Output](#output-json-object-format), which contained the message |
+|extract | string | must | Part of referenced output. Extracted from message triggering input. |
 |begin | unsigned int | must | Offset of extract into ... |
 |end | unsigned int | must | ... referenced element: C-like (zero-based). |
 
