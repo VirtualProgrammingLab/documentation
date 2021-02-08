@@ -218,7 +218,6 @@ participant mit membership id <code>8</code> adressiert:</p>
 ' \
 https://ecs.uni-stuttgart.de/numlab/exercises
 </code></pre>
-
 <p>Mögliche Antwort:</p>
 <pre><code>HTTP/1.1 201 Created
 Location: https://ecs.uni-stuttgart.de/numlab/exercises/274
@@ -226,7 +225,6 @@ Content-Type: application/json; charset=utf-8
 
 &lt;leerer http-body&gt;
 </code></pre>
-
 <h2 id="eintrag-in-message-queue-erzeugen-anonymer-client">Eintrag in Message-Queue erzeugen (anonymer Client)</h2>
 <p>Unter der Ressource {{{https://ecs.uni-stuttgart.de/numlab/solutions}}} neue
 Message in Message-Queue erzeugen (POST auf
@@ -254,7 +252,6 @@ den Respond-Header (Rückantwort vom ECS) mitgeteilt (siehe auch Core ECS):</p>
 ' \
 http://ecs.uni-stuttgart.de/numlab/solutions
 </code></pre>
-
 <p>Mögliche Antwort:</p>
 <pre><code>HTTP/1.1 201 Created
 Location: http://ecs.uni-stuttgart.de/numlab/solutions/89
@@ -262,7 +259,6 @@ Set-Cookie: ecs_anonymous=59c3aaeead64514b83abcea9f81cece9; path=/
 
 &lt;leerer http-body&gt;
 </code></pre>
-
 <h2 id="abfragen-einer-message-queue-durch-authentisierten-participanten">Abfragen einer Message Queue durch authentisierten Participanten</h2>
 <p>Die Queue Ressource {{{https://ecs.uni-stuttgart.de/numlab/solutions}}} soll
 von einem authentisierten Participanten (z.B. Computation client) abgefragt
@@ -276,7 +272,6 @@ Serverzertifikats):</p>
 -H &quot;Accept: application/json&quot; \
 -X POST https://ecs.uni-stuttgart.de/numlab/solutions/fifo
 </code></pre>
-
 <p>Mögliche Antwort:</p>
 <pre><code>HTTP/1.1 200 OK
 Connection: close
@@ -290,7 +285,6 @@ Cache-Control: private, max-age=5
 
 &lt;BODY&gt;
 </code></pre>
-
 <h2 id="abfragen-einer-message-queue-durch-anonymen-participanten">Abfragen einer Message Queue durch anonymen Participanten</h2>
 <p>Die Queue Ressource <code>https://ecs.uni-stuttgart.de/numlab/results</code> soll
 von einem durch Cookie identifizierten (Cookie:
@@ -303,7 +297,6 @@ dem freeit-root-ca.cert.pem Rootzertifikat):</p>
 -H &quot;Accept: application/json&quot; \
 -X POST https://ecs.uni-stuttgart.de/numlab/solutions/fifo
 </code></pre>
-
 <p>Mögliche Antwort:</p>
 <pre><code>HTTP/1.1 200 OK
 Server: nginx/0.7.65
@@ -321,12 +314,10 @@ Cache-Control: private, max-age=5
 
 &lt;BODY&gt;
 </code></pre>
-
 <h2 id="exercises-filter-plugin">Exercises Filter-Plugin</h2>
 <p><strong>Filterung einer Exercises Message-Ressource nach dem {{{name}}} Property:</strong>*</p>
 <pre><code>curl -i -X GET http://ecs.uni-stuttgart.de/numlab/exercises/27?properties=name
 </code></pre>
-
 <p>Mögliche Antwort:</p>
 <pre><code>HTTP/1.1 200 OK
 Connection: close
@@ -344,11 +335,9 @@ Cache-Control: private, max-age=5
   }
 } 
 </code></pre>
-
 <p><strong>Filterung einer Exercises Message-Ressource nach dem {{{name}}} und {{{description}}} Property:</strong></p>
 <pre><code>curl -i -X GET http://ecs.uni-stuttgart.de/numlab/exercises/27?properties=name,description
 </code></pre>
-
 <p>Mögliche Antwort:</p>
 <pre><code>HTTP/1.1 200 OK
 Connection: close

@@ -195,7 +195,6 @@
 }
 ]
 </code></pre>
-
 <p><code>GET, econtents/&lt;eid&gt;:</code> Gibt eContent mit der eContentID= <eid> zurück. Dies funktioniert auch, wenn der aufrufende Participant nicht in <code>eligibleMembers</code> des <code>econtents</code> gelistet ist, sondern dort als <code>owner</code> eingetragen ist:</p>
 <pre><code>https://infolms.rus.uni-stuttgart.de:7923/econtent/125
 [
@@ -207,7 +206,6 @@
 }
 ]
 </code></pre>
-
 <p><code>POST, econtents:</code> Generiert neuen eContent. Nachfolgend sind alle möglichen Attribute für den Course-Econtent aufgeführt. Es müssen mindestens "url", "title", "eligibleMembers", "etype", "status","lang" und "owner" angegeben werden. Wertebereiche bzw. Infos für einzelne Attribute:</p>
 <ul>
 <li>"status" : "online" | "offline"</li>
@@ -248,7 +246,6 @@
   &quot;term&quot;: &quot;WS 06/07&quot;
 }
 </code></pre>
-
 <p><code>eligibleMembers</code> sind <a href="../memberships#mid">MembershipIDs</a>. </p>
 <p><code>PUT, econtents/&lt;eid&gt;:</code> Updated eContent mit der eContentID=\&lt;eid>:</p>
 <pre><code>https://infolms.rus.uni-stuttgart.de:7923/econtents/125
@@ -262,7 +259,6 @@
 &quot;credits&quot;: 23
 }
 </code></pre>
-
 <p><code>DELETE, econtents/&lt;eid&gt;</code> Löscht eContent mit der eContentID=<eid> :</p>
 <pre><code>https://infolms.rus.uni-stuttgart.de:7923/econtents/125
 </code></pre></div>

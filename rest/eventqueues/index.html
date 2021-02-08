@@ -197,7 +197,6 @@
 ...
 ]
 </code></pre>
-
 <h2 id="commandqueue">Commandqueue</h2>
 <p>Die Eventqueue wird erweitert zu einer Commandqueue.<BR>
 Die neuen Objekte der Eventqueue (Commands) sollen eine Art "remote control" bzgl. der Participanten erm&ouml;glichen. Dies dient in erster Linie dazu, eine Neusynchronisation zwischen Participant und ECS herzustellen, ohne dass dazu ein h&auml;ndisches Eingreifen seitens der Administratoren der Participanten vonn&ouml;ten w&auml;re. Diese Commands werden ausschlie&szlig;lich vom ECS Admin manuell getriggert. </p>
@@ -212,7 +211,6 @@ Die neuen Objekte der Eventqueue (Commands) sollen eine Art "remote control" bzg
 </ol>
 <pre><code> {&quot;cmd&quot;:{&quot;admin&quot;:&quot;reset_all&quot;}}
 </code></pre>
-
 <p>Vornehmlich f&uuml;r Testzwecke kann jeder Participant die jeweiligen Commands auch selbst triggern, indem er einfach folgende Resourcen aufruft (POST):</p>
 <ol>
 <li><code>POST, eventqueues/adminReset</code></li>
