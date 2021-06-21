@@ -58,22 +58,54 @@ Note: `//` with text following until EOL is a comment,
           },
           "content" : "aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ" // source
                                                 // decoded: int main() { bar(); return 0; }
+        }, 
+        {
+          "identifier": "part-contains-slider",
+          "access": "template",
+          "metadata": {
+            "name": "Parameter in part",
+            "emphasis": "low"
+          },
+          "parameters" : 
+          [
+            {
+              "type" : "any-value",
+              "identifier" : "__sliderSingle__", 
+              "metadata" : {
+                "guiType" : "slider",
+                "name": "temperature",
+                "vertical": false
+              },
+              "value": [
+                10
+              ],
+              "min": 0,
+              "max": 500,
+              "step": 10
+            }
+          ],
+          "content": "VGhpcyBpcyBhIFRleHQ6Ont7X19zbGlkZXJTaW5nbGVfX319OjpUaGlzIGlzIGEgVGV4dA=="
         }
       ] // parts[]
     }
   ], // files[]
   "parameters" : // parameters can be used to supply values at runtime to the configuration
-  { "__STEPWIDTH__" :
-    { "guiType" : "input_field",
-      "name"     : "stepwidth",
-      "type"     : "number",
-      "value"    : 0.001, //default
-      "min"      : 0,
-      "max"      : 1,
-      "step"     : 0.001,
+  [
+    {
+      "type" : "any-value", // depending on guiType either any-value or fixed-value
+      "identifier" : "__STEPWIDTH__", 
+      "metadata" : {
+        "guiType" : "input_field",
+        "type": "number",
+        "name": "stepwidth"
+      },
+      "value": 0.001, //default
+      "min": 0,
+      "max": 1,
+      "step": 0.001,
       "validation" : "range" // one of [range, pattern (regex), anyof/oneof]
     }
-  },
+  ],
   "configuration" :
   { "compiling.compiler" : "gcc",                  // string
     "compiling.flags"    : "-O2 -Wall"             // string
@@ -100,7 +132,7 @@ Note: `//` with text following until EOL is a comment,
 |metadata --viewer | one or more (list) of {"Image", "ParaView", "ViPLabGraphics"} | opt | When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable. | | |
 |environment |one of {"C", "C++", "Java", "Matlab", "Octave", "Container", "DuMuX"} | must | Specifies the environment used for the Computation. It defines language, runtime, libraries and tools | | |
 |files | [ {...}, {...}, ... ] |must |array containing [File objects](#json-objects-in-files): there has to be at least one element | | |
-|parameters | {PARAM_ID, PARAM_ID, ...} | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique PARAM_ID (string) and is a [JSON object](#json-object-parameter). | For security reasons free text *gui_type*, i.e., text input field or editor, are not allowed here. |
+|parameters | [{parameter}, {parameter}, ...] | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique PARAM_ID (identifier - as string) and is a [JSON object](#json-object-parameter). | For security reasons free text *gui_type*, i.e., text input field or editor, are not allowed here. |
 |configuration | struct |opt/must (depends on environment) | Environment specific configurations | Different phases can be configured like compiling, checking (for legal function calls in source code), ... | 
 |configuration --compiling.sources | [FILE_ID, FILE_ID, ...] | must | Array of identifiers of [JSON File objects](#json-objects-in-files). Explicit compilation (only referenced sources will be compiled). | for **C, C++, Java**; The frontend should suggest defaults here, e.g. by suited file suffix ('.c', '.cpp', '.java'). |  name/path (Java) for implicit compiling? check backend?|
 |configuration --compiling.compiler |string |must |compiler to be used, e.g. "gcc" | for **C, C++** | |
@@ -229,8 +261,8 @@ An object in array parts[] has the following members:
 |metadata | struct | opt | contains information mainly for the frontend |
 |metadata --name |string |opt | additional description of this part | To be shown in the frontend | Where? Is it used?
 |metadata --emphasis | One of {"low", *"medium"*, "high"} |opt |info for rendering | | Still needed? |
-|metadata --PARAM_ID | struct | opt | definition of [parameters](#json-object-parameter) that are injected to *content* at runtime | Any number of parameters can be specified, but the PARAM_ID has to be unique.
-|content |string |must |base64url-encoded source code | Can contain mustache expressions with PARAM_IDs if the access type of this part is "template".
+|parameters | array of parameter-objects | opt | definition of [parameters](#json-object-parameter) that are injected to *content* at runtime | Any number of parameters can be specified, but the PARAM_ID (identifier) has to be unique.
+|content |string |must |base64url-encoded source code | Can contain mustache expressions with PARAM_IDs (identifiers) if the access type of this part is "template".
 
 #### Notes on access levels in parts
 
@@ -243,23 +275,28 @@ Four access levels can be specified inside a part:
 
 ### JSON object Parameter
 
-An PARAM_ID-object, like *\_\_BINARY\_\_*, has the following members:
+A parameter-object, has the following members:
 
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
 |---------------|----------------------------------------|-----------|------------|--------|
-|guiType | one of {*"editor"*, "input_field", "checkbox", "radio", "dropdown", "toggle", "slider"} | must | specifies how the frontend renders the parameter | |
-|name | string | must | Label for the parameter | frontend feature |
-|type | one of {"number", "text"} | opt | Type of the input field |  | 
+|type | one of {"any-type", "fixed-type"} | must | specifies type of the parameter | depends on the guiType - *fixed-type*: checkbox, radio, dropdown, toggle; *any-type*: slider, input_field, editor |
+|identifier | PARAM_ID | must | specifies ID of the parameter | Example: "*\_\_BINARY\_\_*" |
+| metadata | Object | must | Object that contains general info about the parameter | |
+| metadata --guiType | one of {*"editor"*, "input_field", "checkbox", "radio", "dropdown", "toggle", "slider"} | must | specifies how the frontend renders the parameter | |
+| metadata --type | one of {"number", "text"} | opt | Type of the input field |  | 
+| metadata --name | string | must | Label for the parameter | frontend feature |
+| metadata --vertical | bool | opt (*false*) | Specifies for *gui_type* "slider" whether it is rendered horizontal or vertical |
 |value | number for numerical "input_field"; array of numbers for a range slider | opt | the default value(s) shown in frontend | |
-|values | array of strings | must for *gui_type* "checkbox", "radio", "dropdown", "toggle" | specifies the allowed values | |
-|min | number | opt | minimal allowed value | |
-|max | number | opt | maximal allowed value | |
-|step | number | opt | defines together with *min* and *max* attributes a finite set of allowed values | | 
+|values | array of objects | must for *gui_type* "checkbox", "radio", "dropdown", "toggle" | specifies the allowed values | |
+|values --value | string | must | specifies one avaliable value | Example: { "value" : "verbose" } |
+|values --disabled | boolean | opt | Shows disabled options in frontend | Example: { "value" : "Please choose multiple", "disabled" : true } |
+|min | number | opt | minimal allowed value | for slider, or input_field with type number |
+|max | number | opt | maximal allowed value | for slider, or input_field with type number |
+|step | number | opt | defines together with *min* and *max* attributes a finite set of allowed values | for slider, or input_field with type number | 
 |validation | one of {"range", "pattern", "anyof", "oneof"} | must | See [Parameter validation semantics](#parameter-checking-semantics) for details | |
-|selected | array of strings for *gui_type* "checkbox"/"toggle"; string for *gui_type* "radio" | opt | specifies defaults value/values for frontend | the strings have to be part of *values*; for "toogle" given values mean *true* |
-|disabled | array of strings | opt | Shows disabled options in frontend | sting has to be part of *values*; suited, e.g., to show possibilities that are part of a software, but deactivated |
+|selected | array of strings for *gui_type* "checkbox", "toggle", "dropdown" (with multiple values); string for *gui_type* "radio", "dropdown" (with single value) | opt | specifies defaults value/values for frontend | the strings have to be part of *values*; for "toogle" given values mean *true* |
 |multiple | bool | opt (*false*) | Specifies for *gui_type* "dropdown"/"slider" if multiple values can be selected| If true, *selected*/*value* has to be an array; a dropdown list is then rendered as listbox |
-|vertical | bool | opt (*false*) | Specifies for *gui_type* "slider" whether it is rendered horizontal or vertical |
+|maxlength | number | opt | Specifies for *gui_type* "input_field" the length of the input |
 |pattern | string | opt | A regex pattern for validation | |
 
 #### Parameter Validation Semantics
