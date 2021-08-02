@@ -6,13 +6,14 @@ A *computation template*  can be
  * a pre-configured research software (stored in a docker image), used to show reproducability of a research work or to reduce complex software environments to specific functionality
 
 
-## Example (informal)
+## Examples (informal)
 Note: `//` with text following until EOL is a comment,
 
  * which is not covered by the JSON spec, and
  * should not be contained in message sends in real;
  * but nevertheless it would help, if JSON parsers could just ignore them.
 
+### C Student Example
 ```
 { "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
   "version" : "3.0.0" // version of this JSON-spec definition
@@ -58,33 +59,6 @@ Note: `//` with text following until EOL is a comment,
           },
           "content" : "aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ" // source
                                                 // decoded: int main() { bar(); return 0; }
-        }, 
-        {
-          "identifier": "part-contains-slider",
-          "access": "template",
-          "metadata": {
-            "name": "Parameter in part",
-            "emphasis": "low"
-          },
-          "parameters" : 
-          [
-            {
-              "type" : "any-value",
-              "identifier" : "__sliderSingle__", 
-              "metadata" : {
-                "guiType" : "slider",
-                "name": "temperature",
-                "vertical": false
-              },
-              "value": [
-                10
-              ],
-              "min": 0,
-              "max": 500,
-              "step": 10
-            }
-          ],
-          "content": "VGhpcyBpcyBhIFRleHQ6Ont7X19zbGlkZXJTaW5nbGVfX319OjpUaGlzIGlzIGEgVGV4dA=="
         }
       ] // parts[]
     }
@@ -99,7 +73,7 @@ Note: `//` with text following until EOL is a comment,
         "type": "number",
         "name": "stepwidth"
       },
-      "value": 0.001, //default
+      "default": [0.001], //default
       "min": 0,
       "max": 1,
       "step": 0.001,
@@ -118,6 +92,277 @@ Note: `//` with text following until EOL is a comment,
 }
 ```
 
+### Parameters Example
+```
+{ "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3f", // uuid, created by a frontend launcher
+  "version" : "3.0.0" // version of this JSON-spec definition
+  "metadata": // information for frontend
+    { "displayName" : "Parameters Example",  // name of computation template shown in frontend
+      "description" : "This is an example", // short description (could be used  
+                                                     // as subtitle, further descriptions in "parts").
+    },
+  "environment" : "C", // important for interpreting configuration 
+  "files" : // must: at least one array element
+  [
+    { "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3f", // uuid, for referencing
+      "path"      : "params.input"                                // filename on backend 
+      "metadata"  : // information for frontend
+        {  "syntaxHighlighting": "ini",                    // optional (default: "none")
+        },
+      "parts" : // must: at least one array element
+      [ 
+
+        {
+          "identifier": "part-contains-slider",
+          "access": "template",
+          "metadata": {
+            "name": "Parameter in part",
+            "emphasis": "low"
+          },
+          "parameters" : 
+          [
+            {
+              "type" : "any",
+              "identifier" : "__sliderSingle__", 
+              "metadata" : {
+                "guiType" : "slider",
+                "name": "temperature",
+                "vertical": false
+              },
+              "default": [
+                10
+              ],
+              "min": 0,
+              "max": 500,
+              "step": 10,
+              "validation": "range"
+            }
+          ],
+          "content": "VGhpcyBpcyBhIFRleHQ6Ont7X19zbGlkZXJTaW5nbGVfX319OjpUaGlzIGlzIGEgVGV4dA=="
+        },
+        {
+          "identifier": "ceb051d8-b50c-4814-983a-b9d703cae0c6",
+          "access"    : "template",
+          "metadata"  :
+              { "name"      : "params.input file"
+              },
+          "parameters":
+          [
+            {
+              "type" : "any",
+              "identifier" : "__inputTextWOMaxlangth__", 
+              "metadata" : {
+                "guiType" : "input_field",
+                "type": "text",
+                "name": "file_name"
+              },
+              "validation": "pattern"
+            },
+            {
+              "type" : "any",
+              "identifier" : "__inputNumber__", 
+              "metadata" : {
+                "guiType" : "input_field",
+                "type": "number",
+                "name": "time_delay"
+              },
+              "default": [10],
+              "min": 0,
+              "max": 500,
+              "step": 0.1,
+              "validation": "range"
+            }
+          ],
+            "content"   : ""
+         }
+      ] // parts[]
+    }
+  ] // files[]
+  "parameters" : // parameters can be used to supply values at runtime to the configuration
+  [
+    {
+      "type" : "fixed",
+      "identifier" : "__checkbox__", 
+      "metadata" : {
+        "guiType": "checkbox",
+        "name": "options"
+      },
+      "options": [
+        {
+          "value" : "verbose",
+          "selected" : true
+        },
+        {
+          "value" : "debug"
+        },
+        {
+          "value" : "make_plot"
+        }
+      ],
+      "validation": "anyof"
+    }, 
+    {
+      "type" : "fixed",
+      "identifier" : "__radioButton__", 
+      "metadata" : {
+        "guiType": "radio",
+        "name": "backend"
+      },
+      "options": [
+        {
+          "value" : "debug"
+        },
+        {
+          "value" : "serial",
+          "selected" : true
+        },
+        {
+          "value" : "hpc",
+          "disabled" : true
+        },
+        {
+          "value" : "test"
+        }
+      ],
+      "validation": "oneof"
+    },
+    {
+      "type" : "fixed",
+      "identifier" : "__dropdownSingle__", 
+      "metadata" : {
+        "guiType": "dropdown",
+        "name": "model"
+      },
+      "options": [
+        {
+          "value" : "Please choose one",
+          "disabled" : true
+        },
+        {
+          "value" : "1p",
+          "selected" : true
+        },
+        {
+          "value" : "1pnc"
+        },
+        {
+          "value" : "1pncmin"
+        },
+        {
+          "value" : "2p"
+        },
+        {
+          "value" : "2p1c"
+        }
+      ],
+      "validation": "oneof"
+    }, 
+    {
+      "type" : "fixed",
+      "identifier" : "__dropdownMultiple__", 
+      "metadata" : {
+        "guiType": "dropdown",
+        "name": "model"
+      },
+      "options": [
+        {
+          "value" : "Please choose multiple",
+          "disabled" : true
+        },
+        {
+          "value" : "1p",
+          "selected" : true
+        },
+        {
+          "value" : "1pnc"
+        },
+        {
+          "value" : "1pncmin"
+        },
+        {
+          "value" : "2p", 
+          "selected" : true
+        },
+        {
+          "value" : "2p1c", 
+          "disabled" : true
+        }
+      ], 
+      "validation": "anyof"
+    }, 
+    {
+      "type" : "fixed",
+      "identifier" : "__toggle__", 
+      "metadata" : {
+        "guiType": "toggle",
+        "name": "options"
+      },
+      "options": [
+        {
+          "value" : "verbose",
+          "selected" : true
+        },
+        {
+          "value" : "debug"
+        },
+        {
+          "value" : "make_plot"
+        }
+      ], 
+      "validation": "anyof"
+    }, 
+    {
+      "type" : "any",
+      "identifier" : "__sliderMultiple__", 
+      "metadata" : {
+        "guiType" : "slider",
+        "name": "temperature",
+        "vertical": true
+      },
+      "default": [
+        25,
+        50,
+        75
+      ],
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "validation": "range"
+    },
+    {
+      "type" : "any",
+      "identifier" : "__inputTextWMaxlength__", 
+      "metadata" : {
+        "guiType" : "input_field",
+        "type": "text",
+        "name": "file_name"
+      },
+      "maxlength": 200,
+      "default" : "",
+      "validation": "pattern"
+    },
+    {
+      "type" : "any",
+      "identifier" : "__default__", 
+      "metadata" : {
+        "guiType" : "editor", 
+        "name": "code 1"
+      },
+      "default": "I2luY2x1ZGUgPHN0ZGlvLmg-Cg",
+      "validation": "pattern"
+    },
+  ],
+  "configuration" :
+    { "resources.image"  : "name://git.iws.uni-stuttgart.de:4567/dumux-repositories/dumux-docker/viplab/test", 
+      "resources.volume" : "/data/shared",
+      "resources.memory" : "1g",
+      "resources.numCPUs" : 1,
+      "running.entrypoint" : "/data/bin/run.sh",
+      "running.commandLineArguments" : "params.input"
+    }
+}
+```
+
 ## Explaining the JSON Format
 
 *version 3.0.0*
@@ -132,7 +377,7 @@ Note: `//` with text following until EOL is a comment,
 |metadata --viewer | one or more (list) of {"Image", "ParaView", "ViPLabGraphics"} | opt | When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable. | | |
 |environment |one of {"C", "C++", "Java", "Matlab", "Octave", "Container", "DuMuX"} | must | Specifies the environment used for the Computation. It defines language, runtime, libraries and tools | | |
 |files | [ {...}, {...}, ... ] |must |array containing [File objects](#json-objects-in-files): there has to be at least one element | | |
-|parameters | [{parameter}, {parameter}, ...] | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique PARAM_ID (identifier - as string) and is a [JSON object](#json-object-parameter). | For security reasons free text *gui_type*, i.e., text input field or editor, are not allowed here. |
+|parameters | [{...}, {...}, ...] | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique identifier (as string) and is a [Parameter object](#json-object-parameter). | For security reasons free text *gui_type*, i.e., text input field or editor, are not allowed here. |
 |configuration | struct |opt/must (depends on environment) | Environment specific configurations | Different phases can be configured like compiling, checking (for legal function calls in source code), ... | 
 |configuration --compiling.sources | [FILE_ID, FILE_ID, ...] | must | Array of identifiers of [JSON File objects](#json-objects-in-files). Explicit compilation (only referenced sources will be compiled). | for **C, C++, Java**; The frontend should suggest defaults here, e.g. by suited file suffix ('.c', '.cpp', '.java'). |  name/path (Java) for implicit compiling? check backend?|
 |configuration --compiling.compiler |string |must |compiler to be used, e.g. "gcc" | for **C, C++** | |
@@ -279,25 +524,64 @@ A parameter-object, has the following members:
 
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
 |---------------|----------------------------------------|-----------|------------|--------|
-|type | one of {"any-type", "fixed-type"} | must | specifies type of the parameter | depends on the guiType - *fixed-type*: checkbox, radio, dropdown, toggle; *any-type*: slider, input_field, editor |
-|identifier | PARAM_ID | must | specifies ID of the parameter | Example: "*\_\_BINARY\_\_*" |
-| metadata | Object | must | Object that contains general info about the parameter | |
-| metadata --guiType | one of {*"editor"*, "input_field", "checkbox", "radio", "dropdown", "toggle", "slider"} | must | specifies how the frontend renders the parameter | |
-| metadata --type | one of {"number", "text"} | opt | Type of the input field |  | 
-| metadata --name | string | must | Label for the parameter | frontend feature |
-| metadata --vertical | bool | opt (*false*) | Specifies for *gui_type* "slider" whether it is rendered horizontal or vertical |
-|value | number for numerical "input_field"; array of numbers for a range slider | opt | the default value(s) shown in frontend | |
-|values | array of objects | must for *gui_type* "checkbox", "radio", "dropdown", "toggle" | specifies the allowed values | |
-|values --value | string | must | specifies one avaliable value | Example: { "value" : "verbose" } |
-|values --disabled | boolean | opt | Shows disabled options in frontend | Example: { "value" : "Please choose multiple", "disabled" : true } |
+|mode | one of {"any", "fixed"} | must | specifies type of the parameter | used to define the type of validation that is performed |
+|identifier | string | must | unique id for this parameter | This id must be valid mustach template variable. Example: "*\_\_BINARY\_\_*" | 
+|validation | one of {"range", "pattern", "anyof", "oneof"} | must | See [Parameter validation semantics](#parameter-validation-semantics) for details | |
+|multiple | bool | opt (*false*) | Specifies for *gui_type* "dropdown"/"slider" if multiple values can be selected| a dropdown list is then rendered as listbox |
+|pattern | string | opt | A regex pattern for validation | |
+
+#### fixed-type parameter JSON object
+
+A fixed-type PARAM-object, like *\_\_checkbox\_\_*, has the following members:
+
+|Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
+|---------------|----------------------------------------|-----------|------------|--------|
+|metadata | Object | must | JSON object containing information how to render this parameter | See definition of [fixed-type JSON object Parameter-Metadata](#fixed-type-json-object-parameter-metadata) |
+|options | array of objects | must for *gui_type* "checkbox", "radio", "dropdown", "toggle" | specifies the allowed values | See [fixed-type options JSON object](#fixed-type-options-json-object) for details on contained objects|
+
+#### fixed-type JSON object Parameter-Metadata
+
+A metadata-object, has the following members:
+
+|Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
+|---------------|----------------------------------------|-----------|------------|--------|
+| guiType | one of {"checkbox", "radio", "dropdown", "toggle"} | must | specifies how the frontend renders the parameter | | 
+| name | string | must | Label for the parameter | frontend feature |
+
+#### fixed-type options JSON object
+
+|Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
+|---------------|----------------------------------------|-----------|------------|--------|
+|value | string | must | specifies one avaliable value | Example: { "value" : "verbose" } |
+|text | string | opt | Text shown besides or as dropdown of the value | |
+|disabled | boolean | opt | Shows disabled options in frontend | Example: { "value" : "Please choose multiple", "disabled" : true } |
+|selected | Boolean | opt | specifies defaults value/values for frontend | the strings have to be part of *values*; for "toogle" given values mean *true* |
+|text | string | opt | Text shown besides or as dropdown of the value | |
+
+
+#### any-type parameter JSON object
+
+A any-type PARAM-object, like *\_\_sliderMultiple\_\_*, has the following members:
+
+|Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
+|---------------|----------------------------------------|-----------|------------|--------|
+|metadata | Object | must | JSON object containing information how to render this parameter | See definition of [any-type JSON object Parameter-Metadata](#any-type-json-object-parameter-metadata) |
+|default | array of number(s) | opt | the default value(s) shown in frontend | |
 |min | number | opt | minimal allowed value | for slider, or input_field with type number |
 |max | number | opt | maximal allowed value | for slider, or input_field with type number |
-|step | number | opt | defines together with *min* and *max* attributes a finite set of allowed values | for slider, or input_field with type number | 
-|validation | one of {"range", "pattern", "anyof", "oneof"} | must | See [Parameter validation semantics](#parameter-checking-semantics) for details | |
-|selected | array of strings for *gui_type* "checkbox", "toggle", "dropdown" (with multiple values); string for *gui_type* "radio", "dropdown" (with single value) | opt | specifies defaults value/values for frontend | the strings have to be part of *values*; for "toogle" given values mean *true* |
-|multiple | bool | opt (*false*) | Specifies for *gui_type* "dropdown"/"slider" if multiple values can be selected| If true, *selected*/*value* has to be an array; a dropdown list is then rendered as listbox |
-|maxlength | number | opt | Specifies for *gui_type* "input_field" the length of the input |
-|pattern | string | opt | A regex pattern for validation | |
+|step | number | opt | defines together with *min* and *max* attributes a finite set of allowed values | for slider, or input_field with type number |
+|maxlength | number | opt | Specifies for *gui_type* "input_field" the length of the input ||
+
+#### any-type JSON object Parameter-Metadata
+
+A metadata-object, has the following members:
+
+|Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
+|---------------|----------------------------------------|-----------|------------|--------|
+| guiType | one of {*"editor"*, "input_field", "slider"} | must | specifies how the frontend renders the parameter | |
+| type | one of {"number", "text"} | opt | Type of the input field |  | 
+| name | string | must | Label for the parameter | frontend feature |
+| vertical | bool | opt (*false*) | Specifies for *gui_type* "slider" whether it is rendered horizontal or vertical |
 
 #### Parameter Validation Semantics
 
