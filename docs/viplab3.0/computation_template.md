@@ -149,6 +149,155 @@ Note: `//` with text following until EOL is a comment,
           "parameters":
           [
             {
+              "type" : "fixed",
+              "identifier" : "__checkbox__", 
+              "metadata" : {
+                "guiType": "checkbox",
+                "name": "options"
+              },
+              "options": [
+                {
+                  "value" : "verbose",
+                  "selected" : true
+                },
+                {
+                  "value" : "debug"
+                },
+                {
+                  "value" : "make_plot"
+                }
+              ],
+              "validation": "anyof"
+            }, 
+            {
+              "type" : "fixed",
+              "identifier" : "__radioButton__", 
+              "metadata" : {
+                "guiType": "radio",
+                "name": "backend"
+              },
+              "options": [
+                {
+                  "value" : "debug"
+                },
+                {
+                  "value" : "serial",
+                  "selected" : true
+                },
+                {
+                  "value" : "hpc",
+                  "disabled" : true
+                },
+                {
+                  "value" : "test"
+                }
+              ],
+              "validation": "oneof"
+            },
+            {
+              "type" : "fixed",
+              "identifier" : "__dropdownSingle__", 
+              "metadata" : {
+                "guiType": "dropdown",
+                "name": "model"
+              },
+              "options": [
+                {
+                  "value" : "Please choose one",
+                  "disabled" : true
+                },
+                {
+                  "value" : "1p",
+                  "selected" : true
+                },
+                {
+                  "value" : "1pnc"
+                },
+                {
+                  "value" : "1pncmin"
+                },
+                {
+                  "value" : "2p"
+                },
+                {
+                  "value" : "2p1c"
+                }
+              ],
+              "validation": "oneof"
+            }, 
+            {
+              "type" : "fixed",
+              "identifier" : "__dropdownMultiple__", 
+              "metadata" : {
+                "guiType": "dropdown",
+                "name": "model"
+              },
+              "options": [
+                {
+                  "value" : "Please choose multiple",
+                  "disabled" : true
+                },
+                {
+                  "value" : "1p",
+                  "selected" : true
+                },
+                {
+                  "value" : "1pnc"
+                },
+                {
+                  "value" : "1pncmin"
+                },
+                {
+                  "value" : "2p", 
+                  "selected" : true
+                },
+                {
+                  "value" : "2p1c", 
+                  "disabled" : true
+                }
+              ], 
+              "validation": "anyof"
+            }, 
+            {
+              "type" : "fixed",
+              "identifier" : "__toggle__", 
+              "metadata" : {
+                "guiType": "toggle",
+                "name": "options"
+              },
+              "options": [
+                {
+                  "value" : "verbose",
+                  "selected" : true
+                },
+                {
+                  "value" : "debug"
+                },
+                {
+                  "value" : "make_plot"
+                }
+              ], 
+              "validation": "anyof"
+            }, 
+            {
+              "type" : "any",
+              "identifier" : "__sliderMultiple__", 
+              "metadata" : {
+                "guiType" : "slider",
+                "name": "temperature",
+                "vertical": true
+              },
+              "default": [
+                25,
+                50,
+                75
+              ],
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "validation": "range"
+            },
+            {
               "type" : "any",
               "identifier" : "__inputTextWOMaxlangth__", 
               "metadata" : {
@@ -156,6 +305,19 @@ Note: `//` with text following until EOL is a comment,
                 "type": "text",
                 "name": "file_name"
               },
+              "default" : [""],
+              "validation": "pattern"
+            },
+            {
+              "type" : "any",
+              "identifier" : "__inputTextWMaxlength__", 
+              "metadata" : {
+                "guiType" : "input_field",
+                "type": "text",
+                "name": "file_name"
+              },
+              "maxlength": 200,
+              "default" : [""],
               "validation": "pattern"
             },
             {
@@ -171,187 +333,23 @@ Note: `//` with text following until EOL is a comment,
               "max": 500,
               "step": 0.1,
               "validation": "range"
-            }
+            },
+            {
+              "type" : "any",
+              "identifier" : "__default__", 
+              "metadata" : {
+                "guiType" : "editor", 
+                "name": "code 1"
+              },
+              "default": ["I2luY2x1ZGUgPHN0ZGlvLmg-Cg"],
+              "validation": "pattern"
+            },
           ],
             "content"   : ""
          }
       ] // parts[]
     }
-  ] // files[]
-  "parameters" : // parameters can be used to supply values at runtime to the configuration
-  [
-    {
-      "type" : "fixed",
-      "identifier" : "__checkbox__", 
-      "metadata" : {
-        "guiType": "checkbox",
-        "name": "options"
-      },
-      "options": [
-        {
-          "value" : "verbose",
-          "selected" : true
-        },
-        {
-          "value" : "debug"
-        },
-        {
-          "value" : "make_plot"
-        }
-      ],
-      "validation": "anyof"
-    }, 
-    {
-      "type" : "fixed",
-      "identifier" : "__radioButton__", 
-      "metadata" : {
-        "guiType": "radio",
-        "name": "backend"
-      },
-      "options": [
-        {
-          "value" : "debug"
-        },
-        {
-          "value" : "serial",
-          "selected" : true
-        },
-        {
-          "value" : "hpc",
-          "disabled" : true
-        },
-        {
-          "value" : "test"
-        }
-      ],
-      "validation": "oneof"
-    },
-    {
-      "type" : "fixed",
-      "identifier" : "__dropdownSingle__", 
-      "metadata" : {
-        "guiType": "dropdown",
-        "name": "model"
-      },
-      "options": [
-        {
-          "value" : "Please choose one",
-          "disabled" : true
-        },
-        {
-          "value" : "1p",
-          "selected" : true
-        },
-        {
-          "value" : "1pnc"
-        },
-        {
-          "value" : "1pncmin"
-        },
-        {
-          "value" : "2p"
-        },
-        {
-          "value" : "2p1c"
-        }
-      ],
-      "validation": "oneof"
-    }, 
-    {
-      "type" : "fixed",
-      "identifier" : "__dropdownMultiple__", 
-      "metadata" : {
-        "guiType": "dropdown",
-        "name": "model"
-      },
-      "options": [
-        {
-          "value" : "Please choose multiple",
-          "disabled" : true
-        },
-        {
-          "value" : "1p",
-          "selected" : true
-        },
-        {
-          "value" : "1pnc"
-        },
-        {
-          "value" : "1pncmin"
-        },
-        {
-          "value" : "2p", 
-          "selected" : true
-        },
-        {
-          "value" : "2p1c", 
-          "disabled" : true
-        }
-      ], 
-      "validation": "anyof"
-    }, 
-    {
-      "type" : "fixed",
-      "identifier" : "__toggle__", 
-      "metadata" : {
-        "guiType": "toggle",
-        "name": "options"
-      },
-      "options": [
-        {
-          "value" : "verbose",
-          "selected" : true
-        },
-        {
-          "value" : "debug"
-        },
-        {
-          "value" : "make_plot"
-        }
-      ], 
-      "validation": "anyof"
-    }, 
-    {
-      "type" : "any",
-      "identifier" : "__sliderMultiple__", 
-      "metadata" : {
-        "guiType" : "slider",
-        "name": "temperature",
-        "vertical": true
-      },
-      "default": [
-        25,
-        50,
-        75
-      ],
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "validation": "range"
-    },
-    {
-      "type" : "any",
-      "identifier" : "__inputTextWMaxlength__", 
-      "metadata" : {
-        "guiType" : "input_field",
-        "type": "text",
-        "name": "file_name"
-      },
-      "maxlength": 200,
-      "default" : "",
-      "validation": "pattern"
-    },
-    {
-      "type" : "any",
-      "identifier" : "__default__", 
-      "metadata" : {
-        "guiType" : "editor", 
-        "name": "code 1"
-      },
-      "default": "I2luY2x1ZGUgPHN0ZGlvLmg-Cg",
-      "validation": "pattern"
-    },
-  ],
+  ], // files[]
   "configuration" :
     { "resources.image"  : "name://git.iws.uni-stuttgart.de:4567/dumux-repositories/dumux-docker/viplab/test", 
       "resources.volume" : "/data/shared",
@@ -526,9 +524,6 @@ A parameter-object, has the following members:
 |---------------|----------------------------------------|-----------|------------|--------|
 |mode | one of {"any", "fixed"} | must | specifies type of the parameter | used to define the type of validation that is performed |
 |identifier | string | must | unique id for this parameter | This id must be valid mustach template variable. Example: "*\_\_BINARY\_\_*" | 
-|validation | one of {"range", "pattern", "anyof", "oneof"} | must | See [Parameter validation semantics](#parameter-validation-semantics) for details | |
-|multiple | bool | opt (*false*) | Specifies for *gui_type* "dropdown"/"slider" if multiple values can be selected| a dropdown list is then rendered as listbox |
-|pattern | string | opt | A regex pattern for validation | |
 
 #### fixed-type parameter JSON object
 
@@ -538,6 +533,7 @@ A fixed-type PARAM-object, like *\_\_checkbox\_\_*, has the following members:
 |---------------|----------------------------------------|-----------|------------|--------|
 |metadata | Object | must | JSON object containing information how to render this parameter | See definition of [fixed-type JSON object Parameter-Metadata](#fixed-type-json-object-parameter-metadata) |
 |options | array of objects | must for *gui_type* "checkbox", "radio", "dropdown", "toggle" | specifies the allowed values | See [fixed-type options JSON object](#fixed-type-options-json-object) for details on contained objects|
+|validation | one of {"onlyone", "minone", "any"} | must | See [Parameter validation semantics](#parameter-validation-semantics) for details | |
 
 #### fixed-type JSON object Parameter-Metadata
 
@@ -566,11 +562,13 @@ A any-type PARAM-object, like *\_\_sliderMultiple\_\_*, has the following member
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
 |---------------|----------------------------------------|-----------|------------|--------|
 |metadata | Object | must | JSON object containing information how to render this parameter | See definition of [any-type JSON object Parameter-Metadata](#any-type-json-object-parameter-metadata) |
-|default | array of number(s) | opt | the default value(s) shown in frontend | |
+|default | array of number(s) or string(s) | opt | the default value(s) shown in frontend | |
 |min | number | opt | minimal allowed value | for slider, or input_field with type number |
 |max | number | opt | maximal allowed value | for slider, or input_field with type number |
 |step | number | opt | defines together with *min* and *max* attributes a finite set of allowed values | for slider, or input_field with type number |
 |maxlength | number | opt | Specifies for *gui_type* "input_field" the length of the input ||
+|validation | one of {"range", "pattern", "none"} | must | See [Parameter validation semantics](#parameter-validation-semantics) for details | |
+|pattern | string | opt | A regex pattern for validation | |
 
 #### any-type JSON object Parameter-Metadata
 
@@ -587,7 +585,10 @@ A metadata-object, has the following members:
 
 Four types of validation are implemented at the moment:
 
+* **onlyone**: Only one value can be chosen. The value has to be included in *options* and *disabled* for the *value* has to be set to false (is false by default, so *disabled* can also be missing).
+* **minone**: One or more values can be chosen. The values have to be included in *options* and *disabled* for the *value*s has to be set to false (is false by default, so *disabled* can also be missing).
+* **any**: All of the chosen values have to be included in *options* and *disabled* for the *value*s has to be set to false (is false by default, so *disabled* can also be missing).
 * **range**: A numerical value is checked whether is is between *min* and *max*. If *step* is given a finite number of possible values is computed and the value has to be within this set.
 * **pattern**: A regex pattern that the text value has to fulfill.
-* **oneof**: The value has to be included in *values* and, if given, not in *disabled*.
-* **anyof**: All values have to be included in *values* and, if given, not in *disabled*.
+* **none**: If no validation is necessary, because there are no restraints on the value.
+
