@@ -66,7 +66,7 @@ Note: `//` with text following until EOL is a comment,
   "parameters" : // parameters can be used to supply values at runtime to the configuration
   [
     {
-      "type" : "any-value", // depending on guiType either any-value or fixed-value
+      "mode" : "any", // depending on guiType either any or fixed
       "identifier" : "__STEPWIDTH__", 
       "metadata" : {
         "guiType" : "input_field",
@@ -122,7 +122,7 @@ Note: `//` with text following until EOL is a comment,
           "parameters" : 
           [
             {
-              "type" : "any",
+              "mode" : "any",
               "identifier" : "__sliderSingle__", 
               "metadata" : {
                 "guiType" : "slider",
@@ -149,7 +149,7 @@ Note: `//` with text following until EOL is a comment,
           "parameters":
           [
             {
-              "type" : "fixed",
+              "mode" : "fixed",
               "identifier" : "__checkbox__", 
               "metadata" : {
                 "guiType": "checkbox",
@@ -170,7 +170,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "anyof"
             }, 
             {
-              "type" : "fixed",
+              "mode" : "fixed",
               "identifier" : "__radioButton__", 
               "metadata" : {
                 "guiType": "radio",
@@ -195,7 +195,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "oneof"
             },
             {
-              "type" : "fixed",
+              "mode" : "fixed",
               "identifier" : "__dropdownSingle__", 
               "metadata" : {
                 "guiType": "dropdown",
@@ -226,7 +226,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "oneof"
             }, 
             {
-              "type" : "fixed",
+              "mode" : "fixed",
               "identifier" : "__dropdownMultiple__", 
               "metadata" : {
                 "guiType": "dropdown",
@@ -259,7 +259,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "anyof"
             }, 
             {
-              "type" : "fixed",
+              "mode" : "fixed",
               "identifier" : "__toggle__", 
               "metadata" : {
                 "guiType": "toggle",
@@ -280,7 +280,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "anyof"
             }, 
             {
-              "type" : "any",
+              "mode" : "any",
               "identifier" : "__sliderMultiple__", 
               "metadata" : {
                 "guiType" : "slider",
@@ -298,7 +298,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "range"
             },
             {
-              "type" : "any",
+              "mode" : "any",
               "identifier" : "__inputTextWOMaxlangth__", 
               "metadata" : {
                 "guiType" : "input_field",
@@ -309,7 +309,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "pattern"
             },
             {
-              "type" : "any",
+              "mode" : "any",
               "identifier" : "__inputTextWMaxlength__", 
               "metadata" : {
                 "guiType" : "input_field",
@@ -321,7 +321,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "pattern"
             },
             {
-              "type" : "any",
+              "mode" : "any",
               "identifier" : "__inputNumber__", 
               "metadata" : {
                 "guiType" : "input_field",
@@ -335,7 +335,7 @@ Note: `//` with text following until EOL is a comment,
               "validation": "range"
             },
             {
-              "type" : "any",
+              "mode" : "any",
               "identifier" : "__default__", 
               "metadata" : {
                 "guiType" : "editor", 
@@ -591,4 +591,3 @@ Four types of validation are implemented at the moment:
 * **range**: A numerical value is checked whether is is between *min* and *max*. If *step* is given a finite number of possible values is computed and the value has to be within this set.
 * **pattern**: A regex pattern that the text value has to fulfill.
 * **none**: If no validation is necessary, because there are no restraints on the value.
-
