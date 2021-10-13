@@ -25,36 +25,46 @@ Note: `//` with text following until EOL is a comment,
   "environment" : "C", // important for interpreting configuration 
   "files" : // must: at least one array element
   [
-    { "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3e", // uuid, for referencing
-      "path"      : "code.c"                                // filename on backend 
+    { 
+      "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3e", // uuid, for referencing
+      "path"      : "code.c",                                // filename on backend 
       "metadata"  : // information for frontend
-        {  "syntaxHighlighting": "C",                    // optional (default: "none")
+        {  
+          "name" : "This is a filename",
+          "decription" : "This section describes the file",
+          "syntaxHighlighting": "C",                    // optional (default: "none")
         },
       "parts" : // must: at least one array element
       [ 
-        { "identifier": "preamble",
+        { 
+          "identifier": "preamble",
           "access"    : "visible",   // it is rendered, but can not be changed
           "metadata"  : // what has to be moved to files ?
-          { "name"    : "Info: source before your code.", // name of element in frontend
+          { 
+            "name"    : "Info: source before your code.", // name of element in frontend
             "emphasis"  : "low"                           // optional (for rendering)          
           },
           "content"   : "I2luY2x1ZGUgPHN0ZGlvLmg-Cg"      // source (base64url encoded) 
                                                           // decoded: #include <stdio.h>\n
         },
-        { "identifier": "codeFromStudent",
+        { 
+          "identifier": "codeFromStudent",
           "access"    : "modifiable",             // it can be edited in the frontend
           "metadata"  :
-          { "name"    : "Fill in your code!",
+          { 
+            "name"    : "Fill in your code!",
             "emphasis"  : "medium"
           },
           "content" : "dm9pZCBiYXIoKSB7IC8qIFNjaHJlaWJlbiBTaWUgaGllciBDb2RlLCBkZXIgImJhciIgYXVzZ2lidC4gKi8KCn0K"
             // source (template)
             // decoded: void bar() { /* Schreiben Sie hier Code, der "bar" ausgibt. */\n\n}\n 
         },
-        { "identifier": "postscript",
+        { 
+          "identifier": "postscript",
           "access"    : "visible",
           "metadata"  :
-          { "name"      : "Info: source after your code calling bar() in it.",
+          { 
+            "name"      : "Info: source after your code calling bar() in it.",
             "emphasis"  : "low",
           },
           "content" : "aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ" // source
@@ -71,13 +81,14 @@ Note: `//` with text following until EOL is a comment,
       "metadata" : {
         "guiType" : "input_field",
         "type": "number",
-        "name": "stepwidth"
+        "name": "stepwidth",
+        "decription" : "This section describes the parameter",
       },
       "default": [0.001], //default
       "min": 0,
       "max": 1,
       "step": 0.001,
-      "validation" : "range" // one of [range, pattern (regex), anyof/oneof]
+      "validation" : "range" // one of [range, pattern (regex), any/oneof, minone]
     }
   ],
   "configuration" :
@@ -97,17 +108,22 @@ Note: `//` with text following until EOL is a comment,
 { "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3f", // uuid, created by a frontend launcher
   "version" : "3.0.0" // version of this JSON-spec definition
   "metadata": // information for frontend
-    { "displayName" : "Parameters Example",  // name of computation template shown in frontend
+    { 
+      "displayName" : "Parameters Example",  // name of computation template shown in frontend
       "description" : "This is an example", // short description (could be used  
                                                      // as subtitle, further descriptions in "parts").
     },
   "environment" : "C", // important for interpreting configuration 
   "files" : // must: at least one array element
   [
-    { "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3f", // uuid, for referencing
+    { 
+      "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3f", // uuid, for referencing
       "path"      : "params.input"                                // filename on backend 
       "metadata"  : // information for frontend
-        {  "syntaxHighlighting": "ini",                    // optional (default: "none")
+        {  
+          "name" : "This is a filename",
+          "decription" : "This section describes the file",
+          "syntaxHighlighting": "ini",                    // optional (default: "none")
         },
       "parts" : // must: at least one array element
       [ 
@@ -127,7 +143,8 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "slider",
                 "name": "temperature",
-                "vertical": false
+                "vertical": false,
+                "decription" : "This section describes the parameter",
               },
               "default": [
                 10
@@ -144,7 +161,9 @@ Note: `//` with text following until EOL is a comment,
           "identifier": "ceb051d8-b50c-4814-983a-b9d703cae0c6",
           "access"    : "template",
           "metadata"  :
-              { "name"      : "params.input file"
+              { 
+                "name"      : "params.input file",
+                "decription" : "This section describes the file",
               },
           "parameters":
           [
@@ -153,7 +172,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__checkbox__", 
               "metadata" : {
                 "guiType": "checkbox",
-                "name": "options"
+                "name": "options",
+                "decription" : "This section describes the parameter",
               },
               "options": [
                 {
@@ -167,14 +187,15 @@ Note: `//` with text following until EOL is a comment,
                   "value" : "make_plot"
                 }
               ],
-              "validation": "anyof"
+              "validation": "any"
             }, 
             {
               "mode" : "fixed",
               "identifier" : "__radioButton__", 
               "metadata" : {
                 "guiType": "radio",
-                "name": "backend"
+                "name": "backend",
+                "decription" : "This section describes the parameter",
               },
               "options": [
                 {
@@ -199,7 +220,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__dropdownSingle__", 
               "metadata" : {
                 "guiType": "dropdown",
-                "name": "model"
+                "name": "model",
+                "decription" : "This section describes the parameter",
               },
               "options": [
                 {
@@ -230,7 +252,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__dropdownMultiple__", 
               "metadata" : {
                 "guiType": "dropdown",
-                "name": "model"
+                "name": "model",
+                "decription" : "This section describes the parameter",
               },
               "options": [
                 {
@@ -256,14 +279,15 @@ Note: `//` with text following until EOL is a comment,
                   "disabled" : true
                 }
               ], 
-              "validation": "anyof"
+              "validation": "any"
             }, 
             {
               "mode" : "fixed",
               "identifier" : "__toggle__", 
               "metadata" : {
                 "guiType": "toggle",
-                "name": "options"
+                "name": "options",
+                "decription" : "This section describes the parameter",
               },
               "options": [
                 {
@@ -277,7 +301,7 @@ Note: `//` with text following until EOL is a comment,
                   "value" : "make_plot"
                 }
               ], 
-              "validation": "anyof"
+              "validation": "any"
             }, 
             {
               "mode" : "any",
@@ -285,7 +309,8 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "slider",
                 "name": "temperature",
-                "vertical": true
+                "vertical": true,
+                "decription" : "This section describes the parameter",
               },
               "default": [
                 25,
@@ -303,10 +328,12 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "text",
-                "name": "file_name"
+                "name": "file_name",
+                "decription" : "This section describes the parameter",
               },
               "default" : [""],
-              "validation": "pattern"
+              "validation": "pattern",
+              "pattern": "^a[a-z]+$"
             },
             {
               "mode" : "any",
@@ -314,11 +341,13 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "text",
-                "name": "file_name"
+                "name": "file_name",
+                "decription" : "This section describes the parameter",
               },
               "maxlength": 200,
               "default" : [""],
-              "validation": "pattern"
+              "validation": "pattern",
+              "pattern": "^EXAMPLE[a-z]+$"
             },
             {
               "mode" : "any",
@@ -326,7 +355,8 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "number",
-                "name": "time_delay"
+                "name": "time_delay",
+                "decription" : "This section describes the parameter",
               },
               "default": [10],
               "min": 0,
@@ -339,10 +369,12 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__default__", 
               "metadata" : {
                 "guiType" : "editor", 
-                "name": "code 1"
+                "name": "code 1",
+                "decription" : "This section describes the parameter",
               },
               "default": ["I2luY2x1ZGUgPHN0ZGlvLmg-Cg"],
-              "validation": "pattern"
+              "validation": "pattern",
+              "pattern": "^a[a-z]+b$"
             },
           ],
             "content"   : ""
@@ -487,12 +519,17 @@ An object in array files[] has the following members:
 
 |Key |Type (an enum default is marked by _italics_) |Opt / Must |Description|Comment
 |----|----------------------------------------------|-----------|-----------|-------
-|identifier | string (UUID) | must |for later referencing, has to be unique | can be autogenerated by frontend |
+|identifier | string (UUID) | must | for later referencing, has to be unique | can be autogenerated by frontend |
 |path | string | must | absolute path to file | It is *not* allowed to start with '/' |
-|metadata | struct | opt | contains information for frontend | | |
-|metadata --syntaxHighlighting | string (*text*) | opt | Mode of the ace editor. List can be found in on [github](https://github.com/ajaxorg/ace/tree/master/lib/ace/mode) | Examples: "ini", "c_cpp", "matlab", "java". See also [Ace demo](http://ajaxorg.github.io/ace-builds/kitchen-sink.html) | |
+|metadata | struct | opt | contains information for frontend | See definition of [file metadata](#file-metadata-json-object) | |
 |parts | [{...}, {...}, ...] | must | array containing [part objects](#json-objects-in-parts). There has to be at least one. |
 
+### file metadata JSON object
+|Key |Type (an enum default is marked by _italics_) |Opt / Must |Description|Comment
+|----|----------------------------------------------|-----------|-----------|-------
+|syntaxHighlighting | string (*text*) | opt | Mode of the ace editor. List can be found in on [github](https://github.com/ajaxorg/ace/tree/master/lib/ace/mode) | Examples: "ini", "c_cpp", "matlab", "java". See also [Ace demo](http://ajaxorg.github.io/ace-builds/kitchen-sink.html) | 
+|name | string (*text*) | must | name of the file | |
+|decription | string (*text*) | opt | description of the file | |
 
 ### JSON objects in parts
 
@@ -544,6 +581,7 @@ A metadata-object, has the following members:
 |---------------|----------------------------------------|-----------|------------|--------|
 | guiType | one of {"checkbox", "radio", "dropdown", "toggle"} | must | specifies how the frontend renders the parameter | | 
 | name | string | must | Label for the parameter | frontend feature |
+| description | string | must | description of the parameter | frontend feature |
 
 #### fixed-type options JSON object
 
@@ -554,6 +592,7 @@ A metadata-object, has the following members:
 |disabled | boolean | opt | Shows disabled options in frontend | Example: { "value" : "Please choose multiple", "disabled" : true } |
 |selected | Boolean | opt | specifies defaults value/values for frontend | the strings have to be part of *values*; for "toogle" given values mean *true* |
 |text | string | opt | Text shown besides or as dropdown of the value | |
+| description | string | must | description of the parameter | frontend feature |
 
 
 #### any-type parameter JSON object

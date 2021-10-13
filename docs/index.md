@@ -9,4 +9,3 @@ The documentation contains the [ViPLab 3.0](viplab3.0/index.md) documenation. If
 * `mkdocs serve` - Start the live-reloading docs server.
 * `mkdocs build` - Build the documentation site.
 * `mkdocs help` - Print this help message.
-
