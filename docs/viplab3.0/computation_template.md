@@ -392,6 +392,7 @@ Note: `//` with text following until EOL is a comment,
 |configuration --running.executable |string |must |name of executable to run (as in backend file system)| for **DuMuX** | |
 |configuration --running.entrypoint | string | opt | executable to run inside the container | for **Container**; can contain mustache template syntax for injecting PARAM_IDs (see *parameters*-attribute) |
 |configuration --running.intermediateFilesPattern | string |opt | regex-expression in stdout which file is ready to be transferred | for **Container**| Is this implemented?|
+|configuration --running.userId | int | opt | user id of the user that writes files inside the container | for **Container**; needed to set correct permissions |
 |configuration --resources.image | url | must | location of the image to be executed | for **Container**; has to be a tar |
 |configuration --resources.volume | string | opt | path in the container where data is placed | for **Container** | we need workaround for kata containers?! |
 |configuration --resources.memory | string | opt (*64mb*)| memory limit for the container | for **Container** | |
