@@ -16,10 +16,10 @@ Note: `//` with text following until EOL is a comment,
 ### C Student Example
 ```
 { "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
-  "version" : "3.0.0" // version of this JSON-spec definition
+  "version" : "3.0.0", // version of this JSON-spec definition
   "metadata": // information for frontend
     { "displayName" : "Aufgabe 1",  // name of computation template shown in frontend
-      "description" : "Schreiben Sie eine C-Funktion...", // short description (could be used  
+      "description" : "Schreiben Sie eine C-Funktion..." // short description (could be used
                                                      // as subtitle, further descriptions in "parts").
     },
   "environment" : "C", // important for interpreting configuration 
