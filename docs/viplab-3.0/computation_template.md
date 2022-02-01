@@ -15,13 +15,6 @@ Note: `//` with text following until EOL is a comment,
 
 ### C Student Example
 ```
-<<<<<<< HEAD:docs/viplab-3.0/computation_template.md
-{ "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
-  "version" : "3.0.0", // version of this JSON-spec definition
-  "metadata": // information for frontend
-    { "displayName" : "Aufgabe 1",  // name of computation template shown in frontend
-      "description" : "Schreiben Sie eine C-Funktion..." // short description (could be used
-=======
 { 
   "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
   "version" : "3.0.0" // version of this JSON-spec definition
@@ -29,7 +22,6 @@ Note: `//` with text following until EOL is a comment,
     { 
       "displayName" : "Aufgabe 1",  // name of computation template shown in frontend
       "description" : "Schreiben Sie eine C-Funktion...", // short description (could be used  
->>>>>>> e97dd5c (Removed file name, as path can be used; updated examples; also: parameters on top level can only be of mode fixed):docs/viplab3.0/computation_template.md
                                                      // as subtitle, further descriptions in "parts").
     },
   "environment" : "C", // important for interpreting configuration 
@@ -64,20 +56,20 @@ Note: `//` with text following until EOL is a comment,
             "name"    : "Fill in your code!",
             "emphasis"  : "medium"
           },
-          "content" : "dm9pZCBiYXIoaW50IHdpZHRoKSB7IC8qIFNjaHJlaWJlbiBTaWUgaGllciBDb2RlLCBkZXIgImJhciIgYXVzZ2lidCB1bmQgZGllIE32Z2xpY2hrZWl0IGdpYnQgZWluZSBGZWxkYnJlaXRlIGZlc3R6dWxlZ2VuKi8KCn0K"
+          "content" : "dm9pZCBiYXIoKSB7IC8qIFNjaHJlaWJlbiBTaWUgaGllciBDb2RlLCBkZXIgImJhciIgYXVzZ2lidC4gKi8KCn0K"
             // source (template)
-            // decoded: void bar(int width) { /* Schreiben Sie hier Code, der "bar" ausgibt und die Möglichkeit gibt eine Feldbreite festzulegen*/\n\n}\n 
+            // decoded: void bar() { /* Schreiben Sie hier Code, der "bar" ausgibt. */\n\n}\n 
         },
         { 
           "identifier": "postscript",
           "access"    : "visible",
           "metadata"  :
           { 
-            "name"      : "Info: source after your code calling bar(width) in it.",
+            "name"      : "Info: source after your code calling bar() in it.",
             "emphasis"  : "low",
           },
-          "content" : "aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IGJhcihhcmd2WzFdKTsgcmV0dXJuIDA7IH0=" // source
-                                                // decoded: int main(int argc, char **argv) { bar(argv[1]); return 0; }
+          "content" : "aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ" // source
+                                                // decoded: int main() { bar(); return 0; }
         }
       ] // parts[]
     }
@@ -86,22 +78,22 @@ Note: `//` with text following until EOL is a comment,
   [
     {
       "mode": "fixed", // in this section, the parameters can only be of mode fixed
-      "identifier": "__FIELDWIDTH__",
+      "identifier": "__STEPWIDTH__",
       "metadata": {
         "guiType": "dropdown",
-        "name": "fieldwidth",
-        "decription" : "Fieldwidth that is used to specify the width of the field of the output. To give an example, if the fieldwidth is 6, the output of bar(6) is padded like this: "   bar",
+        "name": "stepwidth",
+        "decription" : "Stepwidth that is added, when function is called",
       },
       "options": [
         {
-          "value": "3",
+          "value": "0.05",
           "selected": true
         },
         {
-          "value": "6"
+          "value": "0.5"
         },
         {
-          "value": "8"
+          "value": "1"
         }
       ],
       "validation": "onlyone"
@@ -114,7 +106,7 @@ Note: `//` with text following until EOL is a comment,
     "checking.sources"   : ["codeFromStudent"],    // identifier to parts
     "checking.forbiddenCalls": "system execve",    // forbidden call names separated by WS
     "linking.flags"      : "-lm",                  // string
-    "running.commandLineArguments" : "{{ __FIELDWIDTH__ }}"
+    "running.commandLineArguments" : "--stepwidth {{ __STEPWIDTH__ }}"
                                                // mustache template if parameters are used
   }
 }
@@ -128,9 +120,9 @@ Note: `//` with text following until EOL is a comment,
   "metadata": 
     { 
       "displayName" : "Parameters Example",  
-      "description" : "This is a 'Hello World' example showing the usage of parameters. Please introduce yourself so that the Hello World-Container can print your information..."                                    
+      "description" : "This is an example showing the usage of parameters"                                    
     },
-  "environment" : "Container", 
+  "environment" : "C", 
   "files" : 
   [
     { 
@@ -157,20 +149,20 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__sliderSingle__", 
               "metadata" : {
                 "guiType" : "slider",
-                "name": "Temperature",
+                "name": "temperature",
                 "vertical": false,
-                "decription" : "How hot do you like your coffee? (in degrees Celsius)"
+                "decription" : "Select temperature value as parameter for code execution"
               },
               "default": [
-                75
+                10
               ],
               "min": 0,
-              "max": 90,
+              "max": 500,
               "step": 10,
               "validation": "range"
             }
           ],
-          "content": "TXkgY29mZmVlIG5lZWRzIHRvIGJlIHt7X19zbGlkZXJTaW5nbGVfX319IGRlZ3JlZXMgQ2Vsc2l1cw==" // decoded: My coffee needs to be {{__sliderSingle__}} degrees Celsius
+          "content": "VGhpcyBpcyBhIFRleHQ6Ont7X19zbGlkZXJTaW5nbGVfX319OjpUaGlzIGlzIGEgVGV4dA=="
         },
         {
           "identifier": "ceb051d8-b50c-4814-983a-b9d703cae0c6",
@@ -186,19 +178,19 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__checkbox__", 
               "metadata" : {
                 "guiType": "checkbox",
-                "name": "Things I like",
-                "decription" : "Select things you like"
+                "name": "options",
+                "decription" : "Select output type"
               },
               "options": [
                 {
-                  "value" : "programming",
+                  "value" : "verbose",
                   "selected" : true
                 },
                 {
-                  "value" : "music"
+                  "value" : "debug"
                 },
                 {
-                  "value" : "books"
+                  "value" : "make_plot"
                 }
               ],
               "validation": "anyof"
@@ -208,23 +200,23 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__radioButton__", 
               "metadata" : {
                 "guiType": "radio",
-                "name": "Favorite PL",
-                "decription" : "Select your favorite programming language",
+                "name": "backend",
+                "decription" : "Select execution type",
               },
               "options": [
                 {
-                  "value" : "C"
+                  "value" : "debug"
                 },
                 {
-                  "value" : "Java",
+                  "value" : "serial",
                   "selected" : true
                 },
                 {
-                  "value" : "Haskell",
+                  "value" : "hpc",
                   "disabled" : true
                 },
                 {
-                  "value" : "Python"
+                  "value" : "test"
                 }
               ],
               "validation": "oneof"
@@ -234,8 +226,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__dropdownSingle__", 
               "metadata" : {
                 "guiType": "dropdown",
-                "name": "Fridge",
-                "decription" : "How often do look into the fridge a day?"
+                "name": "model",
+                "decription" : "Select model for execution"
               },
               "options": [
                 {
@@ -243,20 +235,20 @@ Note: `//` with text following until EOL is a comment,
                   "disabled" : true
                 },
                 {
-                  "value" : "never",
+                  "value" : "1p",
                   "selected" : true
                 },
                 {
-                  "value" : "Once a day"
+                  "value" : "1pnc"
                 },
                 {
-                  "value" : "Twice a day"
+                  "value" : "1pncmin"
                 },
                 {
-                  "value" : "Three times a day"
+                  "value" : "2p"
                 },
                 {
-                  "value" : "More than three times a day"
+                  "value" : "2p1c"
                 }
               ],
               "validation": "oneof"
@@ -266,8 +258,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__dropdownMultiple__", 
               "metadata" : {
                 "guiType": "dropdown",
-                "name": "Dance Time",
-                "decription" : "To which songs would you dance in the kitchen?"
+                "name": "model",
+                "decription" : "Select model for execution"
               },
               "options": [
                 {
@@ -275,21 +267,21 @@ Note: `//` with text following until EOL is a comment,
                   "disabled" : true
                 },
                 {
-                  "value" : "Last Christmas",
+                  "value" : "1p",
                   "selected" : true
                 },
                 {
-                  "value" : "White Christmas"
+                  "value" : "1pnc"
                 },
                 {
-                  "value" : "Winter Woderland"
+                  "value" : "1pncmin"
                 },
                 {
-                  "value" : "Thats Christmas To Me", 
+                  "value" : "2p", 
                   "selected" : true
                 },
                 {
-                  "value" : "O Come All Ye Faithful", 
+                  "value" : "2p1c", 
                   "disabled" : true
                 }
               ], 
@@ -300,19 +292,19 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__toggle__", 
               "metadata" : {
                 "guiType": "toggle",
-                "name": "NO!",
-                "decription" : "What do you dislike?"
+                "name": "options",
+                "decription" : "Select output type"
               },
               "options": [
                 {
-                  "value" : "Spiders",
+                  "value" : "verbose",
                   "selected" : true
                 },
                 {
-                  "value" : "All kinds of Bugs (also the ones living in your Computer)"
+                  "value" : "debug"
                 },
                 {
-                  "value" : "I never dislike anything!"
+                  "value" : "make_plot"
                 }
               ], 
               "validation": "anyof"
@@ -322,9 +314,9 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__sliderMultiple__", 
               "metadata" : {
                 "guiType" : "slider",
-                "name": "random numbers",
+                "name": "temperature",
                 "vertical": true,
-                "decription" : "Choose three random numbers to be output by the container"
+                "decription" : "Select temperature value as parameter for code execution"
               },
               "default": [
                 25,
@@ -342,11 +334,11 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "text",
-                "name": "name",
-                "decription" : "Enter your name"
+                "name": "file_name",
+                "decription" : "Enter the file name"
               },
               "default" : [""],
-              "validation": "none"
+              "validation": "pattern"
             },
             {
               "mode" : "any",
@@ -354,8 +346,8 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "text",
-                "name": "Christmas Wish",
-                "decription" : "Enter what you wish for at christmas"
+                "name": "file_name",
+                "decription" : "Enter another the file name"
               },
               "maxlength": 200,
               "default" : [""],
@@ -367,13 +359,13 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "number",
-                "name": "Age",
-                "decription" : "Enter your current age"
+                "name": "time_delay",
+                "decription" : "Enter the time delay for execution"
               },
-              "default": [25],
+              "default": [10],
               "min": 0,
-              "max": 100,
-              "step": 1,
+              "max": 500,
+              "step": 0.1,
               "validation": "range"
             },
             {
@@ -381,10 +373,10 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__default__", 
               "metadata" : {
                 "guiType" : "editor", 
-                "name": "code",
-                "decription" : "Enter some code"
+                "name": "code 1",
+                "decription" : "Enter additional code"
               },
-              "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IC8vIFByaW50ICdIZWxsbyBXb3JsZCcgfQ=="], // decoded: int main(int argc, char **argv) { // Print 'Hello World' }
+              "default": ["I2luY2x1ZGUgPHN0ZGlvLmg-Cg"],
               "validation": "pattern"
             }
           ],
