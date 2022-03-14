@@ -407,7 +407,7 @@ Note: `//` with text following until EOL is a comment,
 |metadata | struct | opt | contains information for frontend | | See [metadata json object](#metadata-json-object) for details on contained objects |
 |environment |one of {"C", "C++", "Java", "Matlab", "Octave", "Container", "DuMuX"} | must | Specifies the environment used for the Computation. It defines language, runtime, libraries and tools | | |
 |files | [ {...}, {...}, ... ] |must |array containing [File objects](#json-objects-in-files): there has to be at least one element | | |
-|parameters | [{...}, {...}, ...] | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique identifier (as string) and is a [Parameter object](#json-object-parameter). | For security reasons free text *guiType*, i.e., text input field or editor, are not allowed here. The only allowed parameters are those, that have mode set to fixed |
+|parameters | [{...}, {...}, ...] | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique identifier (as string) and is a [Parameter object](#json-object-parameter). | For security reasons free text *guiType*, i.e., text input field or editor, are not allowed here. **The only allowed parameters are those, that have mode set to fixed** |
 |configuration | struct |opt/must (depends on environment) | Environment specific configurations | Different phases can be configured like compiling, checking (for legal function calls in source code), ... | 
 |configuration --compiling.sources | [FILE_ID, FILE_ID, ...] | must | Array of identifiers of [JSON File objects](#json-objects-in-files). Explicit compilation (only referenced sources will be compiled). | for **C, C++, Java**; The frontend should suggest defaults here, e.g. by suited file suffix ('.c', '.cpp', '.java'). |  name/path (Java) for implicit compiling? check backend?|
 |configuration --compiling.compiler |string |must |compiler to be used, e.g. "gcc" | for **C, C++** | |
@@ -449,15 +449,16 @@ Note: `//` with text following until EOL is a comment,
 |---------------|----------------------------------------|-----------|------------|--------|----|
 |identifier | string | opt | Identifier of output object | | |
 |basename | string | opt | Basename defines connected files: Path of file begins with basename | | |
-|labels | struct | opt | Define labels for csv-files | | |
-|labels --key | string | opt | key for x-axis given in csv header | | |
-|labels --label | string | opt | x-axis label for diagram | | |
-|labels --factor | string | opt | description | | Needed? |
-|labels --offset | string | opt | description | | Needed? |
-|labels --format | string | opt | description | | Needed? |
-|plots | struct | opt | Define datasets: Provide y-axis labels for y-key given in csv | | For each dataset one diagram is rendered in the result|
+|xlabel | struct | opt | Define labels for csv-files | | |
+|xlabel --key | string | opt | key for x-axis given in csv header | | |
+|xlabel --label | string | opt | x-axis label for diagram | | |
+|xlabel --factor | string | opt | Multiply x-values with this factor | | |
+|xlabel --format | string | opt | Format the x-axis values according to format string | For information on the avaliable formating take a look at the info given by [Plotly](https://github.com/d3/d3-format/blob/main/README.md#locale_format); Example: To format a number to have two decimals, use "0.2f" | |
+|plots | struct | opt | Define datasets: Provide y-axis labels for y-key given in csv | | For each dataset one diagram is rendered in the result |
 |plots --key | string | opt | key for y-axis given in csv header | | |
 |plots --label | string | opt | y-axis label for diagram | | |
+|xlabel --factor | string | opt | Multiply y-values with this factor | | |
+|plots --format | string | opt | Format the y-axis values according to format string | For information on the avaliable formating take a look at the info given by [Plotly](https://github.com/d3/d3-format/blob/main/README.md#locale_format); Example: To format a number to have two decimals, use "0.2f" | |
 
 ##### vtk JSON object
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
