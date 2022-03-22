@@ -626,7 +626,6 @@ A metadata-object, has the following members:
 |text | string | opt | Text shown besides or as dropdown of the value | |
 |disabled | boolean | opt | Shows disabled options in frontend | Example: { "value" : "Please choose multiple", "disabled" : true } |
 |selected | Boolean | opt | specifies defaults value/values for frontend | the strings have to be part of *values*; for "toogle" given values mean *true* |
-|text | string | opt | Text shown besides or as dropdown of the value | |
 | description | string | must | description of the parameter | frontend feature |
 
 
@@ -637,7 +636,7 @@ A any-type PARAM-object, like *\_\_sliderMultiple\_\_*, has the following member
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
 |---------------|----------------------------------------|-----------|------------|--------|
 |metadata | Object | must | JSON object containing information how to render this parameter | See definition of [any-type JSON object Parameter-Metadata](#any-type-json-object-parameter-metadata) |
-|default | array of number(s) or string(s) | opt | the default value(s) shown in frontend | |
+|default | array of number(s) or base64url-encoded string(s) | opt | the default value(s) shown in frontend | |
 |min | number | opt | minimal allowed value | for slider, or input_field with type number |
 |max | number | opt | maximal allowed value | for slider, or input_field with type number |
 |step | number | opt | defines together with *min* and *max* attributes a finite set of allowed values | for slider, or input_field with type number |
