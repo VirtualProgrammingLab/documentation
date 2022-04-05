@@ -82,7 +82,7 @@ Note: `//` with text following until EOL is a comment,
       "metadata": {
         "guiType": "dropdown",
         "name": "fieldwidth",
-        "decription" : "Fieldwidth that is used to specify the width of the field of the output. To give an example, if the fieldwidth is 6, the output of bar(6) is padded like this: "   bar",
+        "decription" : "Fieldwidth that is used to specify the width of the field of the output. To give an example, if the fieldwidth is 6, the output of bar(6) is padded like this: '   bar'",
       },
       "options": [
         {
@@ -117,26 +117,25 @@ Note: `//` with text following until EOL is a comment,
 { 
   "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3f", 
   "version" : "3.0.0",
-  "metadata": 
-    { 
-      "displayName" : "Parameters Example",  
-      "description" : "This is a 'Hello World' example showing the usage of parameters. Please introduce yourself so that the Hello World-Container can print your information..."                                    
-    },
+  "metadata": { 
+    "displayName" : "Parameters Example",  
+    "description" : "This is a 'Hello World' example showing the usage of parameters. Please introduce yourself so that the Hello World-Container can print your information...",
+    "viewer" : ["CSV", "ParaView", "Image"]
+  },
   "environment" : "Container", 
   "files" : 
   [
     { 
       "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3f", 
-      "path"      : "params.input",                              
+      "path"      : "params.ini",                              
       "metadata"  : 
         {  
           "syntaxHighlighting": "ini"                   
         },
       "parts" : 
-      [ 
-
+      [
         {
-          "identifier": "part-contains-slider",
+          "identifier": "f3fc4404-3529-4962-b252-47bc4ddd02a1",
           "access": "template",
           "metadata": {
             "name": "Parameter in part",
@@ -151,7 +150,7 @@ Note: `//` with text following until EOL is a comment,
                 "guiType" : "slider",
                 "name": "Temperature",
                 "vertical": false,
-                "decription" : "How hot do you like your coffee? (in degrees Celsius)"
+                "description" : "How hot do you like your coffee? (in degrees Celsius) - Tip: Typical Serving Temperature lies between 65 and 70 Degrees"
               },
               "default": [
                 75
@@ -162,14 +161,14 @@ Note: `//` with text following until EOL is a comment,
               "validation": "range"
             }
           ],
-          "content": "TXkgY29mZmVlIG5lZWRzIHRvIGJlIHt7X19zbGlkZXJTaW5nbGVfX319IGRlZ3JlZXMgQ2Vsc2l1cw==" // decoded: My coffee needs to be {{__sliderSingle__}} degrees Celsius
+          "content": "W2NvZmZlZSBwcmVmZXJlbmNlXQpjb2ZmZWVUZW1wZXJhdHVyZT17e19fc2xpZGVyU2luZ2xlX199fQ"
         },
         {
           "identifier": "ceb051d8-b50c-4814-983a-b9d703cae0c6",
           "access"    : "template",
           "metadata"  :
               { 
-                "name"      : "params.input file"
+                "name"      : "params.ini file part"
               },
           "parameters":
           [
@@ -179,10 +178,11 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType": "checkbox",
                 "name": "Things I like",
-                "decription" : "Select things you like"
+                "description" : "Select things you like"
               },
               "options": [
                 {
+                  "text" : "Programming",
                   "value" : "programming",
                   "selected" : true
                 },
@@ -201,7 +201,7 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType": "radio",
                 "name": "Favorite PL",
-                "decription" : "Select your favorite programming language",
+                "description" : "Select your favorite programming language"
               },
               "options": [
                 {
@@ -216,6 +216,7 @@ Note: `//` with text following until EOL is a comment,
                   "disabled" : true
                 },
                 {
+                  "text" : "Sssss... Python ...ssssS",
                   "value" : "Python"
                 }
               ],
@@ -227,7 +228,7 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType": "dropdown",
                 "name": "Fridge",
-                "decription" : "How often do look into the fridge a day?"
+                "description" : "How often do look into the fridge a day?"
               },
               "options": [
                 {
@@ -239,6 +240,7 @@ Note: `//` with text following until EOL is a comment,
                   "selected" : true
                 },
                 {
+                  "text" : "1 a day",
                   "value" : "Once a day"
                 },
                 {
@@ -259,7 +261,7 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType": "dropdown",
                 "name": "Dance Time",
-                "decription" : "To which songs would you dance in the kitchen?"
+                "description" : "To which songs would you dance in the kitchen?"
               },
               "options": [
                 {
@@ -267,6 +269,7 @@ Note: `//` with text following until EOL is a comment,
                   "disabled" : true
                 },
                 {
+                  "text" : "Last Christmas (aka the one that drives everybody else crazy)",
                   "value" : "Last Christmas",
                   "selected" : true
                 },
@@ -293,7 +296,7 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType": "toggle",
                 "name": "NO!",
-                "decription" : "What do you dislike?"
+                "description" : "What do you dislike?"
               },
               "options": [
                 {
@@ -301,7 +304,8 @@ Note: `//` with text following until EOL is a comment,
                   "selected" : true
                 },
                 {
-                  "value" : "All kinds of Bugs (also the ones living in your Computer)"
+                  "text" : "All kinds of Bugs (also the ones living in your Computer)",
+                  "value" : "All kinds of Bugs"
                 },
                 {
                   "value" : "I never dislike anything!"
@@ -316,7 +320,7 @@ Note: `//` with text following until EOL is a comment,
                 "guiType" : "slider",
                 "name": "random numbers",
                 "vertical": true,
-                "decription" : "Choose three random numbers to be output by the container"
+                "description" : "Choose three random numbers to be output by the container"
               },
               "default": [
                 25,
@@ -330,12 +334,12 @@ Note: `//` with text following until EOL is a comment,
             },
             {
               "mode" : "any",
-              "identifier" : "__inputTextWOMaxlangth__", 
+              "identifier" : "__inputTextWOMaxlength__", 
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "text",
                 "name": "name",
-                "decription" : "Enter your name"
+                "description" : "Enter your name"
               },
               "default" : [""],
               "validation": "none"
@@ -347,7 +351,7 @@ Note: `//` with text following until EOL is a comment,
                 "guiType" : "input_field",
                 "type": "text",
                 "name": "Christmas Wish",
-                "decription" : "Enter what you wish for at christmas"
+                "description" : "Enter what you wish for at christmas"
               },
               "maxlength": 200,
               "default" : [""],
@@ -360,38 +364,58 @@ Note: `//` with text following until EOL is a comment,
                 "guiType" : "input_field",
                 "type": "number",
                 "name": "Age",
-                "decription" : "Enter your current age"
+                "description" : "Enter your current age"
               },
               "default": [25],
               "min": 0,
               "max": 100,
               "step": 1,
               "validation": "range"
-            },
+            }
+          ],
+          "content"   : "W2Fib3V0IHlvdV0NCmxpa2VkVGhpbmdzPXt7X19jaGVja2JveF9ffX0NCmZhdm9yaXRlUEw9e3tfX3JhZGlvQnV0dG9uX199fQ0KZnJpZGdlPXt7X19kcm9wZG93blNpbmdsZV9ffX0NCmRhbmNpbmc9e3tfX2Ryb3Bkb3duTXVsdGlwbGVfX319DQpkaXNsaWtlZFRoaW5ncz17e19fdG9nZ2xlX199fQ0KcmFuZG9tTnVtYmVycz17e19fc2xpZGVyTXVsdGlwbGVfX319DQpuYW1lPXt7X19pbnB1dFRleHRXT01heGxlbmd0aF9ffX0NCmNocmlzdG1hc1dpc2g9e3tfX2lucHV0VGV4dFdNYXhsZW5ndGhfX319DQphZ2U9e3tfX2lucHV0TnVtYmVyX199fQ"
+        }
+      ]
+    },
+    { 
+      "identifier": "22483f42-95bf-984a-98a5-ee9485c85c31", 
+      "path"      : "code.json",                              
+      "metadata"  : 
+        {  
+          "syntaxHighlighting": "json"                   
+        },
+      "parts" : 
+      [
+        {
+          "identifier": "f3fc4404-3529-4962-b252-47bc4ddd02a2",
+          "access": "template",
+          "metadata": {
+            "name": "Parameter in part",
+            "emphasis": "low"
+          },
+          "parameters" : 
+          [
             {
               "mode" : "any",
               "identifier" : "__default__", 
               "metadata" : {
                 "guiType" : "editor", 
                 "name": "code",
-                "decription" : "Enter some code"
+                "description" : "Enter some code"
               },
-              "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IC8vIFByaW50ICdIZWxsbyBXb3JsZCcgfQ=="], // decoded: int main(int argc, char **argv) { // Print 'Hello World' }
-              "validation": "pattern"
+              "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IA0KLy8gUHJpbnQgJ0hlbGxvIFdvcmxkJyANCn0"]
             }
           ],
-            "content"   : ""
+          "content": "ew0KImNvZGVTbmlwcGV0IiA6ICJ7e19fZGVmYXVsdF9ffX0iDQp9"
         }
-      ] 
+      ]
     }
   ], 
   "configuration" :
-    { "resources.image"  : "name",
+    { "resources.image"  : "name://viplab-example-image",
       "resources.volume" : "/data/shared",
       "resources.memory" : "1g",
-      "resources.numCPUs" : 1,
-      "running.entrypoint" : "/data/bin/run.sh",
-      "running.commandLineArguments" : "params.input"
+      "resources.numCPUs" : 1
     }
 }
 ```
