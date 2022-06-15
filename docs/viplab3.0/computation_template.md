@@ -630,7 +630,7 @@ A fixed-type PARAM-object, like *\_\_checkbox\_\_*, has the following members:
 |---------------|----------------------------------------|-----------|------------|--------|
 |metadata | Object | must | JSON object containing information how to render this parameter | See definition of [fixed-type JSON object Parameter-Metadata](#fixed-type-json-object-parameter-metadata) |
 |options | array of objects | must for *gui_type* "checkbox", "radio", "dropdown", "toggle" | specifies the allowed values | See [fixed-type options JSON object](#fixed-type-options-json-object) for details on contained objects|
-|validation | one of {"onlyone", "minone", "any"} | must | See [Parameter validation semantics](#parameter-validation-semantics) for details | |
+|validation | one of {"oneof", "minone", "anyof"} | must | See [Parameter validation semantics](#parameter-validation-semantics) for details | |
 
 #### fixed-type JSON object Parameter-Metadata
 
@@ -683,9 +683,9 @@ A metadata-object, has the following members:
 
 Four types of validation are implemented at the moment:
 
-* **onlyone**: Only one value can be chosen. The value has to be included in *options* and *disabled* for the *value* has to be set to false (is false by default, so *disabled* can also be missing).
+* **oneof**: Only one value can be chosen. The value has to be included in *options* and *disabled* for the *value* has to be set to false (is false by default, so *disabled* can also be missing).
 * **minone**: One or more values can be chosen. The values have to be included in *options* and *disabled* for the *value*s has to be set to false (is false by default, so *disabled* can also be missing).
-* **any**: All of the chosen values have to be included in *options* and *disabled* for the *value*s has to be set to false (is false by default, so *disabled* can also be missing).
+* **anyof**: All of the chosen values have to be included in *options* and *disabled* for the *value*s has to be set to false (is false by default, so *disabled* can also be missing).
 * **range**: A numerical value is checked whether is is between *min* and *max*. If *step* is given a finite number of possible values is computed and the value has to be within this set.
 * **pattern**: A regex pattern that the text value has to fulfill.
 * **none**: If no validation is necessary, because there are no restraints on the value.
