@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Computation Task JSON Message - ViPLab</title>
+        <title>System status JSON message - ViPLab</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -36,71 +36,8 @@
                             <li class="navitem">
                                 <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../ecs2/" class="dropdown-item">Core ECS</a>
-</li>
-                                    
-<li>
-    <a href="../../ecs2/example/" class="dropdown-item">Beispiele</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../rest/" class="dropdown-item">ECS REST Interface</a>
-</li>
-                                    
-<li>
-    <a href="../../rest/auths/" class="dropdown-item">Auths</a>
-</li>
-                                    
-<li>
-    <a href="../../rest/econtent/" class="dropdown-item">Econtent</a>
-</li>
-                                    
-<li>
-    <a href="../../rest/eventqueues/" class="dropdown-item">Eventqueues</a>
-</li>
-                                    
-<li>
-    <a href="../../rest/memberships/" class="dropdown-item">memberships</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../viplab/" class="dropdown-item">Index</a>
-</li>
-                                    
-<li>
-    <a href="../../viplab/exercises/" class="dropdown-item">/numlab/exercises</a>
-</li>
-                                    
-<li>
-    <a href="../../viplab/interrupts/" class="dropdown-item">Interrupts</a>
-</li>
-                                    
-<li>
-    <a href="../../viplab/results/" class="dropdown-item">/numlab/results</a>
-</li>
-                                    
-<li>
-    <a href="../../viplab/solutions/" class="dropdown-item">/numlab/solutions</a>
-</li>
-                                </ul>
-                            </li>
                             <li class="dropdown active">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab 3.0 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -116,7 +53,7 @@
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">Computation Task JSON Message</a>
+    <a href="../computation_task/" class="dropdown-item">Computation Task JSON Message</a>
 </li>
                                     
 <li>
@@ -124,7 +61,7 @@
 </li>
                                     
 <li>
-    <a href="../system_status/" class="dropdown-item">System status JSON message</a>
+    <a href="./" class="dropdown-item active">System status JSON message</a>
 </li>
                                     
 <li>
@@ -141,12 +78,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../computation_result/" class="nav-link">
+                                <a rel="prev" href="../computation_template/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../computation_template/" class="nav-link">
+                                <a rel="next" href="../versioning/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -168,20 +105,8 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#computation-task-json-message" class="nav-link">Computation Task JSON Message</a>
+            <li class="nav-item" data-level="1"><a href="#system-status-json-message" class="nav-link">System status JSON message</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#example-informal" class="nav-link">Example (informal)</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#explaining-the-json-format" class="nav-link">Explaining the JSON Format</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#evaluation-task" class="nav-link">Evaluation Task</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -189,104 +114,8 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="computation-task-json-message">Computation Task JSON Message</h1>
-<p>A <em>computation task</em>  is the result of a possibly manipulated <em>computation template</em>.
-It contains the changes made on the template.
-Together with the template, a <em>computation task</em> forms a <em>computation</em> that is
-sent to the backend.</p>
-<p>In the context of a learning environment, a <em>computation task</em> can be seen as a
-<em>Solution</em>.</p>
-<h2 id="example-informal">Example (informal)</h2>
-<pre><code>{ &quot;template&quot; : &quot;11483f23-95bf-424a-98a5-ee5868c85c3e&quot;, // uuid of corresponding computation template
-  &quot;arguments&quot; : {
-     &quot;__STEPWIDTH__&quot; : &quot;0.5&quot; // parameter values from template, filled out by frontend
-  },
-  &quot;metadata&quot; : {
-      &quot;comment&quot; : &quot;Die war aber schwer!&quot;,
-  },
-  &quot;parts&quot; : 
-    [
-      { &quot;identifier&quot;: &quot;codeFromStudent&quot;, // must: identifier of template part that has changed
-        &quot;content&quot;   : &quot;dm9pZCBiYXIoKSB7IHByaW50ZigiYmFyIQoiKTsKfQo&quot; // changed source from user 
-                                               // decoded: void bar() { printf(\&quot;bar!\\n\&quot;);\n}\n
-        // other fields defining this (text) element must *not* be repeated here.
-      }
-      // unchanged elements needn't be repeated here
-    ]
-}
-</code></pre>
-<h2 id="explaining-the-json-format">Explaining the JSON Format</h2>
-<table>
-<thead>
-<tr>
-<th>Key [--Subkey]</th>
-<th>Type</th>
-<th>Opt / Must</th>
-<th>Description</th>
-<th>Comment</th>
-<th>AS</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>template</td>
-<td>string (UUID)</td>
-<td>must</td>
-<td>computation template identifier</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>arguments</td>
-<td>{PARAM_ID: value, ..., PARAM_ID: value}</td>
-<td>opt</td>
-<td>arguments of, e.g., <em>configuration.commandLineArguments</em> extracted by the frontend</td>
-<td>see <a href="../computation_template/#explaining-the-json-format">computation template</a></td>
-<td></td>
-</tr>
-<tr>
-<td>metadata</td>
-<td>struct</td>
-<td>opt</td>
-<td>contains information for frontend</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>metadata --comment</td>
-<td>string</td>
-<td>opt</td>
-<td>comment from user</td>
-<td></td>
-<td>implemented in frontend?</td>
-</tr>
-<tr>
-<td>parts</td>
-<td>[{...}, {...}, ...]</td>
-<td>opt</td>
-<td>array containing <em>modified</em> <a href="../computation_template/#json-objects-in-parts">part objects</a>. Only <em>identifier</em>- and <em>content</em>-attributes are allowed. Only "modifiable" or "template" parts can be referenced here (see <em>access</em>-attribute).</td>
-<td>The frontend creates the content for "template" parts. See <a href="#notes-for-template-parts">notes</a>.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="notes-for-template-parts">Notes for template parts</h3>
-<p>The frontend will encode parts with <em>access</em>-value "template" as JSON messages with
-the following structure:</p>
-<pre><code>{ &quot;PARAM_ID1&quot; : &quot;value&quot;,
-  &quot;PARAM_ID2&quot; : &quot;value_2&quot;,
-  ...
-  &quot;PARAM_IDn&quot; : &quot;value_n&quot;
-}
-</code></pre>
-<p><em>PARAM_ID</em> is the reference (key) to a parameter name inside the mustache template.
-"value" is the selected value of the user in the frontend.</p>
-<h2 id="evaluation-task">Evaluation Task</h2>
-<p>The feature of ViPLab to automatically evaluate student code (correction service)
-is still possible in ViPLab 3.0. The code needed for evaluation is send to the 
-correction server as a JSON message with the same structure as a <em>Computation Task</em>.
-The only difference is, that here all <em>parts</em> can be replaced, regardless of there
-<em>access</em>-settings.</p></div>
+<h1 id="system-status-json-message">System status JSON message</h1>
+<p>to inform frontend about computations in-preparation...</p></div>
             </div>
         </div>
 

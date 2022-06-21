@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Interrupts - ViPLab</title>
+        <title>Computation Task JSON Message - ViPLab</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -36,46 +36,8 @@
                             <li class="navitem">
                                 <a href="../.." class="nav-link">Welcome to the Viplab documentation</a>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ecs2 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../ecs2/" class="dropdown-item">Core ECS</a>
-</li>
-                                    
-<li>
-    <a href="../../ecs2/example/" class="dropdown-item">Beispiele</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rest <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../rest/" class="dropdown-item">ECS REST Interface</a>
-</li>
-                                    
-<li>
-    <a href="../../rest/auths/" class="dropdown-item">Auths</a>
-</li>
-                                    
-<li>
-    <a href="../../rest/econtent/" class="dropdown-item">Econtent</a>
-</li>
-                                    
-<li>
-    <a href="../../rest/eventqueues/" class="dropdown-item">Eventqueues</a>
-</li>
-                                    
-<li>
-    <a href="../../rest/memberships/" class="dropdown-item">memberships</a>
-</li>
-                                </ul>
-                            </li>
                             <li class="dropdown active">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab 3.0 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -83,52 +45,27 @@
 </li>
                                     
 <li>
-    <a href="../exercises/" class="dropdown-item">/numlab/exercises</a>
+    <a href="../computation/" class="dropdown-item">Computation JSON Message</a>
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">Interrupts</a>
+    <a href="../computation_result/" class="dropdown-item">Computation Result JSON Message</a>
 </li>
                                     
 <li>
-    <a href="../results/" class="dropdown-item">/numlab/results</a>
+    <a href="./" class="dropdown-item active">Computation Task JSON Message</a>
 </li>
                                     
 <li>
-    <a href="../solutions/" class="dropdown-item">/numlab/solutions</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Viplab3.0 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../viplab3.0/" class="dropdown-item">Index</a>
+    <a href="../computation_template/" class="dropdown-item">Computation Template JSON Message</a>
 </li>
                                     
 <li>
-    <a href="../../viplab3.0/computation/" class="dropdown-item">Computation JSON Message</a>
+    <a href="../system_status/" class="dropdown-item">System status JSON message</a>
 </li>
                                     
 <li>
-    <a href="../../viplab3.0/computation_result/" class="dropdown-item">Computation Result JSON Message</a>
-</li>
-                                    
-<li>
-    <a href="../../viplab3.0/computation_task/" class="dropdown-item">Computation Task JSON Message</a>
-</li>
-                                    
-<li>
-    <a href="../../viplab3.0/computation_template/" class="dropdown-item">Computation Template JSON Message</a>
-</li>
-                                    
-<li>
-    <a href="../../viplab3.0/system_status/" class="dropdown-item">System status JSON message</a>
-</li>
-                                    
-<li>
-    <a href="../../viplab3.0/versioning/" class="dropdown-item">JSON Object Versioning Rules</a>
+    <a href="../versioning/" class="dropdown-item">JSON Object Versioning Rules</a>
 </li>
                                 </ul>
                             </li>
@@ -141,12 +78,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../exercises/" class="nav-link">
+                                <a rel="prev" href="../computation_result/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../results/" class="nav-link">
+                                <a rel="next" href="../computation_template/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -168,13 +105,17 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#numlabinterrupts" class="nav-link">/numlab/interrupts</a>
+            <li class="nav-item" data-level="1"><a href="#computation-task-json-message" class="nav-link">Computation Task JSON Message</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#interface" class="nav-link">Interface</a>
+            <li class="nav-item" data-level="2"><a href="#example-informal" class="nav-link">Example (informal)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#message" class="nav-link">Message</a>
+            <li class="nav-item" data-level="2"><a href="#explaining-the-json-format" class="nav-link">Explaining the JSON Format</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#evaluation-task" class="nav-link">Evaluation Task</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -185,52 +126,33 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It's unclear, when Interrupts will be implemented: for short computations only this is not necessary (but for e.g. long running simulations).</p>
-<p>@Heiko: what's the status of the broadcasting mechanism?</p>
-<p>--sr</p>
-</div>
-<h1 id="numlabinterrupts">/numlab/interrupts</h1>
-<p>Broadcast message queue.</p>
-<h2 id="interface">Interface</h2>
-<p>POST, GET (see <a href="/ecs2#queue-resource">''English section name unknown so far.''</a>)</p>
-<h3 id="generic">Generic</h3>
-<ul>
-<li><strong>POST resourceURL (push)</strong>: creates Interrupt.</li>
-<li><strong>POST resourceURL/fifo (pull)</strong>: gets first Interrupt and removes it from the queue.</li>
-<li><strong>GET resourceURL/fifo (look)</strong>: gets first Interrupt (fifo) without removing it from the queue.</li>
-</ul>
-<h3 id="viplab-specific">VipLab Specific</h3>
-<p>POST resourceURL (push) will be used by SCs, POST resourceURL/fifo (pull) by CCs.</p>
-<p>Student clients (SCs) push Interrupts into this queue; computation clients (CCs) pulls them from there (each CC gets all Interrupts (broadcast)). For getting next Interrupt the former one has to be removed (by POST resourceURL/fifo (pull)).</p>
-<ul>
-<li><strong>POST resourceURL (push)</strong>: SC creates Interrupt for interrupting a computation of a formerly posted Solution.</li>
-<li><strong>POST resourceURL/fifo (pull)</strong>: each CC pulls next available Interrupt. If this Interrupt matches a currently computed Solution (affects only ''one'' CC), its computation will be finished, otherwise (all other CCs) it will be ignored.</li>
-<li><strong>GET resourceURL/fifo (look)</strong>: for debugging purposes only.</li>
-</ul>
-<p>Notes:</p>
-<ul>
-<li>For getting Interrupts in sensible time, CCs have to poll the queue often enough.</li>
-<li>CCs have to remove all Interrupt messages not affecting them (from CC point of view it has its own queue getting all broadcasted messages). This should be done regularily ''outside'' computations, too.</li>
-</ul>
-<h2 id="message">Message</h2>
-<h3 id="interrupt-json-definition-by-example-informal">Interrupt JSON Definition by Example (informal)</h3>
-<pre><code>{ &quot;Interrupt&quot;: // wrapper
-{
-  &quot;postTime&quot; : &quot;1985-04-13T18:00:00.12Z&quot;, // must
-  &quot;ID&quot;       : &quot;#11&quot;, // must, for tracking and debugging
-  &quot;comment&quot;  : &quot;don't wanna wait anymore&quot;, // opt
-
-  &quot;Solution&quot; :
-  {
-    &quot;ID&quot; : &quot;#37&quot; // ID of Solution formerly generated by SC
-  } // Solution
+<h1 id="computation-task-json-message">Computation Task JSON Message</h1>
+<p>A <em>computation task</em>  is the result of a possibly manipulated <em>computation template</em>.
+It contains the changes made on the template.
+Together with the template, a <em>computation task</em> forms a <em>computation</em> that is
+sent to the backend.</p>
+<p>In the context of a learning environment, a <em>computation task</em> can be seen as a
+<em>Solution</em>.</p>
+<h2 id="example-informal">Example (informal)</h2>
+<pre><code>{ &quot;template&quot; : &quot;11483f23-95bf-424a-98a5-ee5868c85c3e&quot;, // uuid of corresponding computation template
+  &quot;arguments&quot; : {
+     &quot;__STEPWIDTH__&quot; : &quot;0.5&quot; // parameter values from template, filled out by frontend
+  },
+  &quot;metadata&quot; : {
+      &quot;comment&quot; : &quot;Die war aber schwer!&quot;,
+  },
+  &quot;parts&quot; : 
+    [
+      { &quot;identifier&quot;: &quot;codeFromStudent&quot;, // must: identifier of template part that has changed
+        &quot;content&quot;   : &quot;dm9pZCBiYXIoKSB7IHByaW50ZigiYmFyIQoiKTsKfQo&quot; // changed source from user 
+                                               // decoded: void bar() { printf(\&quot;bar!\\n\&quot;);\n}\n
+        // other fields defining this (text) element must *not* be repeated here.
+      }
+      // unchanged elements needn't be repeated here
+    ]
 }
-} // &quot;Interrupt&quot;
 </code></pre>
-<h3 id="interrupt-json-format">Interrupt JSON Format</h3>
-<p>wrapper "Interrupt" around the following</p>
+<h2 id="explaining-the-json-format">Explaining the JSON Format</h2>
 <table>
 <thead>
 <tr>
@@ -239,55 +161,69 @@
 <th>Opt / Must</th>
 <th>Description</th>
 <th>Comment</th>
+<th>AS</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>postTime</td>
-<td>string UTC</td>
+<td>template</td>
+<td>string (UUID)</td>
 <td>must</td>
-<td>timestamp from SC</td>
-<td>Timestamp from SC: in addition a CC side timestamp could be made.</td>
+<td>computation template identifier</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>ID</td>
-<td>string</td>
-<td>must</td>
-<td>unique ID created by SC (automatically)</td>
-<td>For tracking and debugging purposes.</td>
+<td>arguments</td>
+<td>{PARAM_ID: value, ..., PARAM_ID: value}</td>
+<td>opt</td>
+<td>arguments of, e.g., <em>configuration.commandLineArguments</em> extracted by the frontend</td>
+<td>see <a href="../computation_template/#explaining-the-json-format">computation template</a></td>
+<td></td>
 </tr>
 <tr>
-<td>comment</td>
+<td>metadata</td>
+<td>struct</td>
+<td>opt</td>
+<td>contains information for frontend</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>metadata --comment</td>
 <td>string</td>
 <td>opt</td>
+<td>comment from user</td>
 <td></td>
-<td></td>
+<td>implemented in frontend?</td>
 </tr>
 <tr>
-<td>Solution</td>
-<td>struct</td>
-<td>must</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Solution --ID</td>
-<td>String</td>
-<td>must</td>
-<td>refers to unique Solution ID</td>
+<td>parts</td>
+<td>[{...}, {...}, ...]</td>
+<td>opt</td>
+<td>array containing <em>modified</em> <a href="../computation_template/#json-objects-in-parts">part objects</a>. Only <em>identifier</em>- and <em>content</em>-attributes are allowed. Only "modifiable" or "template" parts can be referenced here (see <em>access</em>-attribute).</td>
+<td>The frontend creates the content for "template" parts. See <a href="#notes-for-template-parts">notes</a>.</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="notes">Notes</h3>
-<ul>
-<li>The computation the Interrupt applies to is defined by<ul>
-<li>Solution--ID above, and</li>
-<li>sender identity: this is given outside this JSON-Message.</li>
-</ul>
-</li>
-<li>An alternative could be to use UUIDs for Solution--IDs: but we already need/have some sender identity for routing back Results to Solution senders (and can use it here, too).</li>
-</ul></div>
+<h3 id="notes-for-template-parts">Notes for template parts</h3>
+<p>The frontend will encode parts with <em>access</em>-value "template" as JSON messages with
+the following structure:</p>
+<pre><code>{ &quot;PARAM_ID1&quot; : &quot;value&quot;,
+  &quot;PARAM_ID2&quot; : &quot;value_2&quot;,
+  ...
+  &quot;PARAM_IDn&quot; : &quot;value_n&quot;
+}
+</code></pre>
+<p><em>PARAM_ID</em> is the reference (key) to a parameter name inside the mustache template.
+"value" is the selected value of the user in the frontend.</p>
+<h2 id="evaluation-task">Evaluation Task</h2>
+<p>The feature of ViPLab to automatically evaluate student code (correction service)
+is still possible in ViPLab 3.0. The code needed for evaluation is send to the 
+correction server as a JSON message with the same structure as a <em>Computation Task</em>.
+The only difference is, that here all <em>parts</em> can be replaced, regardless of there
+<em>access</em>-settings.</p></div>
             </div>
         </div>
 
