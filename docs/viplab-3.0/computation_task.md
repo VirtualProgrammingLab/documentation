@@ -60,6 +60,7 @@ the following structure:
 <table>
   <tr>
     <th>Parameter guitype</th>
+    <th>Example</th>
     <th>Returns</th>
   </tr>
   <tr>
