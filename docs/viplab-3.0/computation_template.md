@@ -615,7 +615,7 @@ An object in array parts[] has the following members:
 |metadata | struct | opt | contains information mainly for the frontend |
 |metadata --name |string |opt | additional description of this part | To be shown in the frontend | Where? Is it used?
 |parameters | array of parameter-objects | opt | definition of [parameters](#json-object-parameter) that are injected to *content* at runtime | Any number of parameters can be specified, but the PARAM_ID (identifier) has to be unique.
-|content |string |must |base64url-encoded source code | Can contain mustache expressions with PARAM_IDs (identifiers) if the access type of this part is "template".
+|content |string |must |base64url-encoded source code | Can contain [Handlebars.js](https://handlebarsjs.com/guide/) expressions with PARAM_IDs (identifiers) if the access type of this part is "template".
 
 #### Notes on access levels in parts
 
