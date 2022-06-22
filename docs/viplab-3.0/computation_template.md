@@ -42,8 +42,7 @@ Note: `//` with text following until EOL is a comment,
           "access"    : "visible",   // it is rendered, but can not be changed
           "metadata"  : // what has to be moved to files ?
           { 
-            "name"    : "Info: source before your code.", // name of element in frontend
-            "emphasis"  : "low"                           // optional (for rendering)          
+            "name"    : "Info: source before your code." // name of element in frontend     
           },
           "content"   : "I2luY2x1ZGUgPHN0ZGlvLmg-Cg"      // source (base64url encoded) 
                                                           // decoded: #include <stdio.h>\n
@@ -53,8 +52,7 @@ Note: `//` with text following until EOL is a comment,
           "access"    : "modifiable",             // it can be edited in the frontend
           "metadata"  :
           { 
-            "name"    : "Fill in your code!",
-            "emphasis"  : "medium"
+            "name"    : "Fill in your code!"
           },
           "content" : "dm9pZCBsZWZ0cGFkX2JhcigpIHsgLyogV3JpdGUgY29kZSB0aGF0IHByaW50cyAiYmFyIiBhbmQgYWRkcyB0aGUgcG9zc2liaWxpdHkgdG8gc3BlY2lmeSBhIGZpZWxkLXdpZHRoICovDQoNCn0"
             // source (template)
@@ -65,8 +63,7 @@ Note: `//` with text following until EOL is a comment,
           "access"    : "visible",
           "metadata"  :
           { 
-            "name"      : "Info: source after your code calling bar() in it.",
-            "emphasis"  : "low",
+            "name"      : "Info: source after your code calling bar() in it."
           },
           "content" : "aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ" // source
                                                 // decoded: int main() { bar(); return 0; }
@@ -138,8 +135,7 @@ Note: `//` with text following until EOL is a comment,
           "identifier": "f3fc4404-3529-4962-b252-47bc4ddd02a1",
           "access": "template",
           "metadata": {
-            "name": "Parameter in part",
-            "emphasis": "low"
+            "name": "Parameter in part"
           },
           "parameters" : 
           [
@@ -404,8 +400,7 @@ Note: `//` with text following until EOL is a comment,
           "identifier": "f3fc4404-3529-4962-b252-47bc4ddd02a2",
           "access": "template",
           "metadata": {
-            "name": "Parameter in part",
-            "emphasis": "low"
+            "name": "Parameter in part"
           },
           "parameters" : 
           [
@@ -418,13 +413,15 @@ Note: `//` with text following until EOL is a comment,
                 "description" : "Enter some code"
               },
               "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IA0KLy8gUHJpbnQgJ0hlbGxvIFdvcmxkJyANCn0"]
+              // decoded: 
+              // {
+              // "codeSnippet" : "{{__default__}}"
+              // }
             }
           ],
-          "content": "ew0KImNvZGVTbmlwcGV0IiA6ICJ7e19fZGVmYXVsdF9ffX0iDQp9"
+          "content": "e3t7X19kZWZhdWx0X199fX0"
           // decoded: 
-          // {
-          // "codeSnippet" : "{{__default__}}"
-          // }
+          // {{{__default__}}}
         }
       ]
     }
@@ -616,7 +613,6 @@ An object in array parts[] has the following members:
 |access | one of {"invisible", "visible", "modifiable", "template"} | must | defines the access level of this part for the user | see [Notes on access levels](#notes-on-access-levels-in-parts) for more details |
 |metadata | struct | opt | contains information mainly for the frontend |
 |metadata --name |string |opt | additional description of this part | To be shown in the frontend | Where? Is it used?
-|metadata --emphasis | One of {"low", *"medium"*, "high"} |opt |info for rendering | | Still needed? |
 |parameters | array of parameter-objects | opt | definition of [parameters](#json-object-parameter) that are injected to *content* at runtime | Any number of parameters can be specified, but the PARAM_ID (identifier) has to be unique.
 |content |string |must |base64url-encoded source code | Can contain mustache expressions with PARAM_IDs (identifiers) if the access type of this part is "template".
 
