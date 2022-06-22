@@ -161,7 +161,7 @@ In Viplab 2.0, the following MIMEtypes where allowed. They contain some custom d
 * application/x-vgf3: generated graphics output in 'ViP graphics format 3D'
 * application/x-vgfc: generated graphics output in 'ViP graphics format contour plot'.|
 
-Additionally, the following types are supperted:
+Additionally, the following types are supported:
 
 * image/jpeg
 * application/vnd.kitware
