@@ -382,7 +382,7 @@ the following structure:
           "decription" : "Enter some code"
         },
         "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IC8vIFByaW50ICdIZWxsbyBXb3JsZCcgfQ"],
-        "validation": "pattern"
+        "validation": "none"
       }
       </pre>
       Editor Result:

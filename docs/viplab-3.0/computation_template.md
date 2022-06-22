@@ -56,9 +56,9 @@ Note: `//` with text following until EOL is a comment,
             "name"    : "Fill in your code!",
             "emphasis"  : "medium"
           },
-          "content" : "dm9pZCBiYXIoKSB7IC8qIFNjaHJlaWJlbiBTaWUgaGllciBDb2RlLCBkZXIgImJhciIgYXVzZ2lidC4gKi8KCn0K"
+          "content" : "dm9pZCBsZWZ0cGFkX2JhcigpIHsgLyogV3JpdGUgY29kZSB0aGF0IHByaW50cyAiYmFyIiBhbmQgYWRkcyB0aGUgcG9zc2liaWxpdHkgdG8gc3BlY2lmeSBhIGZpZWxkLXdpZHRoICovDQoNCn0"
             // source (template)
-            // decoded: void bar() { /* Schreiben Sie hier Code, der "bar" ausgibt. */\n\n}\n 
+            // decoded: void leftpad_bar() { /* Write code that prints "bar" and adds the possibility to specify a field-width */\n\n}\n 
         },
         { 
           "identifier": "postscript",
@@ -162,6 +162,9 @@ Note: `//` with text following until EOL is a comment,
             }
           ],
           "content": "W2NvZmZlZSBwcmVmZXJlbmNlXQpjb2ZmZWVUZW1wZXJhdHVyZT17e19fc2xpZGVyU2luZ2xlX199fQ"
+          // decoded: 
+          // [coffee preference]
+          // coffeeTemperature={{__sliderSingle__}}
         },
         {
           "identifier": "ceb051d8-b50c-4814-983a-b9d703cae0c6",
@@ -374,6 +377,17 @@ Note: `//` with text following until EOL is a comment,
             }
           ],
           "content"   : "W2Fib3V0IHlvdV0NCmxpa2VkVGhpbmdzPXt7X19jaGVja2JveF9ffX0NCmZhdm9yaXRlUEw9e3tfX3JhZGlvQnV0dG9uX199fQ0KZnJpZGdlPXt7X19kcm9wZG93blNpbmdsZV9ffX0NCmRhbmNpbmc9e3tfX2Ryb3Bkb3duTXVsdGlwbGVfX319DQpkaXNsaWtlZFRoaW5ncz17e19fdG9nZ2xlX199fQ0KcmFuZG9tTnVtYmVycz17e19fc2xpZGVyTXVsdGlwbGVfX319DQpuYW1lPXt7X19pbnB1dFRleHRXT01heGxlbmd0aF9ffX0NCmNocmlzdG1hc1dpc2g9e3tfX2lucHV0VGV4dFdNYXhsZW5ndGhfX319DQphZ2U9e3tfX2lucHV0TnVtYmVyX199fQ"
+          // decoded:
+          // [about you]
+          // likedThings={{__checkbox__}}
+          // favoritePL={{__radioButton__}}
+          // fridge={{__dropdownSingle__}}
+          // dancing={{__dropdownMultiple__}}
+          // dislikedThings={{__toggle__}}
+          // randomNumbers={{__sliderMultiple__}}
+          // name={{__inputTextWOMaxlength__}}
+          // christmasWish={{__inputTextWMaxlength__}}
+          // age={{__inputNumber__}}
         }
       ]
     },
@@ -407,12 +421,16 @@ Note: `//` with text following until EOL is a comment,
             }
           ],
           "content": "ew0KImNvZGVTbmlwcGV0IiA6ICJ7e19fZGVmYXVsdF9ffX0iDQp9"
+          // decoded: 
+          // {
+          // "codeSnippet" : "{{__default__}}"
+          // }
         }
       ]
     }
   ], 
   "configuration" :
-    { "resources.image"  : "name://viplab-example-image",
+    { "resources.image"  : "name://viplab/viplab-example-image",
       "resources.volume" : "/data/shared",
       "resources.memory" : "1g",
       "resources.numCPUs" : 1
@@ -471,7 +489,6 @@ Note: `//` with text following until EOL is a comment,
 ##### csv JSON object
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
 |---------------|----------------------------------------|-----------|------------|--------|----|
-|identifier | string | opt | Identifier of output object | | |
 |basename | string | opt | Basename defines connected files: Path of file begins with basename | | |
 |xlabel | struct | opt | Define labels for csv-files | | |
 |xlabel --key | string | opt | key for x-axis given in csv header | | |
@@ -487,7 +504,6 @@ Note: `//` with text following until EOL is a comment,
 ##### vtk JSON object
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
 |---------------|----------------------------------------|-----------|------------|--------|----|
-|identifier | string | opt | Identifier of output object | | |
 |basename | string | opt | Basename defines connected files: Path of file begins with basename | | |
 
 ### C checking semantics
