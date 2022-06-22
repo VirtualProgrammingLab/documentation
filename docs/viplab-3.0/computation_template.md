@@ -412,11 +412,12 @@ Note: `//` with text following until EOL is a comment,
                 "name": "code",
                 "description" : "Enter some code"
               },
-              "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IA0KLy8gUHJpbnQgJ0hlbGxvIFdvcmxkJyANCn0"]
+              "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IA0KLy8gUHJpbnQgJ0hlbGxvIFdvcmxkJyANCn0"],
               // decoded: 
               // {
               // "codeSnippet" : "{{__default__}}"
               // }
+              "validation": "none"
             }
           ],
           "content": "e3t7X19kZWZhdWx0X199fX0"
