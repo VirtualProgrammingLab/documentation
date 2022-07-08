@@ -65,8 +65,7 @@ the following structure:
   <tr>
     <td>checkbox</td>
     <td>
-      Checkbox Example:
-      <pre>
+      ``` json title="Checkbox Example"
       {
         "mode" : "fixed",
         "identifier" : "__checkbox__", 
@@ -90,11 +89,10 @@ the following structure:
         ],
         "validation": "anyof"
       } 
-      </pre>
-      Checkbox Returns:
-      <pre>
+      ```
+      ``` title="Checkbox Returns"
       ["programming", "music"] 
-      </pre>
+      ```
     </td>
     <td>
       Array of Strings
@@ -103,8 +101,7 @@ the following structure:
   <tr>
     <td>radio</td>
     <td>
-      Radio Example:
-      <pre>
+      ``` json title="Radio Example"
       {
         "mode" : "fixed",
         "identifier" : "__radioButton__", 
@@ -131,11 +128,10 @@ the following structure:
         ],
         "validation": "oneof"
       }
-      </pre>
-      Radio Returns:
-      <pre>
+      ```
+      ``` title="Radio Returns"
       "Java"
-      </pre>
+      ```
     </td>
     <td>
       String
@@ -144,8 +140,7 @@ the following structure:
   <tr>
     <td>dropdown (single)</td>
     <td>
-      Dropdown (single) Example: 
-      <pre>
+      ``` json title="Dropdown (single) Example"
       {
         "mode" : "fixed",
         "identifier" : "__dropdownSingle__", 
@@ -178,11 +173,10 @@ the following structure:
         ],
         "validation": "oneof"
       }
-      </pre>
-      Dropdown (single) Returns:
-      <pre> 
+      ```
+      ``` title=" Dropdown (single) Returns"
       "never"
-      </pre>
+      ```
     </td>
     <td>
       String
@@ -191,8 +185,7 @@ the following structure:
   <tr>
     <td>dropdown (multiple)</td>
     <td>
-      Dropdown (multiple) Example: 
-      <pre>
+      ``` json title="Dropdown (multiple) Example"
       {
         "mode" : "fixed",
         "identifier" : "__dropdownMultiple__", 
@@ -227,11 +220,10 @@ the following structure:
         ], 
         "validation": "anyof"
       }
-      </pre>
-      Dropdown (multiple) Result:
-      <pre>
+      ```
+      ``` title="Dropdown (multiple) Result"
       ["Last Christmas", "Thats Christmas To Me"]
-      </pre>
+      ```
     </td>
     <td>
       Array of Strings
@@ -240,8 +232,7 @@ the following structure:
   <tr>
     <td>toggle</td>
     <td>
-      Toggle Example: 
-      <pre>
+      ``` json title="Toggle Example"
       {
         "mode" : "fixed",
         "identifier" : "__toggle__", 
@@ -264,11 +255,10 @@ the following structure:
         ], 
         "validation": "anyof"
       }
-      </pre>
-      Toggle Result:
-      <pre>
+      ```
+      ``` title="Toggle Result"
       ["Spiders"]
-      </pre>
+      ```
     </td>
     <td>
       Array of Strings
@@ -277,8 +267,7 @@ the following structure:
   <tr>
     <td>slider (single)</td>
     <td>
-      Slider (single) Example:
-      <pre>
+      ``` json title="Slider (single) Example"
       {
         "mode" : "any",
         "identifier" : "__sliderSingle__", 
@@ -296,11 +285,10 @@ the following structure:
         "step": 10,
         "validation": "range"
       }
-      </pre>
-      Slider (single) Result:
-      <pre>
+      ```
+      ``` title="Slider (single) Result"
       75
-      </pre>
+      ```
     </td>
     <td>
       Number
@@ -309,8 +297,7 @@ the following structure:
   <tr>
     <td>slider (multiple)</td>
     <td>
-      Slider (multiple) Example:
-      <pre>
+      ``` json title="Slider (multiple) Example"
       {
         "mode" : "any",
         "identifier" : "__sliderMultiple__", 
@@ -330,11 +317,10 @@ the following structure:
         "step": 5,
         "validation": "range"
       }
-      </pre>
-      Slider (multiple) Result:
-      <pre>
+      ```
+      ``` title="Slider (multiple) Result"
       [25, 50, 75]
-      </pre>
+      ```
     </td>
     <td>
       Array of Numbers
@@ -343,8 +329,7 @@ the following structure:
   <tr>
     <td>input_field</td>
     <td>
-      Input_field Example:
-      <pre>
+      ``` json title="Input_field Example"
       {
         "mode" : "any",
         "identifier" : "__inputText__", 
@@ -357,11 +342,10 @@ the following structure:
         "default" : [""],
         "validation": "none"
       }
-      </pre>
-      Input_field Result:
-      <pre>
+      ```
+      ``` title="Input_field Result"
       "base64:S2F0aHJ5bg"
-      </pre>
+      ```
     </td>
     <td>
       If the input_field is of type number: Number
@@ -371,8 +355,7 @@ the following structure:
   <tr>
     <td>editor</td>
     <td>
-      Editor Example:
-      <pre>
+      ``` json title="Editor Example"
       {
         "mode" : "any",
         "identifier" : "__default__", 
@@ -382,14 +365,12 @@ the following structure:
           "decription" : "Enter some code"
         },
         "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IC8vIFByaW50ICdIZWxsbyBXb3JsZCcgfQ"],
-        "validation": "pattern"
+        "validation": "none"
       }
-      </pre>
-      Editor Result:
-      <pre>
+      ```
+      ``` title="Editor Result"
       "base64:aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IC8vIFByaW50ICdIZWxsbyBXb3JsZCcgfQ"
-      </pre>
-
+      ```
     </td>
     <td>
       Prefixed ("base64:") and Base64URL-encoded String - is decoded by Websocket API, before it is sent to Backend

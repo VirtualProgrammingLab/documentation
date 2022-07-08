@@ -1,5 +1,2 @@
-<<<<<<< HEAD
 mkdocs==1.3.0
-=======
-mkdocs==1.3.0
->>>>>>> upstream/viplab3.0-json
+mkdocs-material
