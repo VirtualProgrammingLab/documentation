@@ -15,47 +15,55 @@ Note: `//` with text following until EOL is a comment,
 
 ### C Student Example
 ```
-{ "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
-  "version" : "3.0.0", // version of this JSON-spec definition
+{ 
+  "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
+  "version" : "3.0.0" // version of this JSON-spec definition
   "metadata": // information for frontend
-    { "displayName" : "Aufgabe 1",  // name of computation template shown in frontend
-      "description" : "Schreiben Sie eine C-Funktion..." // short description (could be used
+    { 
+      "displayName" : "Aufgabe 1",  // name of computation template shown in frontend
+      "description" : "Schreiben Sie eine C-Funktion...", // short description (could be used  
                                                      // as subtitle, further descriptions in "parts").
     },
   "environment" : "C", // important for interpreting configuration 
   "files" : // must: at least one array element
   [
-    { "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3e", // uuid, for referencing
-      "path"      : "code.c"                                // filename on backend 
+    { 
+      "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3e", // uuid, for referencing
+      "path"      : "code.c",                                // filename on backend 
       "metadata"  : // information for frontend
-        {  "syntaxHighlighting": "C",                    // optional (default: "none")
+        { 
+          "decription" : "Programming exercise to test your knowledge of C",
+          "syntaxHighlighting": "C",                    // optional (default: "none")
         },
       "parts" : // must: at least one array element
       [ 
-        { "identifier": "preamble",
+        { 
+          "identifier": "preamble",
           "access"    : "visible",   // it is rendered, but can not be changed
           "metadata"  : // what has to be moved to files ?
-          { "name"    : "Info: source before your code.", // name of element in frontend
-            "emphasis"  : "low"                           // optional (for rendering)          
+          { 
+            "name"    : "Info: source before your code." // name of element in frontend     
           },
           "content"   : "I2luY2x1ZGUgPHN0ZGlvLmg-Cg"      // source (base64url encoded) 
                                                           // decoded: #include <stdio.h>\n
         },
-        { "identifier": "codeFromStudent",
+        { 
+          "identifier": "codeFromStudent",
           "access"    : "modifiable",             // it can be edited in the frontend
           "metadata"  :
-          { "name"    : "Fill in your code!",
-            "emphasis"  : "medium"
+          { 
+            "name"    : "Fill in your code!"
           },
-          "content" : "dm9pZCBiYXIoKSB7IC8qIFNjaHJlaWJlbiBTaWUgaGllciBDb2RlLCBkZXIgImJhciIgYXVzZ2lidC4gKi8KCn0K"
+          "content" : "dm9pZCBsZWZ0cGFkX2JhcigpIHsgLyogV3JpdGUgY29kZSB0aGF0IHByaW50cyAiYmFyIiBhbmQgYWRkcyB0aGUgcG9zc2liaWxpdHkgdG8gc3BlY2lmeSBhIGZpZWxkLXdpZHRoICovDQoNCn0"
             // source (template)
-            // decoded: void bar() { /* Schreiben Sie hier Code, der "bar" ausgibt. */\n\n}\n 
+            // decoded: void leftpad_bar() { /* Write code that prints "bar" and adds the possibility to specify a field-width */\n\n}\n 
         },
-        { "identifier": "postscript",
+        { 
+          "identifier": "postscript",
           "access"    : "visible",
           "metadata"  :
-          { "name"      : "Info: source after your code calling bar() in it.",
-            "emphasis"  : "low",
+          { 
+            "name"      : "Info: source after your code calling bar() in it."
           },
           "content" : "aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ" // source
                                                 // decoded: int main() { bar(); return 0; }
@@ -66,22 +74,31 @@ Note: `//` with text following until EOL is a comment,
   "parameters" : // parameters can be used to supply values at runtime to the configuration
   [
     {
-      "mode" : "any", // depending on guiType either any or fixed
-      "identifier" : "__STEPWIDTH__", 
-      "metadata" : {
-        "guiType" : "input_field",
-        "type": "number",
-        "name": "stepwidth"
+      "mode": "fixed", // in this section, the parameters can only be of mode fixed
+      "identifier": "__STEPWIDTH__",
+      "metadata": {
+        "guiType": "dropdown",
+        "name": "fieldwidth",
+        "decription" : "Fieldwidth that is used to specify the width of the field of the output. To give an example, if the fieldwidth is 6, the output of bar(6) is padded like this: '   bar'",
       },
-      "default": [0.001], //default
-      "min": 0,
-      "max": 1,
-      "step": 0.001,
-      "validation" : "range" // one of [range, pattern (regex), anyof/oneof]
+      "options": [
+        {
+          "value": "0.05",
+          "selected": true
+        },
+        {
+          "value": "0.5"
+        },
+        {
+          "value": "1"
+        }
+      ],
+      "validation": "onlyone"
     }
   ],
   "configuration" :
-  { "compiling.compiler" : "gcc",                  // string
+  { 
+    "compiling.compiler" : "gcc",                  // string
     "compiling.flags"    : "-O2 -Wall"             // string
     "checking.sources"   : ["codeFromStudent"],    // identifier to parts
     "checking.forbiddenCalls": "system execve",    // forbidden call names separated by WS
@@ -94,30 +111,31 @@ Note: `//` with text following until EOL is a comment,
 
 ### Parameters Example
 ```
-{ "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3f", // uuid, created by a frontend launcher
-  "version" : "3.0.0" // version of this JSON-spec definition
-  "metadata": // information for frontend
-    { "displayName" : "Parameters Example",  // name of computation template shown in frontend
-      "description" : "This is an example", // short description (could be used  
-                                                     // as subtitle, further descriptions in "parts").
-    },
-  "environment" : "C", // important for interpreting configuration 
-  "files" : // must: at least one array element
+{ 
+  "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3f", 
+  "version" : "3.0.0",
+  "metadata": { 
+    "displayName" : "Parameters Example",  
+    "description" : "This is a 'Hello World' example showing the usage of parameters. Please introduce yourself so that the Hello World-Container can print your information...",
+    "viewer" : ["CSV", "ParaView", "Image"]
+  },
+  "environment" : "Container", 
+  "files" : 
   [
-    { "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3f", // uuid, for referencing
-      "path"      : "params.input"                                // filename on backend 
-      "metadata"  : // information for frontend
-        {  "syntaxHighlighting": "ini",                    // optional (default: "none")
+    { 
+      "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3f", 
+      "path"      : "params.ini",                              
+      "metadata"  : 
+        {  
+          "syntaxHighlighting": "ini"                   
         },
-      "parts" : // must: at least one array element
-      [ 
-
+      "parts" : 
+      [
         {
-          "identifier": "part-contains-slider",
+          "identifier": "f3fc4404-3529-4962-b252-47bc4ddd02a1",
           "access": "template",
           "metadata": {
-            "name": "Parameter in part",
-            "emphasis": "low"
+            "name": "Parameter in part"
           },
           "parameters" : 
           [
@@ -127,7 +145,8 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "slider",
                 "name": "temperature",
-                "vertical": false
+                "vertical": false,
+                "description" : "How hot do you like your coffee? (in degrees Celsius) - Tip: Typical Serving Temperature lies between 65 and 70 Degrees"
               },
               "default": [
                 10
@@ -138,13 +157,17 @@ Note: `//` with text following until EOL is a comment,
               "validation": "range"
             }
           ],
-          "content": "VGhpcyBpcyBhIFRleHQ6Ont7X19zbGlkZXJTaW5nbGVfX319OjpUaGlzIGlzIGEgVGV4dA=="
+          "content": "W2NvZmZlZSBwcmVmZXJlbmNlXQpjb2ZmZWVUZW1wZXJhdHVyZT17e19fc2xpZGVyU2luZ2xlX199fQ"
+          // decoded: 
+          // [coffee preference]
+          // coffeeTemperature={{__sliderSingle__}}
         },
         {
           "identifier": "ceb051d8-b50c-4814-983a-b9d703cae0c6",
           "access"    : "template",
           "metadata"  :
-              { "name"      : "params.input file"
+              { 
+                "name"      : "params.ini file part"
               },
           "parameters":
           [
@@ -153,11 +176,13 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__checkbox__", 
               "metadata" : {
                 "guiType": "checkbox",
-                "name": "options"
+                "name": "Things I like",
+                "description" : "Select things you like"
               },
               "options": [
                 {
-                  "value" : "verbose",
+                  "text" : "Programming",
+                  "value" : "programming",
                   "selected" : true
                 },
                 {
@@ -174,7 +199,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__radioButton__", 
               "metadata" : {
                 "guiType": "radio",
-                "name": "backend"
+                "name": "Favorite PL",
+                "description" : "Select your favorite programming language"
               },
               "options": [
                 {
@@ -189,7 +215,8 @@ Note: `//` with text following until EOL is a comment,
                   "disabled" : true
                 },
                 {
-                  "value" : "test"
+                  "text" : "Sssss... Python ...ssssS",
+                  "value" : "Python"
                 }
               ],
               "validation": "oneof"
@@ -199,7 +226,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__dropdownSingle__", 
               "metadata" : {
                 "guiType": "dropdown",
-                "name": "model"
+                "name": "Fridge",
+                "description" : "How often do look into the fridge a day?"
               },
               "options": [
                 {
@@ -211,7 +239,8 @@ Note: `//` with text following until EOL is a comment,
                   "selected" : true
                 },
                 {
-                  "value" : "1pnc"
+                  "text" : "1 a day",
+                  "value" : "Once a day"
                 },
                 {
                   "value" : "1pncmin"
@@ -230,7 +259,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__dropdownMultiple__", 
               "metadata" : {
                 "guiType": "dropdown",
-                "name": "model"
+                "name": "Dance Time",
+                "description" : "To which songs would you dance in the kitchen?"
               },
               "options": [
                 {
@@ -238,7 +268,8 @@ Note: `//` with text following until EOL is a comment,
                   "disabled" : true
                 },
                 {
-                  "value" : "1p",
+                  "text" : "Last Christmas (aka the one that drives everybody else crazy)",
+                  "value" : "Last Christmas",
                   "selected" : true
                 },
                 {
@@ -263,7 +294,8 @@ Note: `//` with text following until EOL is a comment,
               "identifier" : "__toggle__", 
               "metadata" : {
                 "guiType": "toggle",
-                "name": "options"
+                "name": "NO!",
+                "description" : "What do you dislike?"
               },
               "options": [
                 {
@@ -271,7 +303,8 @@ Note: `//` with text following until EOL is a comment,
                   "selected" : true
                 },
                 {
-                  "value" : "debug"
+                  "text" : "All kinds of Bugs (also the ones living in your Computer)",
+                  "value" : "All kinds of Bugs"
                 },
                 {
                   "value" : "make_plot"
@@ -285,7 +318,8 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "slider",
                 "name": "temperature",
-                "vertical": true
+                "vertical": true,
+                "description" : "Choose three random numbers to be output by the container"
               },
               "default": [
                 25,
@@ -299,11 +333,12 @@ Note: `//` with text following until EOL is a comment,
             },
             {
               "mode" : "any",
-              "identifier" : "__inputTextWOMaxlangth__", 
+              "identifier" : "__inputTextWOMaxlength__", 
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "text",
-                "name": "file_name"
+                "name": "name",
+                "description" : "Enter your name"
               },
               "default" : [""],
               "validation": "pattern"
@@ -314,7 +349,8 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "text",
-                "name": "file_name"
+                "name": "Christmas Wish",
+                "description" : "Enter what you wish for at christmas"
               },
               "maxlength": 200,
               "default" : [""],
@@ -326,37 +362,76 @@ Note: `//` with text following until EOL is a comment,
               "metadata" : {
                 "guiType" : "input_field",
                 "type": "number",
-                "name": "time_delay"
+                "name": "Age",
+                "description" : "Enter your current age"
               },
               "default": [10],
               "min": 0,
               "max": 500,
               "step": 0.1,
               "validation": "range"
-            },
+            }
+          ],
+          "content"   : "W2Fib3V0IHlvdV0NCmxpa2VkVGhpbmdzPXt7X19jaGVja2JveF9ffX0NCmZhdm9yaXRlUEw9e3tfX3JhZGlvQnV0dG9uX199fQ0KZnJpZGdlPXt7X19kcm9wZG93blNpbmdsZV9ffX0NCmRhbmNpbmc9e3tfX2Ryb3Bkb3duTXVsdGlwbGVfX319DQpkaXNsaWtlZFRoaW5ncz17e19fdG9nZ2xlX199fQ0KcmFuZG9tTnVtYmVycz17e19fc2xpZGVyTXVsdGlwbGVfX319DQpuYW1lPXt7X19pbnB1dFRleHRXT01heGxlbmd0aF9ffX0NCmNocmlzdG1hc1dpc2g9e3tfX2lucHV0VGV4dFdNYXhsZW5ndGhfX319DQphZ2U9e3tfX2lucHV0TnVtYmVyX199fQ"
+          // decoded:
+          // [about you]
+          // likedThings={{__checkbox__}}
+          // favoritePL={{__radioButton__}}
+          // fridge={{__dropdownSingle__}}
+          // dancing={{__dropdownMultiple__}}
+          // dislikedThings={{__toggle__}}
+          // randomNumbers={{__sliderMultiple__}}
+          // name={{__inputTextWOMaxlength__}}
+          // christmasWish={{__inputTextWMaxlength__}}
+          // age={{__inputNumber__}}
+        }
+      ]
+    },
+    { 
+      "identifier": "22483f42-95bf-984a-98a5-ee9485c85c31", 
+      "path"      : "code.json",                              
+      "metadata"  : 
+        {  
+          "syntaxHighlighting": "json"                   
+        },
+      "parts" : 
+      [
+        {
+          "identifier": "f3fc4404-3529-4962-b252-47bc4ddd02a2",
+          "access": "template",
+          "metadata": {
+            "name": "Parameter in part"
+          },
+          "parameters" : 
+          [
             {
               "mode" : "any",
               "identifier" : "__default__", 
               "metadata" : {
                 "guiType" : "editor", 
-                "name": "code 1"
+                "name": "code",
+                "description" : "Enter some code"
               },
-              "default": ["I2luY2x1ZGUgPHN0ZGlvLmg-Cg"],
-              "validation": "pattern"
-            },
+              "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IA0KLy8gUHJpbnQgJ0hlbGxvIFdvcmxkJyANCn0"],
+              // decoded: 
+              // {
+              // "codeSnippet" : "{{__default__}}"
+              // }
+              "validation": "none"
+            }
           ],
-            "content"   : ""
-         }
-      ] // parts[]
+          "content": "e3t7X19kZWZhdWx0X199fX0"
+          // decoded: 
+          // {{{__default__}}}
+        }
+      ]
     }
-  ], // files[]
+  ], 
   "configuration" :
-    { "resources.image"  : "name://git.iws.uni-stuttgart.de:4567/dumux-repositories/dumux-docker/viplab/test", 
+    { "resources.image"  : "name://viplab/viplab-example-image",
       "resources.volume" : "/data/shared",
       "resources.memory" : "1g",
-      "resources.numCPUs" : 1,
-      "running.entrypoint" : "/data/bin/run.sh",
-      "running.commandLineArguments" : "params.input"
+      "resources.numCPUs" : 1
     }
 }
 ```
@@ -369,13 +444,10 @@ Note: `//` with text following until EOL is a comment,
 |---------------|----------------------------------------|-----------|------------|--------|----|
 |identifier | string (UUID) | must | the identifier of this computation template | can be generated by the frontend launcher | |
 |version | string | opt | version of the json specification | should be given for backwards compatibility |
-|metadata | struct | opt | contains information for frontend | | |
-|metadata --displayName | string | opt | name of computation template shown in frontend | | Makes 'opt' sense for frontend? |
-|metadata --description |string (plain text) |opt |short description |Mostly a few lines. A longer description in different formats can be put in "elements" (see below). | There is nothing 'below'. Where are descriptions actually used in the frontend? |
-|metadata --viewer | one or more (list) of {"Image", "ParaView", "ViPLabGraphics"} | opt | When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable. | | |
+|metadata | struct | opt | contains information for frontend | See [metadata json object](#metadata-json-object) for details about the object | |
 |environment |one of {"C", "C++", "Java", "Matlab", "Octave", "Container", "DuMuX"} | must | Specifies the environment used for the Computation. It defines language, runtime, libraries and tools | | |
 |files | [ {...}, {...}, ... ] |must |array containing [File objects](#json-objects-in-files): there has to be at least one element | | |
-|parameters | [{...}, {...}, ...] | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique identifier (as string) and is a [Parameter object](#json-object-parameter). | For security reasons free text *gui_type*, i.e., text input field or editor, are not allowed here. |
+|parameters | [{...}, {...}, ...] | opt | Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique identifier (as string) and is a [Parameter object](#json-object-parameter). | For security reasons free text *guiType*, i.e., text input field or editor, are not allowed here. **The only allowed parameters are those, that have mode set to fixed** |
 |configuration | struct |opt/must (depends on environment) | Environment specific configurations | Different phases can be configured like compiling, checking (for legal function calls in source code), ... | 
 |configuration --compiling.sources | [FILE_ID, FILE_ID, ...] | must | Array of identifiers of [JSON File objects](#json-objects-in-files). Explicit compilation (only referenced sources will be compiled). | for **C, C++, Java**; The frontend should suggest defaults here, e.g. by suited file suffix ('.c', '.cpp', '.java'). |  name/path (Java) for implicit compiling? check backend?|
 |configuration --compiling.compiler |string |must |compiler to be used, e.g. "gcc" | for **C, C++** | |
@@ -391,12 +463,46 @@ Note: `//` with text following until EOL is a comment,
 |configuration --running.mainClass |string |opt (if unique) / must (if not unique) |class containing "public static void main(String[] args) {" | for **Java**: "args" may be another name. If main function is unique, its correct class should be detected automatically.| |
 |configuration --running.executable |string |must |name of executable to run (as in backend file system)| for **DuMuX** | |
 |configuration --running.entrypoint | string | opt | executable to run inside the container | for **Container**; can contain mustache template syntax for injecting PARAM_IDs (see *parameters*-attribute) |
-|configuration --running.intermediateFilesPattern | string |opt | regex-expression in stdout which file is ready to be transferred | for **Container**| Is this implemented?|
+|configuration --running.intermediateFilesPattern | [ REGEX, REGEX, ... ] | opt | regex-expression in stdout which file is ready to be transferred as intermediate result. The Regex has to return the complete filename as matching group 1 | for **Container**|
 |configuration --running.userId | int | opt | user id of the user that writes files inside the container | for **Container**; needed to set correct permissions |
 |configuration --resources.image | url | must | location of the image to be executed | for **Container**; has to be a tar |
 |configuration --resources.volume | string | opt | path in the container where data is placed | for **Container** | we need workaround for kata containers?! |
 |configuration --resources.memory | string | opt (*64mb*)| memory limit for the container | for **Container** | |
 |configuration --resources.numCPUs | int | opt | number of CPUs for the container | for **Container** | default?; kubernetes map to softlimit cpu-shares...|
+
+### metadata JSON object
+|Key | Type |Opt / Must |Description |Comment | AS |
+|---------------|----------------------------------------|-----------|------------|--------|----|
+|displayName | string | opt | name of computation template shown in frontend | | Makes 'opt' sense for frontend? |
+|description |string (plain text) |opt |short description |Mostly a few lines. A longer description in different formats can be put in "elements" (see below). | There is nothing 'below'. Where are descriptions actually used in the frontend? |
+|output | struct | opt | Gives information about the output to the Frontend | See [output json object](#output-json-object) for details on contained objects | |
+
+#### output JSON object
+|Key | Type |Opt / Must |Description |Comment |
+|---------------|----------------------------------------|-----------|------------|--------|
+|viewer | list containing one or more of {"Image", "ParaView", "ViPLabGraphics", "CSV"} | opt | When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable. | |
+|csv | [ {...}, {...}, ... ] | opt | Details for displaying csv-files | See [csv json object](#csv-json-object) for details on contained objects |
+|vtk | [ {...}, {...}, ... ] | opt | Details for displaying vtk-files | See [vtk json object](#vtk-json-object) for details on contained objects |
+
+##### csv JSON object
+|Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
+|---------------|----------------------------------------|-----------|------------|--------|----|
+|basename | string | opt | Basename defines connected files: Path of file begins with basename | | |
+|xlabel | struct | opt | Define labels for csv-files | | |
+|xlabel --key | string | opt | key for x-axis given in csv header | | |
+|xlabel --label | string | opt | x-axis label for diagram | | |
+|xlabel --factor | string | opt | Multiply x-values with this factor | | |
+|xlabel --format | string | opt | Format the x-axis values according to format string | For information on the avaliable formating take a look at the info given by [Plotly](https://github.com/d3/d3-format/blob/main/README.md#locale_format); Example: To format a number to have two decimals, use "0.2f" | |
+|plots | struct | opt | Define datasets: Provide y-axis labels for y-key given in csv | | For each dataset one diagram is rendered in the result |
+|plots --key | string | opt | key for y-axis given in csv header | | |
+|plots --label | string | opt | y-axis label for diagram | | |
+|xlabel --factor | string | opt | Multiply y-values with this factor | | |
+|plots --format | string | opt | Format the y-axis values according to format string | For information on the avaliable formating take a look at the info given by [Plotly](https://github.com/d3/d3-format/blob/main/README.md#locale_format); Example: To format a number to have two decimals, use "0.2f" | |
+
+##### vtk JSON object
+|Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
+|---------------|----------------------------------------|-----------|------------|--------|----|
+|basename | string | opt | Basename defines connected files: Path of file begins with basename | | |
 
 ### C checking semantics
 08.05.2013: Semantics is "mergeAndInclude" for both prod systems and devel system ("element" unused).
@@ -487,12 +593,16 @@ An object in array files[] has the following members:
 
 |Key |Type (an enum default is marked by _italics_) |Opt / Must |Description|Comment
 |----|----------------------------------------------|-----------|-----------|-------
-|identifier | string (UUID) | must |for later referencing, has to be unique | can be autogenerated by frontend |
+|identifier | string (UUID) | must | for later referencing, has to be unique | can be autogenerated by frontend |
 |path | string | must | absolute path to file | It is *not* allowed to start with '/' |
-|metadata | struct | opt | contains information for frontend | | |
-|metadata --syntaxHighlighting | string (*text*) | opt | Mode of the ace editor. List can be found in on [github](https://github.com/ajaxorg/ace/tree/master/lib/ace/mode) | Examples: "ini", "c_cpp", "matlab", "java". See also [Ace demo](http://ajaxorg.github.io/ace-builds/kitchen-sink.html) | |
+|metadata | struct | opt | contains information for frontend | See definition of [file metadata](#file-metadata-json-object) | |
 |parts | [{...}, {...}, ...] | must | array containing [part objects](#json-objects-in-parts). There has to be at least one. |
 
+### file metadata JSON object
+|Key |Type (an enum default is marked by _italics_) |Opt / Must |Description|Comment
+|----|----------------------------------------------|-----------|-----------|-------
+|syntaxHighlighting | string (*text*) | opt | Mode of the ace editor. List can be found in on [github](https://github.com/ajaxorg/ace/tree/master/lib/ace/mode) | Examples: "ini", "c_cpp", "matlab", "java". See also [Ace demo](http://ajaxorg.github.io/ace-builds/kitchen-sink.html) | 
+|description | string | opt | description of the file | |
 
 ### JSON objects in parts
 
@@ -504,9 +614,8 @@ An object in array parts[] has the following members:
 |access | one of {"invisible", "visible", "modifiable", "template"} | must | defines the access level of this part for the user | see [Notes on access levels](#notes-on-access-levels-in-parts) for more details |
 |metadata | struct | opt | contains information mainly for the frontend |
 |metadata --name |string |opt | additional description of this part | To be shown in the frontend | Where? Is it used?
-|metadata --emphasis | One of {"low", *"medium"*, "high"} |opt |info for rendering | | Still needed? |
 |parameters | array of parameter-objects | opt | definition of [parameters](#json-object-parameter) that are injected to *content* at runtime | Any number of parameters can be specified, but the PARAM_ID (identifier) has to be unique.
-|content |string |must |base64url-encoded source code | Can contain mustache expressions with PARAM_IDs (identifiers) if the access type of this part is "template".
+|content |string |must |base64url-encoded source code | Can contain [Handlebars.js](https://handlebarsjs.com/guide/) expressions with PARAM_IDs (identifiers) if the access type of this part is "template".
 
 #### Notes on access levels in parts
 
@@ -534,7 +643,7 @@ A fixed-type PARAM-object, like *\_\_checkbox\_\_*, has the following members:
 |---------------|----------------------------------------|-----------|------------|--------|
 |metadata | Object | must | JSON object containing information how to render this parameter | See definition of [fixed-type JSON object Parameter-Metadata](#fixed-type-json-object-parameter-metadata) |
 |options | array of objects | must for *gui_type* "checkbox", "radio", "dropdown", "toggle" | specifies the allowed values | See [fixed-type options JSON object](#fixed-type-options-json-object) for details on contained objects|
-|validation | one of {"onlyone", "minone", "any"} | must | See [Parameter validation semantics](#parameter-validation-semantics) for details | |
+|validation | one of {"oneof", "minone", "anyof"} | must | See [Parameter validation semantics](#parameter-validation-semantics) for details | |
 
 #### fixed-type JSON object Parameter-Metadata
 
@@ -544,6 +653,7 @@ A metadata-object, has the following members:
 |---------------|----------------------------------------|-----------|------------|--------|
 | guiType | one of {"checkbox", "radio", "dropdown", "toggle"} | must | specifies how the frontend renders the parameter | | 
 | name | string | must | Label for the parameter | frontend feature |
+| description | string | must | description of the parameter | frontend feature |
 
 #### fixed-type options JSON object
 
@@ -553,7 +663,7 @@ A metadata-object, has the following members:
 |text | string | opt | Text shown besides or as dropdown of the value | |
 |disabled | boolean | opt | Shows disabled options in frontend | Example: { "value" : "Please choose multiple", "disabled" : true } |
 |selected | Boolean | opt | specifies defaults value/values for frontend | the strings have to be part of *values*; for "toogle" given values mean *true* |
-|text | string | opt | Text shown besides or as dropdown of the value | |
+| description | string | must | description of the parameter | frontend feature |
 
 
 #### any-type parameter JSON object
@@ -563,7 +673,7 @@ A any-type PARAM-object, like *\_\_sliderMultiple\_\_*, has the following member
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | 
 |---------------|----------------------------------------|-----------|------------|--------|
 |metadata | Object | must | JSON object containing information how to render this parameter | See definition of [any-type JSON object Parameter-Metadata](#any-type-json-object-parameter-metadata) |
-|default | array of number(s) or string(s) | opt | the default value(s) shown in frontend | |
+|default | array of number(s) or base64url-encoded string(s) | opt | the default value(s) shown in frontend | |
 |min | number | opt | minimal allowed value | for slider, or input_field with type number |
 |max | number | opt | maximal allowed value | for slider, or input_field with type number |
 |step | number | opt | defines together with *min* and *max* attributes a finite set of allowed values | for slider, or input_field with type number |
@@ -586,9 +696,9 @@ A metadata-object, has the following members:
 
 Four types of validation are implemented at the moment:
 
-* **onlyone**: Only one value can be chosen. The value has to be included in *options* and *disabled* for the *value* has to be set to false (is false by default, so *disabled* can also be missing).
+* **oneof**: Only one value can be chosen. The value has to be included in *options* and *disabled* for the *value* has to be set to false (is false by default, so *disabled* can also be missing).
 * **minone**: One or more values can be chosen. The values have to be included in *options* and *disabled* for the *value*s has to be set to false (is false by default, so *disabled* can also be missing).
-* **any**: All of the chosen values have to be included in *options* and *disabled* for the *value*s has to be set to false (is false by default, so *disabled* can also be missing).
+* **anyof**: All of the chosen values have to be included in *options* and *disabled* for the *value*s has to be set to false (is false by default, so *disabled* can also be missing).
 * **range**: A numerical value is checked whether is is between *min* and *max*. If *step* is given a finite number of possible values is computed and the value has to be within this set.
 * **pattern**: A regex pattern that the text value has to fulfill.
 * **none**: If no validation is necessary, because there are no restraints on the value.

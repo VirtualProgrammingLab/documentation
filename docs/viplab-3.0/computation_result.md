@@ -155,13 +155,18 @@ The base artifact object that needs to be extended all other artifacts defined.
 In Viplab 2.0, the following MIMEtypes where allowed. They contain some custom defined types, which need to be keep supported:
 
 * text/plain
-* text/html
 * text/uri-list": links to websides to be presented in SC
 * image/png"
 * application/x-vgf: generated graphics output in 'ViP graphics format'
 * application/x-vgf3: generated graphics output in 'ViP graphics format 3D'
 * application/x-vgfc: generated graphics output in 'ViP graphics format contour plot'.|
 
+Additionally, the following types are supported:
+
+* image/jpeg
+* application/vnd.kitware
+* application/json
+* ...
 
 #### s3file artifact JSON object
 |Key            |Value Type |Opt / Must |Description |Comment |
