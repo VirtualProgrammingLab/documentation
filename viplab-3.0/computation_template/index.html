@@ -136,47 +136,55 @@
 <li>but nevertheless it would help, if JSON parsers could just ignore them.</li>
 </ul>
 <h3 id="c-student-example">C Student Example</h3>
-<pre><code>{ &quot;identifier&quot;  : &quot;11483f23-95bf-424a-98a5-ee5868c85c3e&quot;, // uuid, created by a frontend launcher
-  &quot;version&quot; : &quot;3.0.0&quot;, // version of this JSON-spec definition
+<pre><code>{ 
+  &quot;identifier&quot;  : &quot;11483f23-95bf-424a-98a5-ee5868c85c3e&quot;, // uuid, created by a frontend launcher
+  &quot;version&quot; : &quot;3.0.0&quot; // version of this JSON-spec definition
   &quot;metadata&quot;: // information for frontend
-    { &quot;displayName&quot; : &quot;Aufgabe 1&quot;,  // name of computation template shown in frontend
-      &quot;description&quot; : &quot;Schreiben Sie eine C-Funktion...&quot; // short description (could be used
+    { 
+      &quot;displayName&quot; : &quot;Aufgabe 1&quot;,  // name of computation template shown in frontend
+      &quot;description&quot; : &quot;Schreiben Sie eine C-Funktion...&quot;, // short description (could be used  
                                                      // as subtitle, further descriptions in &quot;parts&quot;).
     },
   &quot;environment&quot; : &quot;C&quot;, // important for interpreting configuration 
   &quot;files&quot; : // must: at least one array element
   [
-    { &quot;identifier&quot;: &quot;22483f42-95bf-984a-98a5-ee9485c85c3e&quot;, // uuid, for referencing
-      &quot;path&quot;      : &quot;code.c&quot;                                // filename on backend 
+    { 
+      &quot;identifier&quot;: &quot;22483f42-95bf-984a-98a5-ee9485c85c3e&quot;, // uuid, for referencing
+      &quot;path&quot;      : &quot;code.c&quot;,                                // filename on backend 
       &quot;metadata&quot;  : // information for frontend
-        {  &quot;syntaxHighlighting&quot;: &quot;C&quot;,                    // optional (default: &quot;none&quot;)
+        { 
+          &quot;decription&quot; : &quot;Programming exercise to test your knowledge of C&quot;,
+          &quot;syntaxHighlighting&quot;: &quot;C&quot;,                    // optional (default: &quot;none&quot;)
         },
       &quot;parts&quot; : // must: at least one array element
       [ 
-        { &quot;identifier&quot;: &quot;preamble&quot;,
+        { 
+          &quot;identifier&quot;: &quot;preamble&quot;,
           &quot;access&quot;    : &quot;visible&quot;,   // it is rendered, but can not be changed
           &quot;metadata&quot;  : // what has to be moved to files ?
-          { &quot;name&quot;    : &quot;Info: source before your code.&quot;, // name of element in frontend
-            &quot;emphasis&quot;  : &quot;low&quot;                           // optional (for rendering)          
+          { 
+            &quot;name&quot;    : &quot;Info: source before your code.&quot; // name of element in frontend     
           },
           &quot;content&quot;   : &quot;I2luY2x1ZGUgPHN0ZGlvLmg-Cg&quot;      // source (base64url encoded) 
                                                           // decoded: #include &lt;stdio.h&gt;\n
         },
-        { &quot;identifier&quot;: &quot;codeFromStudent&quot;,
+        { 
+          &quot;identifier&quot;: &quot;codeFromStudent&quot;,
           &quot;access&quot;    : &quot;modifiable&quot;,             // it can be edited in the frontend
           &quot;metadata&quot;  :
-          { &quot;name&quot;    : &quot;Fill in your code!&quot;,
-            &quot;emphasis&quot;  : &quot;medium&quot;
+          { 
+            &quot;name&quot;    : &quot;Fill in your code!&quot;
           },
-          &quot;content&quot; : &quot;dm9pZCBiYXIoKSB7IC8qIFNjaHJlaWJlbiBTaWUgaGllciBDb2RlLCBkZXIgImJhciIgYXVzZ2lidC4gKi8KCn0K&quot;
+          &quot;content&quot; : &quot;dm9pZCBsZWZ0cGFkX2JhcigpIHsgLyogV3JpdGUgY29kZSB0aGF0IHByaW50cyAiYmFyIiBhbmQgYWRkcyB0aGUgcG9zc2liaWxpdHkgdG8gc3BlY2lmeSBhIGZpZWxkLXdpZHRoICovDQoNCn0&quot;
             // source (template)
-            // decoded: void bar() { /* Schreiben Sie hier Code, der &quot;bar&quot; ausgibt. */\n\n}\n 
+            // decoded: void leftpad_bar() { /* Write code that prints &quot;bar&quot; and adds the possibility to specify a field-width */\n\n}\n 
         },
-        { &quot;identifier&quot;: &quot;postscript&quot;,
+        { 
+          &quot;identifier&quot;: &quot;postscript&quot;,
           &quot;access&quot;    : &quot;visible&quot;,
           &quot;metadata&quot;  :
-          { &quot;name&quot;      : &quot;Info: source after your code calling bar() in it.&quot;,
-            &quot;emphasis&quot;  : &quot;low&quot;,
+          { 
+            &quot;name&quot;      : &quot;Info: source after your code calling bar() in it.&quot;
           },
           &quot;content&quot; : &quot;aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ&quot; // source
                                                 // decoded: int main() { bar(); return 0; }
@@ -187,22 +195,31 @@
   &quot;parameters&quot; : // parameters can be used to supply values at runtime to the configuration
   [
     {
-      &quot;mode&quot; : &quot;any&quot;, // depending on guiType either any or fixed
-      &quot;identifier&quot; : &quot;__STEPWIDTH__&quot;, 
-      &quot;metadata&quot; : {
-        &quot;guiType&quot; : &quot;input_field&quot;,
-        &quot;type&quot;: &quot;number&quot;,
-        &quot;name&quot;: &quot;stepwidth&quot;
+      &quot;mode&quot;: &quot;fixed&quot;, // in this section, the parameters can only be of mode fixed
+      &quot;identifier&quot;: &quot;__STEPWIDTH__&quot;,
+      &quot;metadata&quot;: {
+        &quot;guiType&quot;: &quot;dropdown&quot;,
+        &quot;name&quot;: &quot;fieldwidth&quot;,
+        &quot;decription&quot; : &quot;Fieldwidth that is used to specify the width of the field of the output. To give an example, if the fieldwidth is 6, the output of bar(6) is padded like this: '   bar'&quot;,
       },
-      &quot;default&quot;: [0.001], //default
-      &quot;min&quot;: 0,
-      &quot;max&quot;: 1,
-      &quot;step&quot;: 0.001,
-      &quot;validation&quot; : &quot;range&quot; // one of [range, pattern (regex), anyof/oneof]
+      &quot;options&quot;: [
+        {
+          &quot;value&quot;: &quot;0.05&quot;,
+          &quot;selected&quot;: true
+        },
+        {
+          &quot;value&quot;: &quot;0.5&quot;
+        },
+        {
+          &quot;value&quot;: &quot;1&quot;
+        }
+      ],
+      &quot;validation&quot;: &quot;onlyone&quot;
     }
   ],
   &quot;configuration&quot; :
-  { &quot;compiling.compiler&quot; : &quot;gcc&quot;,                  // string
+  { 
+    &quot;compiling.compiler&quot; : &quot;gcc&quot;,                  // string
     &quot;compiling.flags&quot;    : &quot;-O2 -Wall&quot;             // string
     &quot;checking.sources&quot;   : [&quot;codeFromStudent&quot;],    // identifier to parts
     &quot;checking.forbiddenCalls&quot;: &quot;system execve&quot;,    // forbidden call names separated by WS
@@ -213,30 +230,31 @@
 }
 </code></pre>
 <h3 id="parameters-example">Parameters Example</h3>
-<pre><code>{ &quot;identifier&quot;  : &quot;11483f23-95bf-424a-98a5-ee5868c85c3f&quot;, // uuid, created by a frontend launcher
-  &quot;version&quot; : &quot;3.0.0&quot; // version of this JSON-spec definition
-  &quot;metadata&quot;: // information for frontend
-    { &quot;displayName&quot; : &quot;Parameters Example&quot;,  // name of computation template shown in frontend
-      &quot;description&quot; : &quot;This is an example&quot;, // short description (could be used  
-                                                     // as subtitle, further descriptions in &quot;parts&quot;).
-    },
-  &quot;environment&quot; : &quot;C&quot;, // important for interpreting configuration 
-  &quot;files&quot; : // must: at least one array element
+<pre><code>{ 
+  &quot;identifier&quot;  : &quot;11483f23-95bf-424a-98a5-ee5868c85c3f&quot;, 
+  &quot;version&quot; : &quot;3.0.0&quot;,
+  &quot;metadata&quot;: { 
+    &quot;displayName&quot; : &quot;Parameters Example&quot;,  
+    &quot;description&quot; : &quot;This is a 'Hello World' example showing the usage of parameters. Please introduce yourself so that the Hello World-Container can print your information...&quot;,
+    &quot;viewer&quot; : [&quot;CSV&quot;, &quot;ParaView&quot;, &quot;Image&quot;]
+  },
+  &quot;environment&quot; : &quot;Container&quot;, 
+  &quot;files&quot; : 
   [
-    { &quot;identifier&quot;: &quot;22483f42-95bf-984a-98a5-ee9485c85c3f&quot;, // uuid, for referencing
-      &quot;path&quot;      : &quot;params.input&quot;                                // filename on backend 
-      &quot;metadata&quot;  : // information for frontend
-        {  &quot;syntaxHighlighting&quot;: &quot;ini&quot;,                    // optional (default: &quot;none&quot;)
+    { 
+      &quot;identifier&quot;: &quot;22483f42-95bf-984a-98a5-ee9485c85c3f&quot;, 
+      &quot;path&quot;      : &quot;params.ini&quot;,                              
+      &quot;metadata&quot;  : 
+        {  
+          &quot;syntaxHighlighting&quot;: &quot;ini&quot;                   
         },
-      &quot;parts&quot; : // must: at least one array element
-      [ 
-
+      &quot;parts&quot; : 
+      [
         {
-          &quot;identifier&quot;: &quot;part-contains-slider&quot;,
+          &quot;identifier&quot;: &quot;f3fc4404-3529-4962-b252-47bc4ddd02a1&quot;,
           &quot;access&quot;: &quot;template&quot;,
           &quot;metadata&quot;: {
-            &quot;name&quot;: &quot;Parameter in part&quot;,
-            &quot;emphasis&quot;: &quot;low&quot;
+            &quot;name&quot;: &quot;Parameter in part&quot;
           },
           &quot;parameters&quot; : 
           [
@@ -246,7 +264,8 @@
               &quot;metadata&quot; : {
                 &quot;guiType&quot; : &quot;slider&quot;,
                 &quot;name&quot;: &quot;temperature&quot;,
-                &quot;vertical&quot;: false
+                &quot;vertical&quot;: false,
+                &quot;description&quot; : &quot;How hot do you like your coffee? (in degrees Celsius) - Tip: Typical Serving Temperature lies between 65 and 70 Degrees&quot;
               },
               &quot;default&quot;: [
                 10
@@ -257,13 +276,17 @@
               &quot;validation&quot;: &quot;range&quot;
             }
           ],
-          &quot;content&quot;: &quot;VGhpcyBpcyBhIFRleHQ6Ont7X19zbGlkZXJTaW5nbGVfX319OjpUaGlzIGlzIGEgVGV4dA==&quot;
+          &quot;content&quot;: &quot;W2NvZmZlZSBwcmVmZXJlbmNlXQpjb2ZmZWVUZW1wZXJhdHVyZT17e19fc2xpZGVyU2luZ2xlX199fQ&quot;
+          // decoded: 
+          // [coffee preference]
+          // coffeeTemperature={{__sliderSingle__}}
         },
         {
           &quot;identifier&quot;: &quot;ceb051d8-b50c-4814-983a-b9d703cae0c6&quot;,
           &quot;access&quot;    : &quot;template&quot;,
           &quot;metadata&quot;  :
-              { &quot;name&quot;      : &quot;params.input file&quot;
+              { 
+                &quot;name&quot;      : &quot;params.ini file part&quot;
               },
           &quot;parameters&quot;:
           [
@@ -272,11 +295,13 @@
               &quot;identifier&quot; : &quot;__checkbox__&quot;, 
               &quot;metadata&quot; : {
                 &quot;guiType&quot;: &quot;checkbox&quot;,
-                &quot;name&quot;: &quot;options&quot;
+                &quot;name&quot;: &quot;Things I like&quot;,
+                &quot;description&quot; : &quot;Select things you like&quot;
               },
               &quot;options&quot;: [
                 {
-                  &quot;value&quot; : &quot;verbose&quot;,
+                  &quot;text&quot; : &quot;Programming&quot;,
+                  &quot;value&quot; : &quot;programming&quot;,
                   &quot;selected&quot; : true
                 },
                 {
@@ -293,7 +318,8 @@
               &quot;identifier&quot; : &quot;__radioButton__&quot;, 
               &quot;metadata&quot; : {
                 &quot;guiType&quot;: &quot;radio&quot;,
-                &quot;name&quot;: &quot;backend&quot;
+                &quot;name&quot;: &quot;Favorite PL&quot;,
+                &quot;description&quot; : &quot;Select your favorite programming language&quot;
               },
               &quot;options&quot;: [
                 {
@@ -308,7 +334,8 @@
                   &quot;disabled&quot; : true
                 },
                 {
-                  &quot;value&quot; : &quot;test&quot;
+                  &quot;text&quot; : &quot;Sssss... Python ...ssssS&quot;,
+                  &quot;value&quot; : &quot;Python&quot;
                 }
               ],
               &quot;validation&quot;: &quot;oneof&quot;
@@ -318,7 +345,8 @@
               &quot;identifier&quot; : &quot;__dropdownSingle__&quot;, 
               &quot;metadata&quot; : {
                 &quot;guiType&quot;: &quot;dropdown&quot;,
-                &quot;name&quot;: &quot;model&quot;
+                &quot;name&quot;: &quot;Fridge&quot;,
+                &quot;description&quot; : &quot;How often do look into the fridge a day?&quot;
               },
               &quot;options&quot;: [
                 {
@@ -330,7 +358,8 @@
                   &quot;selected&quot; : true
                 },
                 {
-                  &quot;value&quot; : &quot;1pnc&quot;
+                  &quot;text&quot; : &quot;1 a day&quot;,
+                  &quot;value&quot; : &quot;Once a day&quot;
                 },
                 {
                   &quot;value&quot; : &quot;1pncmin&quot;
@@ -349,7 +378,8 @@
               &quot;identifier&quot; : &quot;__dropdownMultiple__&quot;, 
               &quot;metadata&quot; : {
                 &quot;guiType&quot;: &quot;dropdown&quot;,
-                &quot;name&quot;: &quot;model&quot;
+                &quot;name&quot;: &quot;Dance Time&quot;,
+                &quot;description&quot; : &quot;To which songs would you dance in the kitchen?&quot;
               },
               &quot;options&quot;: [
                 {
@@ -357,7 +387,8 @@
                   &quot;disabled&quot; : true
                 },
                 {
-                  &quot;value&quot; : &quot;1p&quot;,
+                  &quot;text&quot; : &quot;Last Christmas (aka the one that drives everybody else crazy)&quot;,
+                  &quot;value&quot; : &quot;Last Christmas&quot;,
                   &quot;selected&quot; : true
                 },
                 {
@@ -382,7 +413,8 @@
               &quot;identifier&quot; : &quot;__toggle__&quot;, 
               &quot;metadata&quot; : {
                 &quot;guiType&quot;: &quot;toggle&quot;,
-                &quot;name&quot;: &quot;options&quot;
+                &quot;name&quot;: &quot;NO!&quot;,
+                &quot;description&quot; : &quot;What do you dislike?&quot;
               },
               &quot;options&quot;: [
                 {
@@ -390,7 +422,8 @@
                   &quot;selected&quot; : true
                 },
                 {
-                  &quot;value&quot; : &quot;debug&quot;
+                  &quot;text&quot; : &quot;All kinds of Bugs (also the ones living in your Computer)&quot;,
+                  &quot;value&quot; : &quot;All kinds of Bugs&quot;
                 },
                 {
                   &quot;value&quot; : &quot;make_plot&quot;
@@ -404,7 +437,8 @@
               &quot;metadata&quot; : {
                 &quot;guiType&quot; : &quot;slider&quot;,
                 &quot;name&quot;: &quot;temperature&quot;,
-                &quot;vertical&quot;: true
+                &quot;vertical&quot;: true,
+                &quot;description&quot; : &quot;Choose three random numbers to be output by the container&quot;
               },
               &quot;default&quot;: [
                 25,
@@ -418,11 +452,12 @@
             },
             {
               &quot;mode&quot; : &quot;any&quot;,
-              &quot;identifier&quot; : &quot;__inputTextWOMaxlangth__&quot;, 
+              &quot;identifier&quot; : &quot;__inputTextWOMaxlength__&quot;, 
               &quot;metadata&quot; : {
                 &quot;guiType&quot; : &quot;input_field&quot;,
                 &quot;type&quot;: &quot;text&quot;,
-                &quot;name&quot;: &quot;file_name&quot;
+                &quot;name&quot;: &quot;name&quot;,
+                &quot;description&quot; : &quot;Enter your name&quot;
               },
               &quot;default&quot; : [&quot;&quot;],
               &quot;validation&quot;: &quot;pattern&quot;
@@ -433,7 +468,8 @@
               &quot;metadata&quot; : {
                 &quot;guiType&quot; : &quot;input_field&quot;,
                 &quot;type&quot;: &quot;text&quot;,
-                &quot;name&quot;: &quot;file_name&quot;
+                &quot;name&quot;: &quot;Christmas Wish&quot;,
+                &quot;description&quot; : &quot;Enter what you wish for at christmas&quot;
               },
               &quot;maxlength&quot;: 200,
               &quot;default&quot; : [&quot;&quot;],
@@ -445,37 +481,76 @@
               &quot;metadata&quot; : {
                 &quot;guiType&quot; : &quot;input_field&quot;,
                 &quot;type&quot;: &quot;number&quot;,
-                &quot;name&quot;: &quot;time_delay&quot;
+                &quot;name&quot;: &quot;Age&quot;,
+                &quot;description&quot; : &quot;Enter your current age&quot;
               },
               &quot;default&quot;: [10],
               &quot;min&quot;: 0,
               &quot;max&quot;: 500,
               &quot;step&quot;: 0.1,
               &quot;validation&quot;: &quot;range&quot;
-            },
+            }
+          ],
+          &quot;content&quot;   : &quot;W2Fib3V0IHlvdV0NCmxpa2VkVGhpbmdzPXt7X19jaGVja2JveF9ffX0NCmZhdm9yaXRlUEw9e3tfX3JhZGlvQnV0dG9uX199fQ0KZnJpZGdlPXt7X19kcm9wZG93blNpbmdsZV9ffX0NCmRhbmNpbmc9e3tfX2Ryb3Bkb3duTXVsdGlwbGVfX319DQpkaXNsaWtlZFRoaW5ncz17e19fdG9nZ2xlX199fQ0KcmFuZG9tTnVtYmVycz17e19fc2xpZGVyTXVsdGlwbGVfX319DQpuYW1lPXt7X19pbnB1dFRleHRXT01heGxlbmd0aF9ffX0NCmNocmlzdG1hc1dpc2g9e3tfX2lucHV0VGV4dFdNYXhsZW5ndGhfX319DQphZ2U9e3tfX2lucHV0TnVtYmVyX199fQ&quot;
+          // decoded:
+          // [about you]
+          // likedThings={{__checkbox__}}
+          // favoritePL={{__radioButton__}}
+          // fridge={{__dropdownSingle__}}
+          // dancing={{__dropdownMultiple__}}
+          // dislikedThings={{__toggle__}}
+          // randomNumbers={{__sliderMultiple__}}
+          // name={{__inputTextWOMaxlength__}}
+          // christmasWish={{__inputTextWMaxlength__}}
+          // age={{__inputNumber__}}
+        }
+      ]
+    },
+    { 
+      &quot;identifier&quot;: &quot;22483f42-95bf-984a-98a5-ee9485c85c31&quot;, 
+      &quot;path&quot;      : &quot;code.json&quot;,                              
+      &quot;metadata&quot;  : 
+        {  
+          &quot;syntaxHighlighting&quot;: &quot;json&quot;                   
+        },
+      &quot;parts&quot; : 
+      [
+        {
+          &quot;identifier&quot;: &quot;f3fc4404-3529-4962-b252-47bc4ddd02a2&quot;,
+          &quot;access&quot;: &quot;template&quot;,
+          &quot;metadata&quot;: {
+            &quot;name&quot;: &quot;Parameter in part&quot;
+          },
+          &quot;parameters&quot; : 
+          [
             {
               &quot;mode&quot; : &quot;any&quot;,
               &quot;identifier&quot; : &quot;__default__&quot;, 
               &quot;metadata&quot; : {
                 &quot;guiType&quot; : &quot;editor&quot;, 
-                &quot;name&quot;: &quot;code 1&quot;
+                &quot;name&quot;: &quot;code&quot;,
+                &quot;description&quot; : &quot;Enter some code&quot;
               },
-              &quot;default&quot;: [&quot;I2luY2x1ZGUgPHN0ZGlvLmg-Cg&quot;],
-              &quot;validation&quot;: &quot;pattern&quot;
-            },
+              &quot;default&quot;: [&quot;aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IA0KLy8gUHJpbnQgJ0hlbGxvIFdvcmxkJyANCn0&quot;],
+              // decoded: 
+              // {
+              // &quot;codeSnippet&quot; : &quot;{{__default__}}&quot;
+              // }
+              &quot;validation&quot;: &quot;none&quot;
+            }
           ],
-            &quot;content&quot;   : &quot;&quot;
-         }
-      ] // parts[]
+          &quot;content&quot;: &quot;e3t7X19kZWZhdWx0X199fX0&quot;
+          // decoded: 
+          // {{{__default__}}}
+        }
+      ]
     }
-  ], // files[]
+  ], 
   &quot;configuration&quot; :
-    { &quot;resources.image&quot;  : &quot;name://git.iws.uni-stuttgart.de:4567/dumux-repositories/dumux-docker/viplab/test&quot;, 
+    { &quot;resources.image&quot;  : &quot;name://viplab/viplab-example-image&quot;,
       &quot;resources.volume&quot; : &quot;/data/shared&quot;,
       &quot;resources.memory&quot; : &quot;1g&quot;,
-      &quot;resources.numCPUs&quot; : 1,
-      &quot;running.entrypoint&quot; : &quot;/data/bin/run.sh&quot;,
-      &quot;running.commandLineArguments&quot; : &quot;params.input&quot;
+      &quot;resources.numCPUs&quot; : 1
     }
 }
 </code></pre>
@@ -514,31 +589,7 @@
 <td>struct</td>
 <td>opt</td>
 <td>contains information for frontend</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>metadata --displayName</td>
-<td>string</td>
-<td>opt</td>
-<td>name of computation template shown in frontend</td>
-<td></td>
-<td>Makes 'opt' sense for frontend?</td>
-</tr>
-<tr>
-<td>metadata --description</td>
-<td>string (plain text)</td>
-<td>opt</td>
-<td>short description</td>
-<td>Mostly a few lines. A longer description in different formats can be put in "elements" (see below).</td>
-<td>There is nothing 'below'. Where are descriptions actually used in the frontend?</td>
-</tr>
-<tr>
-<td>metadata --viewer</td>
-<td>one or more (list) of {"Image", "ParaView", "ViPLabGraphics"}</td>
-<td>opt</td>
-<td>When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable.</td>
-<td></td>
+<td>See <a href="#metadata-json-object">metadata json object</a> for details about the object</td>
 <td></td>
 </tr>
 <tr>
@@ -562,7 +613,7 @@
 <td>[{...}, {...}, ...]</td>
 <td>opt</td>
 <td>Parameters can be used to supply values at runtime to the configuration. Each parameter has a unique identifier (as string) and is a <a href="#json-object-parameter">Parameter object</a>.</td>
-<td>For security reasons free text <em>gui_type</em>, i.e., text input field or editor, are not allowed here.</td>
+<td>For security reasons free text <em>guiType</em>, i.e., text input field or editor, are not allowed here. <strong>The only allowed parameters are those, that have mode set to fixed</strong></td>
 <td></td>
 </tr>
 <tr>
@@ -687,11 +738,11 @@
 </tr>
 <tr>
 <td>configuration --running.intermediateFilesPattern</td>
-<td>string</td>
+<td>[ REGEX, REGEX, ... ]</td>
 <td>opt</td>
-<td>regex-expression in stdout which file is ready to be transferred</td>
+<td>regex-expression in stdout which file is ready to be transferred as intermediate result. The Regex has to return the complete filename as matching group 1</td>
 <td>for <strong>Container</strong></td>
-<td>Is this implemented?</td>
+<td></td>
 </tr>
 <tr>
 <td>configuration --running.userId</td>
@@ -732,6 +783,206 @@
 <td>number of CPUs for the container</td>
 <td>for <strong>Container</strong></td>
 <td>default?; kubernetes map to softlimit cpu-shares...</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metadata-json-object">metadata JSON object</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+<th>AS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>displayName</td>
+<td>string</td>
+<td>opt</td>
+<td>name of computation template shown in frontend</td>
+<td></td>
+<td>Makes 'opt' sense for frontend?</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string (plain text)</td>
+<td>opt</td>
+<td>short description</td>
+<td>Mostly a few lines. A longer description in different formats can be put in "elements" (see below).</td>
+<td>There is nothing 'below'. Where are descriptions actually used in the frontend?</td>
+</tr>
+<tr>
+<td>output</td>
+<td>struct</td>
+<td>opt</td>
+<td>Gives information about the output to the Frontend</td>
+<td>See <a href="#output-json-object">output json object</a> for details on contained objects</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="output-json-object">output JSON object</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>viewer</td>
+<td>list containing one or more of {"Image", "ParaView", "ViPLabGraphics", "CSV"}</td>
+<td>opt</td>
+<td>When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable.</td>
+<td></td>
+</tr>
+<tr>
+<td>csv</td>
+<td>[ {...}, {...}, ... ]</td>
+<td>opt</td>
+<td>Details for displaying csv-files</td>
+<td>See <a href="#csv-json-object">csv json object</a> for details on contained objects</td>
+</tr>
+<tr>
+<td>vtk</td>
+<td>[ {...}, {...}, ... ]</td>
+<td>opt</td>
+<td>Details for displaying vtk-files</td>
+<td>See <a href="#vtk-json-object">vtk json object</a> for details on contained objects</td>
+</tr>
+</tbody>
+</table>
+<h5 id="csv-json-object">csv JSON object</h5>
+<table>
+<thead>
+<tr>
+<th>Key [--Subkey]</th>
+<th>Type (a default is marked by <em>italics</em>)</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+<th>AS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>basename</td>
+<td>string</td>
+<td>opt</td>
+<td>Basename defines connected files: Path of file begins with basename</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xlabel</td>
+<td>struct</td>
+<td>opt</td>
+<td>Define labels for csv-files</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xlabel --key</td>
+<td>string</td>
+<td>opt</td>
+<td>key for x-axis given in csv header</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xlabel --label</td>
+<td>string</td>
+<td>opt</td>
+<td>x-axis label for diagram</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xlabel --factor</td>
+<td>string</td>
+<td>opt</td>
+<td>Multiply x-values with this factor</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xlabel --format</td>
+<td>string</td>
+<td>opt</td>
+<td>Format the x-axis values according to format string</td>
+<td>For information on the avaliable formating take a look at the info given by <a href="https://github.com/d3/d3-format/blob/main/README.md#locale_format">Plotly</a>; Example: To format a number to have two decimals, use "0.2f"</td>
+<td></td>
+</tr>
+<tr>
+<td>plots</td>
+<td>struct</td>
+<td>opt</td>
+<td>Define datasets: Provide y-axis labels for y-key given in csv</td>
+<td></td>
+<td>For each dataset one diagram is rendered in the result</td>
+</tr>
+<tr>
+<td>plots --key</td>
+<td>string</td>
+<td>opt</td>
+<td>key for y-axis given in csv header</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>plots --label</td>
+<td>string</td>
+<td>opt</td>
+<td>y-axis label for diagram</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xlabel --factor</td>
+<td>string</td>
+<td>opt</td>
+<td>Multiply y-values with this factor</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>plots --format</td>
+<td>string</td>
+<td>opt</td>
+<td>Format the y-axis values according to format string</td>
+<td>For information on the avaliable formating take a look at the info given by <a href="https://github.com/d3/d3-format/blob/main/README.md#locale_format">Plotly</a>; Example: To format a number to have two decimals, use "0.2f"</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="vtk-json-object">vtk JSON object</h5>
+<table>
+<thead>
+<tr>
+<th>Key [--Subkey]</th>
+<th>Type (a default is marked by <em>italics</em>)</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+<th>AS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>basename</td>
+<td>string</td>
+<td>opt</td>
+<td>Basename defines connected files: Path of file begins with basename</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -839,20 +1090,41 @@ With this logic it is possible to define
 <td>struct</td>
 <td>opt</td>
 <td>contains information for frontend</td>
-<td></td>
-</tr>
-<tr>
-<td>metadata --syntaxHighlighting</td>
-<td>string (<em>text</em>)</td>
-<td>opt</td>
-<td>Mode of the ace editor. List can be found in on <a href="https://github.com/ajaxorg/ace/tree/master/lib/ace/mode">github</a></td>
-<td>Examples: "ini", "c_cpp", "matlab", "java". See also <a href="http://ajaxorg.github.io/ace-builds/kitchen-sink.html">Ace demo</a></td>
+<td>See definition of <a href="#file-metadata-json-object">file metadata</a></td>
 </tr>
 <tr>
 <td>parts</td>
 <td>[{...}, {...}, ...]</td>
 <td>must</td>
 <td>array containing <a href="#json-objects-in-parts">part objects</a>. There has to be at least one.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="file-metadata-json-object">file metadata JSON object</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type (an enum default is marked by <em>italics</em>)</th>
+<th>Opt / Must</th>
+<th>Description</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>syntaxHighlighting</td>
+<td>string (<em>text</em>)</td>
+<td>opt</td>
+<td>Mode of the ace editor. List can be found in on <a href="https://github.com/ajaxorg/ace/tree/master/lib/ace/mode">github</a></td>
+<td>Examples: "ini", "c_cpp", "matlab", "java". See also <a href="http://ajaxorg.github.io/ace-builds/kitchen-sink.html">Ace demo</a></td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>opt</td>
+<td>description of the file</td>
 <td></td>
 </tr>
 </tbody>
@@ -904,14 +1176,6 @@ With this logic it is possible to define
 <td>Where? Is it used?</td>
 </tr>
 <tr>
-<td>metadata --emphasis</td>
-<td>One of {"low", <em>"medium"</em>, "high"}</td>
-<td>opt</td>
-<td>info for rendering</td>
-<td></td>
-<td>Still needed?</td>
-</tr>
-<tr>
 <td>parameters</td>
 <td>array of parameter-objects</td>
 <td>opt</td>
@@ -924,7 +1188,7 @@ With this logic it is possible to define
 <td>string</td>
 <td>must</td>
 <td>base64url-encoded source code</td>
-<td>Can contain mustache expressions with PARAM_IDs (identifiers) if the access type of this part is "template".</td>
+<td>Can contain <a href="https://handlebarsjs.com/guide/">Handlebars.js</a> expressions with PARAM_IDs (identifiers) if the access type of this part is "template".</td>
 <td></td>
 </tr>
 </tbody>
@@ -995,7 +1259,7 @@ With this logic it is possible to define
 </tr>
 <tr>
 <td>validation</td>
-<td>one of {"onlyone", "minone", "any"}</td>
+<td>one of {"oneof", "minone", "anyof"}</td>
 <td>must</td>
 <td>See <a href="#parameter-validation-semantics">Parameter validation semantics</a> for details</td>
 <td></td>
@@ -1027,6 +1291,13 @@ With this logic it is possible to define
 <td>string</td>
 <td>must</td>
 <td>Label for the parameter</td>
+<td>frontend feature</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>must</td>
+<td>description of the parameter</td>
 <td>frontend feature</td>
 </tr>
 </tbody>
@@ -1072,11 +1343,11 @@ With this logic it is possible to define
 <td>the strings have to be part of <em>values</em>; for "toogle" given values mean <em>true</em></td>
 </tr>
 <tr>
-<td>text</td>
+<td>description</td>
 <td>string</td>
-<td>opt</td>
-<td>Text shown besides or as dropdown of the value</td>
-<td></td>
+<td>must</td>
+<td>description of the parameter</td>
+<td>frontend feature</td>
 </tr>
 </tbody>
 </table>
@@ -1102,7 +1373,7 @@ With this logic it is possible to define
 </tr>
 <tr>
 <td>default</td>
-<td>array of number(s) or string(s)</td>
+<td>array of number(s) or base64url-encoded string(s)</td>
 <td>opt</td>
 <td>the default value(s) shown in frontend</td>
 <td></td>
@@ -1197,9 +1468,9 @@ With this logic it is possible to define
 <h4 id="parameter-validation-semantics">Parameter Validation Semantics</h4>
 <p>Four types of validation are implemented at the moment:</p>
 <ul>
-<li><strong>onlyone</strong>: Only one value can be chosen. The value has to be included in <em>options</em> and <em>disabled</em> for the <em>value</em> has to be set to false (is false by default, so <em>disabled</em> can also be missing).</li>
+<li><strong>oneof</strong>: Only one value can be chosen. The value has to be included in <em>options</em> and <em>disabled</em> for the <em>value</em> has to be set to false (is false by default, so <em>disabled</em> can also be missing).</li>
 <li><strong>minone</strong>: One or more values can be chosen. The values have to be included in <em>options</em> and <em>disabled</em> for the <em>value</em>s has to be set to false (is false by default, so <em>disabled</em> can also be missing).</li>
-<li><strong>any</strong>: All of the chosen values have to be included in <em>options</em> and <em>disabled</em> for the <em>value</em>s has to be set to false (is false by default, so <em>disabled</em> can also be missing).</li>
+<li><strong>anyof</strong>: All of the chosen values have to be included in <em>options</em> and <em>disabled</em> for the <em>value</em>s has to be set to false (is false by default, so <em>disabled</em> can also be missing).</li>
 <li><strong>range</strong>: A numerical value is checked whether is is between <em>min</em> and <em>max</em>. If <em>step</em> is given a finite number of possible values is computed and the value has to be within this set.</li>
 <li><strong>pattern</strong>: A regex pattern that the text value has to fulfill.</li>
 <li><strong>none</strong>: If no validation is necessary, because there are no restraints on the value.</li>

@@ -218,6 +218,348 @@ the following structure:</p>
 </code></pre>
 <p><em>PARAM_ID</em> is the reference (key) to a parameter name inside the mustache template.
 "value" is the selected value of the user in the frontend.</p>
+<h3 id="parameters-what-is-input-into-the-handlebarsjs-template">Parameters: What is input into the Handlebars.js-Template?</h3>
+<table>
+  <tr>
+    <th>Parameter guitype</th>
+    <th>Example</th>
+    <th>Returns</th>
+  </tr>
+  <tr>
+    <td>checkbox</td>
+    <td>
+      Checkbox Example:
+      <pre>
+      {
+        "mode" : "fixed",
+        "identifier" : "__checkbox__", 
+        "metadata" : {
+          "guiType": "checkbox",
+          "name": "Things I like",
+          "decription" : "Select things you like"
+        },
+        "options": [
+          {
+            "value" : "programming",
+            "selected" : true
+          },
+          {
+            "value" : "music"
+            "selected" : true
+          },
+          {
+            "value" : "books"
+          }
+        ],
+        "validation": "anyof"
+      } 
+      </pre>
+      Checkbox Returns:
+      <pre>
+      ["programming", "music"] 
+      </pre>
+    </td>
+    <td>
+      Array of Strings
+    </td>
+  </tr>
+  <tr>
+    <td>radio</td>
+    <td>
+      Radio Example:
+      <pre>
+      {
+        "mode" : "fixed",
+        "identifier" : "__radioButton__", 
+        "metadata" : {
+          "guiType": "radio",
+          "name": "Favorite PL",
+          "decription" : "Select your favorite programming language",
+        },
+        "options": [
+          {
+            "value" : "C"
+          },
+          {
+            "value" : "Java",
+            "selected" : true
+          },
+          {
+            "value" : "Haskell",
+            "disabled" : true
+          },
+          {
+            "value" : "Python"
+          }
+        ],
+        "validation": "oneof"
+      }
+      </pre>
+      Radio Returns:
+      <pre>
+      "Java"
+      </pre>
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>dropdown (single)</td>
+    <td>
+      Dropdown (single) Example: 
+      <pre>
+      {
+        "mode" : "fixed",
+        "identifier" : "__dropdownSingle__", 
+        "metadata" : {
+          "guiType": "dropdown",
+          "name": "Fridge",
+          "decription" : "How often do look into the fridge a day?"
+        },
+        "options": [
+          {
+            "value" : "Please choose one",
+            "disabled" : true
+          },
+          {
+            "value" : "never",
+            "selected" : true
+          },
+          {
+            "value" : "Once a day"
+          },
+          {
+            "value" : "Twice a day"
+          },
+          {
+            "value" : "Three times a day"
+          },
+          {
+            "value" : "More than three times a day"
+          }
+        ],
+        "validation": "oneof"
+      }
+      </pre>
+      Dropdown (single) Returns:
+      <pre> 
+      "never"
+      </pre>
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>dropdown (multiple)</td>
+    <td>
+      Dropdown (multiple) Example: 
+      <pre>
+      {
+        "mode" : "fixed",
+        "identifier" : "__dropdownMultiple__", 
+        "metadata" : {
+          "guiType": "dropdown",
+          "name": "Dance Time",
+          "decription" : "To which songs would you dance in the kitchen?"
+        },
+        "options": [
+          {
+            "value" : "Please choose multiple",
+            "disabled" : true
+          },
+          {
+            "value" : "Last Christmas",
+            "selected" : true
+          },
+          {
+            "value" : "White Christmas"
+          },
+          {
+            "value" : "Winter Woderland"
+          },
+          {
+            "value" : "Thats Christmas To Me", 
+            "selected" : true
+          },
+          {
+            "value" : "O Come All Ye Faithful", 
+            "disabled" : true
+          }
+        ], 
+        "validation": "anyof"
+      }
+      </pre>
+      Dropdown (multiple) Result:
+      <pre>
+      ["Last Christmas", "Thats Christmas To Me"]
+      </pre>
+    </td>
+    <td>
+      Array of Strings
+    </td>
+  </tr>
+  <tr>
+    <td>toggle</td>
+    <td>
+      Toggle Example: 
+      <pre>
+      {
+        "mode" : "fixed",
+        "identifier" : "__toggle__", 
+        "metadata" : {
+          "guiType": "toggle",
+          "name": "NO!",
+          "decription" : "What do you dislike?"
+        },
+        "options": [
+          {
+            "value" : "Spiders",
+            "selected" : true
+          },
+          {
+            "value" : "All kinds of Bugs (also the ones living in your Computer)"
+          },
+          {
+            "value" : "I never dislike anything!"
+          }
+        ], 
+        "validation": "anyof"
+      }
+      </pre>
+      Toggle Result:
+      <pre>
+      ["Spiders"]
+      </pre>
+    </td>
+    <td>
+      Array of Strings
+    </td>
+  </tr>
+  <tr>
+    <td>slider (single)</td>
+    <td>
+      Slider (single) Example:
+      <pre>
+      {
+        "mode" : "any",
+        "identifier" : "__sliderSingle__", 
+        "metadata" : {
+          "guiType" : "slider",
+          "name": "Temperature",
+          "vertical": false,
+          "decription" : "How hot do you like your coffee? (in degrees Celsius)"
+        },
+        "default": [
+          75
+        ],
+        "min": 0,
+        "max": 90,
+        "step": 10,
+        "validation": "range"
+      }
+      </pre>
+      Slider (single) Result:
+      <pre>
+      75
+      </pre>
+    </td>
+    <td>
+      Number
+    </td>
+  </tr>
+  <tr>
+    <td>slider (multiple)</td>
+    <td>
+      Slider (multiple) Example:
+      <pre>
+      {
+        "mode" : "any",
+        "identifier" : "__sliderMultiple__", 
+        "metadata" : {
+          "guiType" : "slider",
+          "name": "random numbers",
+          "vertical": true,
+          "decription" : "Choose three random numbers to be output by the container"
+        },
+        "default": [
+          25,
+          50,
+          75
+        ],
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "validation": "range"
+      }
+      </pre>
+      Slider (multiple) Result:
+      <pre>
+      [25, 50, 75]
+      </pre>
+    </td>
+    <td>
+      Array of Numbers
+    </td>
+  </tr>
+  <tr>
+    <td>input_field</td>
+    <td>
+      Input_field Example:
+      <pre>
+      {
+        "mode" : "any",
+        "identifier" : "__inputText__", 
+        "metadata" : {
+          "guiType" : "input_field",
+          "type": "text",
+          "name": "name",
+          "decription" : "Enter your name"
+        },
+        "default" : [""],
+        "validation": "none"
+      }
+      </pre>
+      Input_field Result:
+      <pre>
+      "base64:S2F0aHJ5bg"
+      </pre>
+    </td>
+    <td>
+      If the input_field is of type number: Number
+      Else: Prefixed ("base64:") and Base64URL-encoded String - is decoded by Websocket API, before it is sent to Backend
+    </td>
+  </tr>
+  <tr>
+    <td>editor</td>
+    <td>
+      Editor Example:
+      <pre>
+      {
+        "mode" : "any",
+        "identifier" : "__default__", 
+        "metadata" : {
+          "guiType" : "editor", 
+          "name": "code",
+          "decription" : "Enter some code"
+        },
+        "default": ["aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IC8vIFByaW50ICdIZWxsbyBXb3JsZCcgfQ"],
+        "validation": "none"
+      }
+      </pre>
+      Editor Result:
+      <pre>
+      "base64:aW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKiphcmd2KSB7IC8vIFByaW50ICdIZWxsbyBXb3JsZCcgfQ"
+      </pre>
+
+    </td>
+    <td>
+      Prefixed ("base64:") and Base64URL-encoded String - is decoded by Websocket API, before it is sent to Backend
+    </td>
+  </tr>
+</table>
+
 <h2 id="evaluation-task">Evaluation Task</h2>
 <p>The feature of ViPLab to automatically evaluate student code (correction service)
 is still possible in ViPLab 3.0. The code needed for evaluation is send to the 
