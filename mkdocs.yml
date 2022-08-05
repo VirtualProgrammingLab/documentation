@@ -66,8 +66,10 @@ nav:
     - Computation: developer/computation.md
     - Computation Result: developer/computation_result.md
     - System Status: developer/system_status.md
+    - Result: developer/result.md
     - ADRs:
       - adr/index.md
+      - Template: adr/template.md
       - ADR-0000: adr/0000-use-markdown-architectural-decision-records.md
       - ADR-0001: adr/0001-use-json-web-tokens.md
       - ADR-0002: adr/0002-use-sha256-with-base64url-encoding.md

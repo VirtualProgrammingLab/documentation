@@ -27,7 +27,7 @@ Describe who is sending which kind of message and gets what back
 
 Versioning rules
 ----------------
-[Versioning rules](versioning.md)
+[Versioning rules](../adr/versioning.md)
 
 Long living JSON messages
 --------------
@@ -42,7 +42,7 @@ Wrapper
 
 Message Types
 -------------
-* [CreateComputation](create_computation.md)
+* [Create Computation](../admin/interface.md#create_computation)
 * [Result](result.md)
 * [System status](system_status.md) (not implemented yet)
-* [Computation Interrupt](computation_interrupt.md) (not implemented yet)
+* Computation Interrupt(not implemented yet)
