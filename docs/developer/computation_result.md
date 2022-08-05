@@ -8,7 +8,7 @@ and result objects, like files, images, links, etc.
 
 ## Example (informal)
 
-```
+``` json title="Computation Result Message Example"
 {
   "identifier" : "86165eea-14df-4a76-805a-09b21441cbf7",
   "version" : "3.0.0"

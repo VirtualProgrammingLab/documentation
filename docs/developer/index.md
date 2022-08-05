@@ -23,11 +23,28 @@ Terms (ViPLab specific)
 
 Flow of information
 -------------------
-Describe who is sending which kind of message and gets what back
+<figure markdown>
+  ![ViPLab Sequence Diagram](../images/ViPLab-Sequence-with-Websocket-API.drawio.svg)
+  <figcaption>ViPLab Sequence Diagram</figcaption>
+</figure>
+
+After establishing a connection to the Websocket API, a JWT is sent for authentication. 
+This JWT is then verified by the Websocket API. 
+If it is valid, the Requestor can send a createComputation message to the Websocket API. 
+The message contains the Computaton Template and a Computation Task. 
+Receiving the message, the Websocket API verifies the Computation Template and combines the Template and the Task into a Computation. 
+Subsequently, a message is sent to ActiveMQ, to request the Result. 
+Additionally, the Computation is returned to the Requestor.  
+This message gets pushed to the Computation-Backend, which in turn computes a Result, that is sent to the Websocket API via ActiveMQ. 
+Before returning the Result to the initial Requestor, the Websocket API gets the Computation and stored the Result from/in its temporary Datastore. 
+
+Development Help
+-------------
+For further developing ViPLab or related services, you can use the [local development environment based on Docker](https://github.com/VirtualProgrammingLab/viplab-docker-dev-env).
 
 Versioning rules
 ----------------
-[Versioning rules](versioning.md)
+[Versioning rules](../adr/versioning.md)
 
 Long living JSON messages
 --------------
@@ -42,7 +59,7 @@ Wrapper
 
 Message Types
 -------------
-* [CreateComputation](create_computation.md)
+* [Create Computation](../admin/interface.md#create_computation)
 * [Result](result.md)
 * [System status](system_status.md) (not implemented yet)
-* [Computation Interrupt](computation_interrupt.md) (not implemented yet)
+* Computation Interrupt(not implemented yet)

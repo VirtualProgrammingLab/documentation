@@ -1,5 +1,84 @@
 site_name: ViPLab
-#plugins:
-#    - search
+plugins:
+    - search
 markdown_extensions:
   - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+edit_uri: https://github.com/VirtualProgrammingLab/documentation/tree/master/docs
+repo_url: https://github.com/VirtualProgrammingLab
+repo_name: VirtualProgrammingLab
+copyright: Copyright &copy; Universität Stuttgart
+theme:
+  name: material
+  logo: images/viplab.png
+  favicon: images/viplab.png
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - toc.follow
+    - navigation.top
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)" 
+      scheme: default
+      primary: light blue
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)" 
+      scheme: slate 
+      primary: light blue
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+nav:
+  - index.md
+  - Admin Guide: 
+    - admin/index.md
+    - Architecture: admin/architecture.md
+    - Interface to Websocket API: admin/interface.md
+    - Integration: admin/integration.md
+    - Docker: admin/docker.md
+    - Setup: admin/setup.md
+  - User Guide: 
+    - user/index.md
+    - Tutorial: user/tutorial.md
+    - Frontend: user/frontend.md
+    - ViPLab In ILIAS: user/ilias.md
+  - Developer Guide: 
+    - developer/index.md
+    - Computation Template: developer/computation_template.md
+    - Computation Task: developer/computation_task.md
+    - Computation: developer/computation.md
+    - Computation Result: developer/computation_result.md
+    - System Status: developer/system_status.md
+    - Result: developer/result.md
+    - ADRs:
+      - adr/index.md
+      - Template: adr/template.md
+      - ADR-0000: adr/0000-use-markdown-architectural-decision-records.md
+      - ADR-0001: adr/0001-use-json-web-tokens.md
+      - ADR-0002: adr/0002-use-sha256-with-base64url-encoding.md
+      - ADR-0003: adr/0003-transfere-hash-in-jwt-claim.md
+      - ADR-0004: adr/0004-use-asymmetric-jwt-signing.md
+      - Versioning: adr/versioning.md
+  - History: 
+    - history/index.md
+extra:
+  collapse_toc: false
+extra_css:
+  - stylesheets/extra.css

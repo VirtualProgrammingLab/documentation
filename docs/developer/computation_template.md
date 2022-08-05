@@ -14,7 +14,7 @@ Note: `//` with text following until EOL is a comment,
  * but nevertheless it would help, if JSON parsers could just ignore them.
 
 ### C Student Example
-```
+``` json title="Computation Template Example using C"
 { 
   "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid, created by a frontend launcher
   "version" : "3.0.0" // version of this JSON-spec definition
@@ -110,7 +110,7 @@ Note: `//` with text following until EOL is a comment,
 ```
 
 ### Parameters Example
-```
+``` json title="Computation Template Example using Container"
 { 
   "identifier"  : "11483f23-95bf-424a-98a5-ee5868c85c3f", 
   "version" : "3.0.0",
