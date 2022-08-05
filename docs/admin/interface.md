@@ -51,7 +51,7 @@ This message contains authentication tokens in terms of JWTs, that are provided 
 
 #### create-computation
 
-Message to create a new [Computation](../viplab-3.0/computation.md) from a [Computation Template](../viplab-3.0/computation_template.md) and a [Computation Task](../viplab-3.0/computation_task.md). 
+Message to create a new [Computation](../developer/computation.md) from a [Computation Template](../developer/computation_template.md) and a [Computation Task](../developer/computation_task.md). 
 This Computation is sent back to the browser using a [computation message](#computation)
 
 ``` json title="create-computation Message Example"
@@ -95,7 +95,7 @@ This Computation is sent back to the browser using a [computation message](#comp
 
 Message to inform the backend about the computation that is currently worked on.  
 The backend can then prepare for running the computation. 
-For example, if the value for environment in the [computation template](../viplab-3.0/computation_template.md) is `docker`, the backend can prepare by already pulling the respective docker image.
+For example, if the value for environment in the [computation template](../developer/computation_template.md) is `docker`, the backend can prepare by already pulling the respective docker image.
 
 This message is identical to the [create-computation message](#create-computation) above, apart from the message type. 
 After preparation, an information is sent back to the browser using a [prepared-computation message](#prepared-computation).

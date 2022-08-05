@@ -12,7 +12,7 @@ The documentation contains five main parts:
 
 - [ViPLab Admin Guide](admin/index.md) 
 - [ViPLab User Guide](user/index.md)
-- [ViPLab Developer Guide](viplab-3.0/index.md) 
+- [ViPLab Developer Guide](developer/index.md) 
 - [Architectural Decision Logs](adr/index.md)
 - [Project History](history/index.md)
 

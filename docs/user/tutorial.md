@@ -185,7 +185,7 @@ To illustrate this a bit better, let's take a look at the line `likedThings={{#e
 The `likedThings` can have multiple values and as seen above, it has to be a list of items separated by a comma: `likedThings=programming,music,books`. 
 In this example, we decided to supply a few values to the users using a checkbox, such that they can select from a limited number of items. 
 This also prevents the user from entering incorrect or dangerous (as in malicious) input.
-As explained in [Computation Task](../viplab-3.0/computation_task.md), the output of a checkbox-element consists of an array of strings. 
+As explained in [Computation Task](../developer/computation_task.md), the output of a checkbox-element consists of an array of strings. 
 This array needs to be converted to a comma-separated list. 
 
 ``` ini title="params.ini Part 2 as Handlebars.js-Template"
@@ -523,7 +523,7 @@ Here, you can see the Copmutation Template asking for the input of the user:
 !!! error "TODO"
     GUI CT Creator
 
-For more detail on the structure of the Computation Template, take a look at the [Developer Guide](../viplab-3.0/computation_template.md).
+For more detail on the structure of the Computation Template, take a look at the [Developer Guide](../developer/computation_template.md).
 
 ### 3. See the Result in the ViPLab Frontend
 

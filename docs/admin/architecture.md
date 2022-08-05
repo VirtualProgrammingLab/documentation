@@ -25,7 +25,7 @@ The *Websocket-Api* can be used by the clients to interact with ViPLab.
 For this it is necessary that th clients authenticate and autorize themselves using JSON Web Tokens (JWTs). 
 Following this process, messages can be exchanged, to start a computation using ViPLab. 
 To enable the computation, all necessary information has to be part of the Websocket message. 
-The messages sent are JSON messages, which are partly described in the [Developer Guide](../viplab-3.0/index.md). 
+The messages sent are JSON messages, which are partly described in the [Developer Guide](../developer/index.md). 
 Once the result was computed, the client is informed. 
 
 Additionally there is a Database, which is used to save Computations and their results. 
