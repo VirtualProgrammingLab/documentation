@@ -13,12 +13,14 @@ Note: `//` with text following until EOL is a comment,
  * should not be contained in message sends in real;
  * but nevertheless it would help, if JSON parsers could just ignore them.
 
-```
-{ "identifier"  : "4598393-95bf-409a-98a5-ee375982c3e", // uuid, created by websocket api
+``` json title="Computation Message Example"
+{ 
+  "identifier"  : "4598393-95bf-409a-98a5-ee375982c3e", // uuid, created by websocket api
   "environment" : "C", // important for interpreting configuration 
   "files" : // must: at least one array element
   [
-    { "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3e", // uuid from template 
+    { 
+      "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3e", // uuid from template 
       "path"      : "code.c"                                // filename on backend 
       "parts" : // must: at least one array element
       [ 
@@ -27,12 +29,14 @@ Note: `//` with text following until EOL is a comment,
           "content"   : "I2luY2x1ZGUgPHN0ZGlvLmg-Cg"      // source (base64url encoded) 
                                                           // decoded: #include <stdio.h>\n
         },
-        { "identifier": "codeFromStudent", // identifier from template
+        { 
+          "identifier": "codeFromStudent", // identifier from template
           "access"    : "modifiable",             
           "content" : "dm9pZCBiYXIoKSB7IHByaW50ZigiYmFyIQoiKTsKfQo" // content from task
                                     // decoded: void bar() { printf(\"bar!\\n\");\n}\n 
         },
-        { "identifier": "postscript", // identifier from template
+        { 
+          "identifier": "postscript", // identifier from template
           "access"    : "visible",
           "content" : "aW50IG1haW4oKSB7IGJhcigpOyByZXR1cm4gMDsgfQ" // source
                                                 // decoded: int main() { bar(); return 0; }
@@ -40,8 +44,8 @@ Note: `//` with text following until EOL is a comment,
       ] // parts[]
     }
   ], // files[]
-  "configuration" :
-  { "compiling.compiler" : "gcc",                  
+  "configuration" : { 
+    "compiling.compiler" : "gcc",                  
     "compiling.flags"    : "-O2 -Wall"            
     "checking.sources"   : ["codeFromStudent"],    // identifier to parts
     "checking.forbiddenCalls": "system execve"     // forbidden call names separated by WS

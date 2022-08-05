@@ -4,7 +4,7 @@ To inform frontend about computations in-preparation.
 
 ## Example (informal)
 
-``` json title="System Status Message of Type 'info'"
+``` json title="System Status Message Example of Type 'info'"
 {
   "type": "system-status",
   "content": {

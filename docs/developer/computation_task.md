@@ -10,8 +10,9 @@ In the context of a learning environment, a *computation task* can be seen as a
 
 ## Example (informal)
 
-```
-{ "template" : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid of corresponding computation template
+``` json title="Computation Task Message Example"
+{ 
+  "template" : "11483f23-95bf-424a-98a5-ee5868c85c3e", // uuid of corresponding computation template
   "arguments" : {
      "__STEPWIDTH__" : "0.5" // parameter values from template, filled out by frontend
   },
@@ -20,7 +21,8 @@ In the context of a learning environment, a *computation task* can be seen as a
   },
   "parts" : 
     [
-      { "identifier": "codeFromStudent", // must: identifier of template part that has changed
+      { 
+        "identifier": "codeFromStudent", // must: identifier of template part that has changed
         "content"   : "dm9pZCBiYXIoKSB7IHByaW50ZigiYmFyIQoiKTsKfQo" // changed source from user 
                                                // decoded: void bar() { printf(\"bar!\\n\");\n}\n
         // other fields defining this (text) element must *not* be repeated here.
@@ -45,8 +47,9 @@ In the context of a learning environment, a *computation task* can be seen as a
 
 The frontend will encode parts with *access*-value "template" as JSON messages with
 the following structure:
-```
-{ "PARAM_ID1" : "value",
+``` json
+{ 
+  "PARAM_ID1" : "value",
   "PARAM_ID2" : "value_2",
   ...
   "PARAM_IDn" : "value_n"
