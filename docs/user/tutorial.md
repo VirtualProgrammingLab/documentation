@@ -39,6 +39,8 @@ print("Your look in the frige:", config['about you']['fridge'])
 print("You would dance in the kitchen to:", config['about you']['dancing'])
 print("You dislike: \033[0;31m", config['about you']['dislikedThings'], "\033[0m")
 print("Your three random numbers are:", config['about you']['randomNumbers'])
+print("You are an earthling?", config['about you']['earthling'])
+print("Muuuuh:", config['about you']['muh'])
 
 code_file = cwd + '/data/shared/code.c'
 f = open(code_file, "r")
@@ -47,8 +49,16 @@ print("The Code you entered:")
 print(codeSnippet)
 f.close()
 
-shutil.copyfile(cwd + "/data/output/earth.vtp", cwd + "/data/shared/earth.vtp")
+if config['about you']['earthling'] == 'true':
+    shutil.copyfile(cwd + "/data/output/earth.vtp", cwd + "/data/shared/earth.vtp")
+if config['about you']['muh'] == 'true':
+    shutil.copyfile(cwd + "/data/output/cow.vtp", cwd + "/data/shared/cow.vtp")
+
 shutil.copyfile(cwd + "/data/output/coffee-temp.csv", cwd + "/data/shared/coffee-temp.csv")
+shutil.copyfile(cwd + "/data/output/coffee-consumption-00000.csv", cwd + "/data/shared/coffee-consumption-00000.csv")
+shutil.copyfile(cwd + "/data/output/coffee-consumption-00001.csv", cwd + "/data/shared/coffee-consumption-00001.csv")
+shutil.copyfile(cwd + "/data/output/coffee-consumption-00002.csv", cwd + "/data/shared/coffee-consumption-00002.csv")
+shutil.copyfile(cwd + "/data/output/coffee-consumption-00003.csv", cwd + "/data/shared/coffee-consumption-00003.csv")
 shutil.copyfile(cwd + "/data/output/coffee.jpg", cwd + "/data/shared/image-coffee.jpg")
 shutil.copyfile(cwd + "/data/output/dance.png", cwd + "/data/shared/image-dance.png")
 shutil.copyfile(cwd + "/data/output/uris.txt", cwd + "/data/shared/uris.txt")
@@ -71,6 +81,8 @@ randomNumbers=25,50,75
 name=Kathryn
 christmasWish=COFFEE! In that nebula!
 age=36
+earthling=false
+muh=true
 ```
 
 Additionally the the input-file called code.c could look like this: 
@@ -103,6 +115,8 @@ Your look in the frige: never
 You would dance in the kitchen to: Last Christmas
 You dislike:  Spiders
 Your three random numbers are: 25,50,75
+You are an earthling? false
+Muuuuh: true
 The Code you entered:
 int main(int argc, char **argv) {
 // Print 'Hello World'
@@ -121,10 +135,15 @@ The file is placed in the same folder as your code.
 For the example code above, the Dockerfile would look like this: 
 
 ``` docker title="Dockerfile"
-FROM python:latest
+FROM python:slim
 COPY *.py /data/bin/
 COPY earth.vtp /data/output/earth.vtp
+COPY cow.vtp /data/output/cow.vtp
 COPY coffee-temp.csv /data/output/coffee-temp.csv
+COPY coffee-consumption-00000.csv /data/output/coffee-consumption-00000.csv
+COPY coffee-consumption-00001.csv /data/output/coffee-consumption-00001.csv
+COPY coffee-consumption-00002.csv /data/output/coffee-consumption-00002.csv
+COPY coffee-consumption-00003.csv /data/output/coffee-consumption-00003.csv
 COPY coffee.jpg /data/output/coffee.jpg
 COPY dance.png /data/output/dance.png
 COPY uris.txt /data/output/uris.txt
@@ -137,7 +156,7 @@ After creating the file, open a terminal and go to the directory where your file
 To build the container image, run the following command:
 
 ``` docker
-docker build -t viplab-example-image .
+docker build -t viplab/viplab-example-image .
 ```
 
 After the build is finished, you can now start the container using...
@@ -146,14 +165,107 @@ After the build is finished, you can now start the container using...
     If you are on Windows, please use Powershell to execute the run command
 
 ```
-docker run -v ${PWD}/shared:/data/shared -it viplab-example-image
+docker run -v ${PWD}/shared:/data/shared -it viplab/viplab-example-image
 ```
 
 ... after which you will see the output shown in section [Easy Example](#easy-example). 
 
 ### 2. Write a Computation Template
 
+To execute the software using ViPLab, a so called [Computation Template](../developer/computation_template.md) is needed. 
+It is a JSON-file in which you not only define, how your software is executed, but also how the result will be displayed and generally what a user will see and what can be modified by him or her before executing your software.
+
 To write a Computation Template you have to make several considerations. 
+
+First, as the example is run using Docker, you have to set the `environment` to Container. 
+Then you have to define how the application is run in the `configuration`-section of the json. 
+Here, you set the image to execute. 
+Additionally, other configuration-parameters for Docker can be set. 
+
+``` json title="Define how to run the application"
+{
+  ...
+  "environment" : "Container",
+  ...
+  "configuration" : { 
+    "resources.image"  : "name://viplab/viplab-example-image",
+    "resources.volume" : "/data/shared",
+    "resources.memory" : "1g",
+    "resources.numCPUs" : 1
+  }
+}
+```
+
+You can also use the Frontend to set these values:
+
+<figure markdown>
+  ![ViPLab Frontend Configuration](../images/gif-teacher-config.gif)
+  <figcaption>ViPLab Frontend showing the Configuration of the Computation Template</figcaption>
+</figure>
+
+Before defining the input, let's set how the results will be displayed in the `output`-object inside the `metadata`-section. 
+Using the array `viewer`, you can set whether CSV-files, ParaView-files, ViPLabGraphics and Images should be displayed in the result, or if they should only be downloadable. 
+As the result of our Container contains Images, CSVs and ParaView-files, the respective values are set in the array. 
+Further, connected result files can be defined with CSV- and ParaView-files. 
+In this example, there are connected CSV-files, so the `csv`-object is added additionally. 
+The CSV-files contain the mean of cups of coffee per day (x) over the last few years for women (y0) and men (y1), as an example, you can see the content of coffee-consumption-0003.csv: 
+
+``` ini title="coffee-consuption-0003.csv"
+year,women,men
+2019,16,4
+2020,12,3
+2021,8,2
+2022,6,1
+```
+
+In each file one data-point is added, e.g. coffee-consumption-0000.csv contains the data for 2019, coffee-consumption-0001.csv contains the data for 2019 and 2020 and so on. 
+As you can see, the example-files start with the same `basename` "coffee-consumption", that is added to the object. 
+Now labels, factor and format for the x-axis can be set. 
+As there are two y-values, one for women and one for men, we decide that two plots should be displayed. 
+They are defined and configured using the `plots`-array. 
+The described output-configuration can be seen below: 
+
+``` json title="Define how the result will be displayed"
+{
+  ...
+  "metadata": { 
+    "displayName" : "Parameters Example",  
+    "description" : "This is a 'Hello World' example showing the usage of parameters. Please introduce yourself so that the Hello World-Container can print your information...",
+    "output" : {
+      "viewer" : ["CSV", "ParaView", "Image"],
+      "csv" : [
+        {
+          "basename": "coffee-consumption",
+          "xlabel": {
+            "key": "year",
+            "label": "Time in years",
+            "format": ".0d"
+          },
+          "plots": [
+            {
+              "key": "women",
+              "label": "Cups of Coffee per Woman"
+            },
+            {
+              "key": "men",
+              "label": "Cups of Coffee per Man"
+            }
+          ]
+        }
+      ]
+    }
+  }  
+  ...
+} 
+```
+
+This is how you can define the output using the Frontend:
+
+<figure markdown>
+  ![ViPLab Frontend Output](../images/gif-teacher-output.gif)
+  <figcaption>ViPLab Frontend showing the Output-Configuration of the Computation Template</figcaption>
+</figure>
+
 For the Template, you need all the input for your application: Commandline arguments and input-files. 
 Using the input-files, you can also let the users make changes to code. 
 Files can consist of multiple parts. 
@@ -199,14 +311,62 @@ randomNumbers={{#each __sliderMultiple__}}{{#if @last}}{{.}}{{else}}{{.}}, {{/if
 name={{{__inputTextWOMaxlength__}}}
 christmasWish={{__inputTextWMaxlength__}}
 age={{__inputNumber__}}
+earthling={{__earth__}}
+muh={{__cow__}}
 ```
 
 ``` ini title="code.c as Handlebars.js-Template"
 {{{__default__}}}
 ```
 
+All these Handlebars-templates need to be added the the content of the parts as Base64url-encoded strings.
 
-Here, you can see the Copmutation Template asking for the input of the user: 
+---
+
+All of this, of course can be done by just writing the JSON using a text-editor, but the ViPLab Frontend can also be used for this. 
+For this, there is the feature of a GUI Creator integrated in the Frontend. 
+
+To add files, parts of files, commandline arguments and specific GUI elements to set parameters, you have to drag and drop them from the left panel to the middle. 
+By seleting on one component on the left by clicking and holding it, the middle displays colors where you can drop the component (green for dropable and red for not dropable). 
+
+<figure markdown>
+  ![ViPLab Frontend Add Files](../images/gif-teacher-files.gif)
+  <figcaption>ViPLab Frontend showing the Dragging and Dropping of Components</figcaption>
+</figure>
+
+By clicking on the added components in the middle, you can configure them on the right. 
+On the left you can also see, which components can now also be added. 
+
+<figure markdown>
+  ![ViPLab Frontend add Components and configure them](../images/gif-teacher-part.gif)
+  <figcaption>ViPLab Frontend showing the Modification of Components</figcaption>
+</figure>
+
+After adding a part to the first file, as seen in the last GIF, you can further configure it and add content to it, as previously described above. 
+
+<figure markdown>
+  ![ViPLab Frontend modify part and add content](../images/gif-teacher-modify-part.gif)
+  <figcaption>ViPLab Frontend showing the Modification of Parts</figcaption>
+</figure>
+
+Repeat these steps with the remaining components. 
+This will then result in the following:
+
+<figure markdown>
+  ![ViPLab Frontend Overview over the finished Template in the Generator](../images/gif-teacher-overview.gif)
+  <figcaption>ViPLab Frontend showing the finished Computation Template</figcaption>
+</figure>
+
+After finishing the template, you can validate, preview and download the Computation Template:
+
+<figure markdown>
+  ![ViPLab Frontend Validation and Preview of Computation Template](../images/gif-teacher-validate-execute.gif)
+  <figcaption>ViPLab Frontend showing the Validation and Preview of the Computation Template</figcaption>
+</figure>
+
+---
+
+Here, you can see the Copmutation Template as JSON, asking for the input of the user: 
 
 ``` json title="Computation Template of the Example"
 { 
@@ -216,7 +376,27 @@ Here, you can see the Copmutation Template asking for the input of the user:
     "displayName" : "Parameters Example",  
     "description" : "This is a 'Hello World' example showing the usage of parameters. Please introduce yourself so that the Hello World-Container can print your information...",
     "output" : {
-      "viewer" : ["CSV", "ParaView", "Image"]
+      "viewer" : ["CSV", "ParaView", "Image"],
+      "csv" : [
+        {
+          "basename": "coffee-consumption",
+          "xlabel": {
+            "key": "year",
+            "label": "Time in years",
+            "format": ".0d"
+          },
+          "plots": [
+            {
+              "key": "women",
+              "label": "Cups of Coffee per Woman"
+            },
+            {
+              "key": "men",
+              "label": "Cups of Coffee per Man"
+            }
+          ]
+        }
+      ]
     }
   },
   "environment" : "Container", 
@@ -225,18 +405,16 @@ Here, you can see the Copmutation Template asking for the input of the user:
     { 
       "identifier": "22483f42-95bf-984a-98a5-ee9485c85c3f", 
       "path"      : "params.ini",                              
-      "metadata"  : 
-        {  
-          "syntaxHighlighting": "ini"                   
-        },
+      "metadata"  : {  
+        "syntaxHighlighting": "ini"                   
+      },
       "parts" : 
       [
         {
           "identifier": "f3fc4404-3529-4962-b252-47bc4ddd02a1",
           "access": "template",
           "metadata": {
-            "name": "Parameter in part",
-            "emphasis": "low"
+            "name": "Parameter in part"
           },
           "parameters" : 
           [
@@ -263,10 +441,9 @@ Here, you can see the Copmutation Template asking for the input of the user:
         {
           "identifier": "ceb051d8-b50c-4814-983a-b9d703cae0c6",
           "access"    : "template",
-          "metadata"  :
-              { 
-                "name"      : "params.ini file part"
-              },
+          "metadata"  : { 
+            "name"      : "params.ini file part"
+          },
           "parameters":
           [
             {
@@ -470,27 +647,67 @@ Here, you can see the Copmutation Template asking for the input of the user:
               "max": 100,
               "step": 1,
               "validation": "range"
+            },
+            {
+              "mode" : "fixed",
+              "identifier" : "__earth__", 
+              "metadata" : {
+                "guiType": "radio",
+                "name": "Earthling",
+                "description" : "Are you an earthling?"
+              },
+              "options": [
+                {
+                  "text" : "Earthling",
+                  "value" : "true",
+                  "selected" : true
+                },
+                {
+                  "text" : "Alien",
+                  "value" : "false"
+                }
+              ],
+              "validation": "oneof"
+            },
+            {
+              "mode" : "fixed",
+              "identifier" : "__cow__", 
+              "metadata" : {
+                "guiType": "radio",
+                "name": "Muuuuh like a Cow",
+                "description" : "Select if you muuuuuuh!"
+              },
+              "options": [
+                { 
+                  "text" : "Muh",
+                  "value" : "true",
+                  "selected" : true
+                },
+                {
+                  "text" : "Kikirikiii",
+                  "value" : "false"
+                }
+              ],
+              "validation": "oneof"
             }
           ],
-          "content"   : "W2Fib3V0IHlvdV0NCmxpa2VkVGhpbmdzPXt7I2VhY2ggX19jaGVja2JveF9ffX17eyNpZiBAbGFzdH19e3sufX17e2Vsc2V9fXt7Ln19LCB7ey9pZn19e3svZWFjaH19DQpmYXZvcml0ZVBMPXt7X19yYWRpb0J1dHRvbl9ffX0NCmZyaWRnZT17e19fZHJvcGRvd25TaW5nbGVfX319DQpkYW5jaW5nPXt7I2VhY2ggX19kcm9wZG93bk11bHRpcGxlX199fXt7I2lmIEBsYXN0fX17ey59fXt7ZWxzZX19e3sufX0sIHt7L2lmfX17ey9lYWNofX0NCmRpc2xpa2VkVGhpbmdzPXt7I2VhY2ggX190b2dnbGVfX319e3sjaWYgQGxhc3R9fXt7Ln19e3tlbHNlfX17ey59fSwge3svaWZ9fXt7L2VhY2h9fQ0KcmFuZG9tTnVtYmVycz17eyNlYWNoIF9fc2xpZGVyTXVsdGlwbGVfX319e3sjaWYgQGxhc3R9fXt7Ln19e3tlbHNlfX17ey59fSwge3svaWZ9fXt7L2VhY2h9fQ0KbmFtZT17e3tfX2lucHV0VGV4dFdPTWF4bGVuZ3RoX199fX0NCmNocmlzdG1hc1dpc2g9e3tfX2lucHV0VGV4dFdNYXhsZW5ndGhfX319DQphZ2U9e3tfX2lucHV0TnVtYmVyX199fQ"
+          "content"   : "W2Fib3V0IHlvdV0NCmxpa2VkVGhpbmdzPXt7I2VhY2ggX19jaGVja2JveF9ffX17eyNpZiBAbGFzdH19e3sufX17e2Vsc2V9fXt7Ln19LCB7ey9pZn19e3svZWFjaH19DQpmYXZvcml0ZVBMPXt7X19yYWRpb0J1dHRvbl9ffX0NCmZyaWRnZT17e19fZHJvcGRvd25TaW5nbGVfX319DQpkYW5jaW5nPXt7I2VhY2ggX19kcm9wZG93bk11bHRpcGxlX199fXt7I2lmIEBsYXN0fX17ey59fXt7ZWxzZX19e3sufX0sIHt7L2lmfX17ey9lYWNofX0NCmRpc2xpa2VkVGhpbmdzPXt7I2VhY2ggX190b2dnbGVfX319e3sjaWYgQGxhc3R9fXt7Ln19e3tlbHNlfX17ey59fSwge3svaWZ9fXt7L2VhY2h9fQ0KcmFuZG9tTnVtYmVycz17eyNlYWNoIF9fc2xpZGVyTXVsdGlwbGVfX319e3sjaWYgQGxhc3R9fXt7Ln19e3tlbHNlfX17ey59fSwge3svaWZ9fXt7L2VhY2h9fQ0KbmFtZT17e3tfX2lucHV0VGV4dFdPTWF4bGVuZ3RoX199fX0NCmNocmlzdG1hc1dpc2g9e3tfX2lucHV0VGV4dFdNYXhsZW5ndGhfX319DQphZ2U9e3tfX2lucHV0TnVtYmVyX199fQ0KZWFydGhsaW5nPXt7X19lYXJ0aF9ffX0NCm11aD17e19fY293X199fQ"
         }
       ]
     },
     { 
       "identifier": "22483f42-95bf-984a-98a5-ee9485c85c31", 
       "path"      : "code.c",                              
-      "metadata"  : 
-        {  
-          "syntaxHighlighting": "c_cpp"                   
-        },
+      "metadata"  : {  
+        "syntaxHighlighting": "c_cpp"                   
+      },
       "parts" : 
       [
         {
           "identifier": "f3fc4404-3529-4962-b252-47bc4ddd02a2",
           "access": "template",
           "metadata": {
-            "name": "Parameter in part",
-            "emphasis": "low"
+            "name": "Parameter in part"
           },
           "parameters" : 
           [
@@ -511,19 +728,16 @@ Here, you can see the Copmutation Template asking for the input of the user:
       ]
     }
   ],
-  "configuration" :
-    { "resources.image"  : "name://viplab-example-image",
-      "resources.volume" : "/data/shared",
-      "resources.memory" : "1g",
-      "resources.numCPUs" : 1
-    }
+  "configuration" : { 
+    "resources.image"  : "name://viplab/viplab-example-image",
+    "resources.volume" : "/data/shared",
+    "resources.memory" : "1g",
+    "resources.numCPUs" : 1
+  }
 }
 ```
 
-!!! error "TODO"
-    GUI CT Creator
-
-For more detail on the structure of the Computation Template, take a look at the [Developer Guide](../developer/computation_template.md).
+For more details on the structure of the Computation Template, take a look at the [Developer Guide](../developer/computation_template.md).
 
 ### 3. See the Result in the ViPLab Frontend
 

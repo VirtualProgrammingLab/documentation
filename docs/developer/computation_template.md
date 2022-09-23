@@ -480,7 +480,7 @@ Note: `//` with text following until EOL is a comment,
 #### output JSON object
 |Key | Type |Opt / Must |Description |Comment |
 |---------------|----------------------------------------|-----------|------------|--------|
-|viewer | list containing one or more of {"Image", "ParaView", "ViPLabGraphics", "CSV"} | opt | When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable. | |
+|viewer | list containing one or more of ["Image", "ParaView", "ViPLabGraphics", "CSV"] | opt | When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable. | |
 |csv | [ {...}, {...}, ... ] | opt | Details for displaying csv-files | See [csv json object](#csv-json-object) for details on contained objects |
 |vtk | [ {...}, {...}, ... ] | opt | Details for displaying vtk-files | See [vtk json object](#vtk-json-object) for details on contained objects |
 
