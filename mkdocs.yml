@@ -58,6 +58,7 @@ nav:
     - user/index.md
     - Tutorial: user/tutorial.md
     - Frontend: user/frontend.md
+    - Common Validation Errors: user/validation.md
     - ViPLab In ILIAS: user/ilias.md
   - Developer Guide: 
     - developer/index.md

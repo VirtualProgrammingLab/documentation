@@ -8,6 +8,10 @@ Click here to find a description on how to create exercises using ViPlab in ILIA
 Click here to find a tutorial on how to do that:
 [Tutorial](tutorial.md)
 
+**You are using the Frontend to generate a Computation Template, but there are validation errors?** <br>
+Click here to see the most commom validation errors and how to resolve them:
+[Common Validation Errors](validation.md)
+
 **You want to inspect and try out software that was uploaded to a research data management system?** <br>
 Click here, to learn more about the ViPLab Frontend: 
 [ViPLab Frontend](frontend.md)
