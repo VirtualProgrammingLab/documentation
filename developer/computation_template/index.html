@@ -1838,7 +1838,7 @@
 </tr>
 <tr>
 <td>environment</td>
-<td _C_="&quot;C++&quot;," _Container_="&quot;Container&quot;," _DuMuX_="&quot;DuMuX&quot;" _Java_="&quot;Java&quot;," _Matlab_="&quot;Matlab&quot;," _Octave_="&quot;Octave&quot;,">one of</td>
+<td>one of { "C", "C++", "Java", "Matlab", "Octave", "Container", "DuMuX" }</td>
 <td>must</td>
 <td>Specifies the environment used for the Computation. It defines language, runtime, libraries and tools</td>
 <td></td>
@@ -1960,7 +1960,7 @@
 <td>configuration --running.mainClass</td>
 <td>string</td>
 <td>opt (if unique) / must (if not unique)</td>
-<td>class containing "public static void main(String[] args) {"</td>
+<td>class containing "public static void main(String[] args) {}"</td>
 <td>for <strong>Java</strong>: "args" may be another name. If main function is unique, its correct class should be detected automatically.</td>
 <td></td>
 </tr>
@@ -2028,6 +2028,14 @@
 <td>for <strong>Container</strong></td>
 <td>default?; kubernetes map to softlimit cpu-shares...</td>
 </tr>
+<tr>
+<td>configuration --resources.diskSpace</td>
+<td>int</td>
+<td>opt</td>
+<td>Disk space limit for the container</td>
+<td>for <strong>Container</strong></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <h3 id="metadata-json-object">metadata JSON object</h3>
@@ -2083,7 +2091,7 @@
 <tbody>
 <tr>
 <td>viewer</td>
-<td>list containing one or more of ["Image", "ParaView", "ViPLabGraphics", "CSV"]</td>
+<td>list containing one or more of { "Image", "ParaView", "ViPLabGraphics", "CSV" }</td>
 <td>opt</td>
 <td>When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable.</td>
 <td></td>
@@ -2326,8 +2334,8 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 <td>path</td>
 <td>string</td>
 <td>must</td>
-<td>absolute path to file</td>
-<td>It is <em>not</em> allowed to start with '/'</td>
+<td>path to file</td>
+<td>Can be absolute (no "/") or relative. If relative, the path has to proceed from the value of "resources.volume" given in the configuration. Example: absolute - <code>/data/shared/input.txt</code>; relative - <code>input.txt</code></td>
 </tr>
 <tr>
 <td>metadata</td>
@@ -2397,7 +2405,7 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 </tr>
 <tr>
 <td>access</td>
-<td _invisible_="&quot;invisible&quot;," _modifiable_="&quot;modifiable&quot;," _template_="&quot;template&quot;" _visible_="&quot;visible&quot;,">one of</td>
+<td>one of { "invisible", "visible", "modifiable", "template" }</td>
 <td>must</td>
 <td>defines the access level of this part for the user</td>
 <td>see <a href="#notes-on-access-levels-in-parts">Notes on access levels</a> for more details</td>
@@ -2460,7 +2468,7 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 <tbody>
 <tr>
 <td>mode</td>
-<td _any_="&quot;any&quot;," _fixed_="&quot;fixed&quot;">one of</td>
+<td>one of { "any", "fixed" }</td>
 <td>must</td>
 <td>specifies type of the parameter</td>
 <td>used to define the type of validation that is performed</td>
@@ -2503,7 +2511,7 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 </tr>
 <tr>
 <td>validation</td>
-<td _anyof_="&quot;anyof&quot;" _minone_="&quot;minone&quot;," _oneof_="&quot;oneof&quot;,">one of</td>
+<td>one of { "oneof", "minone", "anyof" }</td>
 <td>must</td>
 <td>See <a href="#parameter-validation-semantics">Parameter validation semantics</a> for details</td>
 <td></td>
@@ -2525,7 +2533,7 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 <tbody>
 <tr>
 <td>guiType</td>
-<td _checkbox_="&quot;checkbox&quot;," _dropdown_="&quot;dropdown&quot;," _radio_="&quot;radio&quot;," _toggle_="&quot;toggle&quot;">one of</td>
+<td>one of { "checkbox", "radio", "dropdown", "toggle" }</td>
 <td>must</td>
 <td>specifies how the frontend renders the parameter</td>
 <td></td>
@@ -2563,7 +2571,7 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 <td>string</td>
 <td>must</td>
 <td>specifies one avaliable value</td>
-<td :=":" _value_="&quot;value&quot;" _verbose_="&quot;verbose&quot;">Example:</td>
+<td>Example: { "value" : "verbose" }</td>
 </tr>
 <tr>
 <td>text</td>
@@ -2577,11 +2585,11 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 <td>boolean</td>
 <td>opt</td>
 <td>Shows disabled options in frontend</td>
-<td :=":" _Please="&quot;Please" _disabled_="&quot;disabled&quot;" _value_="&quot;value&quot;" choose="choose" multiple_="multiple&quot;," true="true">Example:</td>
+<td>Example: { "value" : "Please choose multiple", "disabled" : true }</td>
 </tr>
 <tr>
 <td>selected</td>
-<td>Boolean</td>
+<td>boolean</td>
 <td>opt</td>
 <td>specifies defaults value/values for frontend</td>
 <td>the strings have to be part of <em>values</em>; for "toogle" given values mean <em>true</em></td>
@@ -2652,7 +2660,7 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 </tr>
 <tr>
 <td>validation</td>
-<td _none_="&quot;none&quot;" _pattern_="&quot;pattern&quot;," _range_="&quot;range&quot;,">one of</td>
+<td>one of { "range", "pattern", "none" }</td>
 <td>must</td>
 <td>See <a href="#parameter-validation-semantics">Parameter validation semantics</a> for details</td>
 <td></td>
@@ -2688,7 +2696,7 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 </tr>
 <tr>
 <td>type</td>
-<td _number_="&quot;number&quot;," _text_="&quot;text&quot;">one of</td>
+<td>one of { "number", "text" }</td>
 <td>opt</td>
 <td>Type of the input field</td>
 <td></td>
@@ -2702,7 +2710,7 @@ Another point of control is to avoid linking with libs, whose functions shouldn'
 </tr>
 <tr>
 <td>vertical</td>
-<td>bool</td>
+<td>boolean</td>
 <td>opt (<em>false</em>)</td>
 <td>Specifies for <em>gui_type</em> "slider" whether it is rendered horizontal or vertical</td>
 <td></td>
