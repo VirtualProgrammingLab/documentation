@@ -60,6 +60,7 @@ nav:
     - Frontend: user/frontend.md
     - Common Validation Errors: user/validation.md
     - ViPLab In ILIAS: user/ilias.md
+    - ViPLab In DaRUS: user/darus.md
   - Developer Guide: 
     - developer/index.md
     - Computation Template: developer/computation_template.md
