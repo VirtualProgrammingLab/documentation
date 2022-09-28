@@ -486,9 +486,10 @@ Note: `//` with text following until EOL is a comment,
 |vtk | [ {...}, {...}, ... ] | opt | Details for displaying vtk-files | See [vtk json object](#vtk-json-object) for details on contained objects |
 
 ##### csv JSON object
+
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
 |---------------|----------------------------------------|-----------|------------|--------|----|
-|basename | string | opt | Basename defines connected files: Path of file begins with basename | | |
+|basename | string | opt | Basename defines connected files: Path of file begins with basename. | The file names have to have the following structure: [basename]-[number(s)], e.g. dataovertime-0001 | |
 |xlabel | struct | opt | Define labels for csv-files | | |
 |xlabel --key | string | opt | key for x-axis given in csv header | | |
 |xlabel --label | string | opt | x-axis label for diagram | | |
@@ -503,7 +504,7 @@ Note: `//` with text following until EOL is a comment,
 ##### vtk JSON object
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
 |---------------|----------------------------------------|-----------|------------|--------|----|
-|basename | string | opt | Basename defines connected files: Path of file begins with basename | | |
+|basename | string | opt | Basename defines connected files: Path of file begins with basename | The file names have to have the following structure: [basename]-[number(s)], e.g. case1_single_tracer_matrix-0001 | |
 
 ### C checking semantics
 08.05.2013: Semantics is "mergeAndInclude" for both prod systems and devel system ("element" unused).
