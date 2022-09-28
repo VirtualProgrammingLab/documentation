@@ -2145,6 +2145,10 @@
 </tbody>
 </table>
 <h5 id="csv-json-object">csv JSON object</h5>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have connected CSV-files (meaning the file is generated line-by-line), file n also has to contain all lines that were previously part of file n-1</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -2161,8 +2165,8 @@
 <td>basename</td>
 <td>string</td>
 <td>opt</td>
-<td>Basename defines connected files: Path of file begins with basename</td>
-<td></td>
+<td>Basename defines connected files: Path of file begins with basename.</td>
+<td>The file names have to have the following structure: [basename]-[number(s)], e.g. dataovertime-0001</td>
 <td></td>
 </tr>
 <tr>
@@ -2265,7 +2269,7 @@
 <td>string</td>
 <td>opt</td>
 <td>Basename defines connected files: Path of file begins with basename</td>
-<td></td>
+<td>The file names have to have the following structure: [basename]-[number(s)], e.g. case1_single_tracer_matrix-0001</td>
 <td></td>
 </tr>
 </tbody>
