@@ -2033,7 +2033,7 @@
 <td>url</td>
 <td>must</td>
 <td>location of the image to be executed</td>
-<td>for <strong>Container</strong>; has to be a tar</td>
+<td>for <strong>Container</strong>. The content can have the following prefixes: <ul><li>file:// stands for a local tar-file on the host viplab is running on (good for local testing)</li><li>name:// has to be used for an image that is in a publically reachable docker-registry, e.g. dockerhub</li><li>id:// is for an image-id (sha) of the image (mostly image is already in local image-list and you do not want docker to pull it again - good for local testing)</li><li>http:// is a "normal" url to a tar-file, e.g. a doi or a s3-link</li></ul></td>
 <td></td>
 </tr>
 <tr>
