@@ -491,7 +491,7 @@ Note: `//` with text following until EOL is a comment,
     If you have connected CSV-files (meaning the file is generated line-by-line), file n also has to contain all lines that were previously part of file n-1
 
 !!! caution
-    The first column in the CSV-file always has to be the x-axis! This can not be influences by the configuration below!
+    The first column in the CSV-file always has to be the x-axis! This can not be influenced by the configuration below!
 
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
 |---------------|----------------------------------------|-----------|------------|--------|----|
