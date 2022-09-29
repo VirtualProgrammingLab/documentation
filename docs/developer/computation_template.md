@@ -490,6 +490,9 @@ Note: `//` with text following until EOL is a comment,
 !!! note 
     If you have connected CSV-files (meaning the file is generated line-by-line), file n also has to contain all lines that were previously part of file n-1
 
+!!! caution
+    The first column in the CSV-file always has to be the x-axis! This can not be influences by the configuration below!
+
 |Key [--Subkey] | Type (a default is marked by _italics_)|Opt / Must |Description |Comment | AS |
 |---------------|----------------------------------------|-----------|------------|--------|----|
 |basename | string | opt | Basename defines connected files: Path of file begins with basename. | The file names have to have the following structure: [basename]-[number(s)], e.g. dataovertime-0001 | |
