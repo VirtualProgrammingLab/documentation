@@ -482,6 +482,9 @@ Note: `//` with text following until EOL is a comment,
 |Key | Type |Opt / Must |Description |Comment |
 |---------------|----------------------------------------|-----------|------------|--------|
 |viewer | list containing one or more of \{ "Image", "ParaView", "ViPLabGraphics", "CSV" \} | opt | When given, specific file extension, like ".vtu" are interpreted by the frontend for displaying results. Otherwise files are only downloadable. | |
+|ignore | struct | opt | Specific files that should not get plotted or downloaded | |
+|ignore --visualization | list of strings | opt | Filenames that should not get plotted | Can include wildcard symbol * |
+|ignore --download | list of strings | opt | Filenames that can be ignored for the final download | Can include wildcard symbol * |
 |csv | [ {...}, {...}, ... ] | opt | Details for displaying csv-files | See [csv json object](#csv-json-object) for details on contained objects |
 |vtk | [ {...}, {...}, ... ] | opt | Details for displaying vtk-files | See [vtk json object](#vtk-json-object) for details on contained objects |
 
